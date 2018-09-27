@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity">
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/idregister"
+        android:layout_centerHorizontal="true"
+        android:hint="ID"
+        android:layout_marginTop="151dp"
+        />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/passwordregister"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        android:layout_below="@+id/idregister"
+        />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/confirmpassword"
+        android:hint="Confirm Password"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/passwordregister"
+        />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/nicknameregister"
+        android:hint="Nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/confirmpassword"
+        />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:id="@+id/IDcheck"
+        android:text="Check"
+        android:textAllCaps="false"
+        android:layout_toRightOf="@+id/idregister"
+        android:layout_marginTop="151dp"
+        />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:id="@+id/doneregister"
+        android:text="Done"
+        android:textAllCaps="false"
+        android:layout_below="@id/nicknameregister"
+        android:layout_centerHorizontal="true"
+
+        />
+
+</RelativeLayout>
