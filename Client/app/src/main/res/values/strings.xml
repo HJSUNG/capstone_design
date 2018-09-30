@@ -3,4 +3,6 @@
     <string name="map">지도로\n찾기</string>
     <string name="building">학과 건물로\n찾기</string>
     <string name="subway">근처 역으로\n찾기</string>
+    <string name="call">Call</string>
+    <string name="favorite">Favorite</string>
 </resources>
