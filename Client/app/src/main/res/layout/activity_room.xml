@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorPrimary"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/menu_bar"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="25dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:typeface="normal" />
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:typeface="normal"/>
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="800px"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/black"
+                android:background="@android:color/darker_gray"
+                android:textSize="20dp"
+                android:typeface="normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
