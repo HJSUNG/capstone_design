@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] items = {"Log-In", "Search", "Board", "PictureList", "Menu5", "Menu6"};
+        final String[] items = {"Log-In", "Search", "Board", "PictureList"};
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         listview = (ListView) findViewById(R.id.drawer_menulist);
         listview.setAdapter(adapter);
@@ -47,12 +47,6 @@ public class MainActivity extends AppCompatActivity {
                     case 3: // menu4
                         Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
                         startActivity(intent3);
-                        break;
-                    case 4: // menu5
-                        contentTextview.setText("Menu5 Selected");
-                        break;
-                    case 5: //menu6
-                        contentTextview.setText("Menu6 Selected");
                         break;
                 }
 
