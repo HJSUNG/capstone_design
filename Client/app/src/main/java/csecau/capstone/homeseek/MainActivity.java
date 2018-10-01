@@ -1,5 +1,6 @@
 package csecau.capstone.homeseek;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,14 +13,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listview = null ;
+    ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] items = {"Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6"};
+        final String[] items = {"Log-In", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6"};
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         listview = (ListView) findViewById(R.id.drawer_menulist);
         listview.setAdapter(adapter);
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0: // menu1
-                        contentTextview.setText("Menu1 Selected");
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        //contentTextview.setText("Menu1 Selected");
                         break;
                     case 1: // menu2
                         contentTextview.setText("Menu2 Selected");
