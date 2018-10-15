@@ -21,19 +21,19 @@ public class Picture_List_Activity extends Activity {
         list_itemArrayList =new ArrayList<list_item>();
 
         list_itemArrayList.add(
-                new list_item(R.mipmap.ic_launcher,"닉네임1","제목1",
+                new list_item(R.drawable.room_01,"닉네임1","제목1",
                         new Date(System.currentTimeMillis()),"내용1"));
 
         list_itemArrayList.add(
-                new list_item(R.mipmap.ic_launcher,"닉네임2","제목2",
+                new list_item(R.drawable.room_02,"닉네임2","제목2",
                         new Date(System.currentTimeMillis()),"내용2"));
 
         list_itemArrayList.add(
-                new list_item(R.mipmap.ic_launcher,"닉네임3","제목3",
+                new list_item(R.drawable.room_03,"닉네임3","제목3",
                         new Date(System.currentTimeMillis()),"내용3"));
 
         list_itemArrayList.add(
-                new list_item(R.mipmap.ic_launcher,"닉네임4","제목4",
+                new list_item(R.drawable.room_04,"닉네임4","제목4",
                         new Date(System.currentTimeMillis()),"내용4"));
 
         pictureListAdapter = new PictureListAdapter(Picture_List_Activity.this, list_itemArrayList);
