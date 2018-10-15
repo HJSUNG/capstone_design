@@ -10,14 +10,14 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private Button loginbutton, registrationbutton;
+    private EditText idedittext, passwordedittext;
+    private CheckBox checkbox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Button loginbutton, registrationbutton;
-        EditText idedittext, passwordedittext;
-        CheckBox checkbox;
 
         loginbutton = (Button) findViewById(R.id.loginButton);
         registrationbutton = (Button) findViewById(R.id.signupButton);
