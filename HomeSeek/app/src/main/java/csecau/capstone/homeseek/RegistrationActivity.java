@@ -18,10 +18,11 @@ import java.io.OutputStream;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "192.168.28.1";
-    private static String TAG = "HomeSeek";
+    private static String IP_ADDRESS = "223.62.8.124";
+    private static String TAG = "phptest";
 
     private EditText IDEdittext;
     private EditText PWEdittext;
@@ -56,7 +57,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 InsertData task = new InsertData();
                 task.execute("http://" + IP_ADDRESS + "/insert.php", ID,PW,nickname);
 
-
                 IDEdittext.setText("");
                 PWEdittext.setText("");
                 nicknameEdittext.setText("");
@@ -70,7 +70,6 @@ public class RegistrationActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             progressDialog = ProgressDialog.show(RegistrationActivity.this,"Please Wait", null, true, true);
         }
 
@@ -91,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
             String nickname = (String)params[3];
 
             String serverURL = (String)params[0];
-            String postParameters = "name=" + ID + "&country=" + PW + "&nickname=" + nickname;
+            String postParameters = "ID=" + ID + "&PW=" + PW + "&nickname=" + nickname;
 
             try {
                 URL url = new URL(serverURL);
@@ -117,7 +116,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 else{
                     inputStream = httpURLConnection.getErrorStream();
                 }
-
 
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
