@@ -21,7 +21,7 @@ import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static String IP_ADDRESS = "223.62.8.124";
+    private static String IP_ADDRESS = "10.210.60.77";
     private static String TAG = "phptest";
 
     private EditText IDEdittext;
@@ -36,26 +36,25 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        IDEdittext = (EditText)findViewById(R.id.IDregister);
-        PWEdittext = (EditText)findViewById(R.id.PWregister);
-        nicknameEdittext = (EditText)findViewById(R.id.NicknameRegister);
+        IDEdittext = (EditText) findViewById(R.id.IDregister);
+        PWEdittext = (EditText) findViewById(R.id.PWregister);
+        nicknameEdittext = (EditText) findViewById(R.id.NicknameRegister);
 
-        checkButton = (Button)findViewById(R.id.IDcheck);
-        doneButton = (Button)findViewById(R.id.DoneRegister);
+        checkButton = (Button) findViewById(R.id.IDcheck);
+        doneButton = (Button) findViewById(R.id.DoneRegister);
 
-        textResult = (TextView)findViewById(R.id.TextResultRegister);
+        textResult = (TextView) findViewById(R.id.TextResultRegister);
 
-        doneButton.setOnClickListener(new View.OnClickListener()
-        {
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
                 String nickname = nicknameEdittext.getText().toString();
 
                 InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/insert.php", ID,PW,nickname);
+                task.execute("http://" + IP_ADDRESS + "/insert.php", ID, PW, nickname);
 
                 IDEdittext.setText("");
                 PWEdittext.setText("");
@@ -65,7 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     class InsertData extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog;
+            ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
