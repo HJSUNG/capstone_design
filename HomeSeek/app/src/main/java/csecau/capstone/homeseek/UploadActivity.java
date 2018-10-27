@@ -3,6 +3,7 @@ package csecau.capstone.homeseek;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class UploadActivity extends AppCompatActivity{
     phpDown task;
     private static final int IMAGE_REQUEST_CODE = 3;
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
-    PermissionCheck permissionCheck;
+    PermissionChecker permissionChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class UploadActivity extends AppCompatActivity{
         task = new phpDown();
 
 
-        permissionCheck = new PermissionCheck();
+        //permissionCheck = new PermissionChecker();
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
