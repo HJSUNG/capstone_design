@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 
@@ -27,6 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText IDEdittext;
     private EditText PWEdittext;
     private EditText nicknameEdittext;
+    private EditText confirmPWEdittext;
     private Button checkButton;
     private Button doneButton;
     private TextView textResult;
@@ -38,6 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         IDEdittext = (EditText) findViewById(R.id.IDregister);
         PWEdittext = (EditText) findViewById(R.id.PWregister);
+        confirmPWEdittext = (EditText)findViewById(R.id.ConfirmPW);
         nicknameEdittext = (EditText) findViewById(R.id.NicknameRegister);
 
         checkButton = (Button) findViewById(R.id.IDcheck);
@@ -51,14 +54,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
+                String confirmPW = confirmPWEdittext.getText().toString();
                 String nickname = nicknameEdittext.getText().toString();
 
-                InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/insert.php", ID, PW, nickname);
+                boolean checkConfirmPW;
+                checkConfirmPW = PW.equals(confirmPW);
 
-                IDEdittext.setText("");
-                PWEdittext.setText("");
-                nicknameEdittext.setText("");
+                if (checkConfirmPW) {
+                    InsertData task = new InsertData();
+                    task.execute("http://" + IP_ADDRESS + "/insert.php", ID, PW, nickname);
+
+                    IDEdittext.setText("");
+                    PWEdittext.setText("");
+                    confirmPWEdittext.setText("");
+                    nicknameEdittext.setText("");
+                }
+                else
+                {
+                    Toast.makeText(RegistrationActivity.this, "Check PW again", Toast.LENGTH_SHORT).show();
+                    confirmPWEdittext.setText("");
+                }
             }
         });
     }
