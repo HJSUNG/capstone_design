@@ -49,4 +49,10 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/TextResultLogin"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

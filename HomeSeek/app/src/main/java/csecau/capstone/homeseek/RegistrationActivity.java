@@ -21,16 +21,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
-
-    private static String IP_ADDRESS = "10.210.60.77";
+//ip 주소 고정할수 있는 방법 없나?
+    private static String IP_ADDRESS = "10.210.60.35";
     private static String TAG = "phptest";
+    private static boolean IDcheck_done = false;
 
     private EditText IDEdittext;
     private EditText PWEdittext;
     private EditText nicknameEdittext;
     private EditText confirmPWEdittext;
+
     private Button checkButton;
     private Button doneButton;
+
     private TextView textResult;
 
     @Override
@@ -48,10 +51,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
         textResult = (TextView) findViewById(R.id.TextResultRegister);
 
+
+        //중복 아이디 체크할 부분 (지금 primary key가 ID 로 되있어서 자체적으로 체크되는데 이걸 안드로이드로 깔끔하게 할수 있나)
+
+        /*checkButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String ID= IDEdittext.getText().toString();
+
+
+
+            }
+
+            }
+
+        );*/
+
+        //다 하고 완료 누르면 DB 에 넣는 부분
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
                 String confirmPW = confirmPWEdittext.getText().toString();
