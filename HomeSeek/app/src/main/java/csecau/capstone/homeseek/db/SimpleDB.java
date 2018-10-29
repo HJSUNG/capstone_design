@@ -1,6 +1,6 @@
-package com.example.dovicvi.home_test.db;
+package csecau.capstone.homeseek.db;
 
-import com.example.dovicvi.home_test.vo.ArticleVO;
+import csecau.capstone.homeseek.vo.ArticleVO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

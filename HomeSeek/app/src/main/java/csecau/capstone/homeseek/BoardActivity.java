@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.dovicvi.home_test.db.SimpleDB;
-import com.example.dovicvi.home_test.vo.ArticleVO;
+import csecau.capstone.homeseek.db.SimpleDB;
+import csecau.capstone.homeseek.vo.ArticleVO;
 
 public class BoardActivity extends AppCompatActivity {
 

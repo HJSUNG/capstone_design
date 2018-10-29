@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.dovicvi.home_test.db.SimpleDB;
-import com.example.dovicvi.home_test.vo.ArticleVO;
+import csecau.capstone.homeseek.db.SimpleDB;
+import csecau.capstone.homeseek.vo.ArticleVO;
 
 public class DetailActivity extends AppCompatActivity {
 

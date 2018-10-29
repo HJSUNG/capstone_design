@@ -1,4 +1,4 @@
-package com.example.dovicvi.home_test.vo;
+package csecau.capstone.homeseek.vo;
 
 public class ArticleVO {
     private int articleNo;
