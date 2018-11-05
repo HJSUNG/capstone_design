@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.210.60.35";
+    private static String IP_ADDRESS = "10.210.61.16";
     private static String TAG = "phptest";
 
     private Button loginButton;
