@@ -7,7 +7,7 @@ import android.os.Bundle;
 import csecau.capstone.homeseek.db.SimpleDB;
 import csecau.capstone.homeseek.vo.ArticleVO;
 
-public class Board_DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

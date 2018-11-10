@@ -29,7 +29,7 @@ public class BoardActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), Board_DetailActivity.class);
+                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
                     String buttonText = (String) ((Button) view).getText();
 
                     intent.putExtra("Key", buttonText);

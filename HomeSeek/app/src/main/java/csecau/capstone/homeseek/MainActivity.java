@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
 
-                TextView contentTextview = (TextView) findViewById(R.id.drawer_content);
+                //TextView contentTextview = (TextView) findViewById(R.id.drawer_content);
+                //없어도 되는거 같은데.....
 
                 switch (position) {
                     case 0: // menu1
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     case 4: // menu5
                         Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
                         startActivity(intent4);
-                        break;
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
