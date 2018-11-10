@@ -1,15 +1,18 @@
 package csecau.capstone.homeseek;
 
-public class Map_MarkerItem {
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+
+public class Map_MarkerItem implements ClusterItem{
 
 
     double lat;
     double lon;
+    LatLng mPosition;
     int price;
 
     public Map_MarkerItem(double lat, double lon, int price) {
-        this.lat = lat;
-        this.lon = lon;
+        mPosition = new LatLng(lat, lon);
         this.price = price;
     }
 
@@ -17,25 +20,17 @@ public class Map_MarkerItem {
         return lat;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
     public double getLon() {
         return lon;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+
+    @Override
+    public LatLng getPosition() {
+        return mPosition;
     }
-
-
 }

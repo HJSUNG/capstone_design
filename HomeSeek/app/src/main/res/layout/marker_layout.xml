@@ -13,6 +13,6 @@
 
         android:background="@drawable/ic_marker_phone"
         android:gravity="center"
-        android:text="13.5만원"
-        android:textSize="16sp"/>
+        android:text="월세"
+        android:textSize="14sp"/>
 </FrameLayout>

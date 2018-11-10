@@ -22,18 +22,21 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.Cluster;
+import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
+    private ClusterManager<Map_MarkerItem> mClusterManager;
+
     Marker selectedMarker;
     View marker_root_view;
     TextView tv_marker;
     private GoogleMap mMap;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +51,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mClusterManager = new ClusterManager<>(this, googleMap);
+        MarkerOptions markerOptions = new MarkerOptions();
 
+        double CAU_LAT = 37.5039255;
+        double CAU_LON = 126.9572649;
+        LatLng CAU = new LatLng(CAU_LAT, CAU_LON);//중앙대학교 서울캠퍼스
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5039255, 126.9572649), 16));
-        //중앙대학교
-        mMap.setOnMarkerClickListener(this);
-        mMap.setOnMapClickListener(this);
+        markerOptions.position(CAU)
+                .title("중앙대 서울캠퍼스")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        mMap.addMarker(markerOptions);
 
-        setCustomMarkerView();
-        getSampleMarkerItems();
+        mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CAU, 16));
 
+        mMap.setOnCameraIdleListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
+        mMap.setOnInfoWindowClickListener(mClusterManager);
+        addMarkerItems();
+        mClusterManager.cluster();
 
+    }
+
+    private  void addMarkerItems() {
+        mClusterManager.addItem(new Map_MarkerItem(37.505478,126.956304, 415000));
+        mClusterManager.addItem(new Map_MarkerItem(37.507144,126.958268, 500000));
+        mClusterManager.addItem(new Map_MarkerItem(37.507204,126.957972, 450000));
+        mClusterManager.addItem(new Map_MarkerItem(37.505629,126.955763, 300000));
+        mClusterManager.addItem(new Map_MarkerItem(37.504824,126.953263, 550000));
+        mClusterManager.addItem(new Map_MarkerItem(37.505731,126.955748, 315000));
+        mClusterManager.addItem(new Map_MarkerItem(37.505909,126.955229, 420000));
+        mClusterManager.addItem(new Map_MarkerItem(37.505440,126.955112, 350000));
+        mClusterManager.addItem(new Map_MarkerItem(37.505191,126.953415, 330000));
+        mClusterManager.addItem(new Map_MarkerItem(37.504415,126.953028, 500000));
+        mClusterManager.addItem(new Map_MarkerItem(37.504543,126.952320, 320000));
+        mClusterManager.addItem(new Map_MarkerItem(37.504159,126.952320, 600000));
+        mClusterManager.addItem(new Map_MarkerItem(37.506447,126.956656, 250000));
+        mClusterManager.addItem(new Map_MarkerItem(37.507335,126.958384, 440000));
+    }
+
+    private class RenderClusterInfoWindow extends DefaultClusterRenderer<Map_MarkerItem> {
+
+        RenderClusterInfoWindow(Context context, GoogleMap map, ClusterManager<Map_MarkerItem> clusterManager) {
+            super(context, map, clusterManager);
+        }
+
+        @Override
+        protected void onClusterRendered(Cluster<Map_MarkerItem> cluster, Marker marker) {
+            super.onClusterRendered(cluster, marker);
+        }
+
+        @Override
+        protected void onBeforeClusterItemRendered(Map_MarkerItem item, MarkerOptions markerOptions) {
+            markerOptions.title(Integer.toString(item.getPrice()));
+
+            super.onBeforeClusterItemRendered(item, markerOptions);
+        }
     }
 
     private void setCustomMarkerView() {
@@ -77,6 +126,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         sampleList.add(new Map_MarkerItem(37.507204,126.957972, 450000));
         sampleList.add(new Map_MarkerItem(37.505629,126.955763, 300000));
         sampleList.add(new Map_MarkerItem(37.504824,126.953263, 550000));
+        sampleList.add(new Map_MarkerItem(37.505731,126.955748, 315000));
+        sampleList.add(new Map_MarkerItem(37.505909,126.955229, 420000));
+        sampleList.add(new Map_MarkerItem(37.505440,126.955112, 350000));
+        sampleList.add(new Map_MarkerItem(37.505191,126.953415, 330000));
+        sampleList.add(new Map_MarkerItem(37.504415,126.953028, 500000));
+        sampleList.add(new Map_MarkerItem(37.504543,126.952320, 320000));
+        sampleList.add(new Map_MarkerItem(37.504159,126.952320, 600000));
+        sampleList.add(new Map_MarkerItem(37.506447,126.956656, 250000));
+        sampleList.add(new Map_MarkerItem(37.507335,126.958384, 440000));
         //나중에 db에서 갔고 오는 형식으로 바꿔야됨
 
 
@@ -91,7 +149,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker addMarker(Map_MarkerItem markerItem, boolean isSelectedMarker) {
 
 
-        LatLng position = new LatLng(markerItem.getLat(), markerItem.getLon());
+        LatLng position = markerItem.getPosition();
         int price = markerItem.getPrice();
         String formatted = NumberFormat.getCurrencyInstance().format((price));
 
