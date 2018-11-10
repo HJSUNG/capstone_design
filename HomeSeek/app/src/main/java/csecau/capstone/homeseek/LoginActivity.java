@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.210.61.16";
+    private static String IP_ADDRESS = "172.30.1.19";
     private static String TAG = "phptest";
 
     private Button loginButton;
@@ -82,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            textResult.setText(result);
+            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+
         }
 
         @Override

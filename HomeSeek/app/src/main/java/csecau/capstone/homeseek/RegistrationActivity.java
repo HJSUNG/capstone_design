@@ -24,7 +24,7 @@ import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
 //ip 주소 고정할수 있는 방법 없나?
-    private static String IP_ADDRESS = "10.210.61.16";
+    private static String IP_ADDRESS = "172.30.1.19";
     private static String TAG = "phptest";
     private static boolean IDcheck_done = false;
 
