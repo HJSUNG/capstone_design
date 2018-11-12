@@ -3,6 +3,7 @@
     package="csecau.capstone.homeseek">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyClpEw5IA9xDaIQAujnuFu4zr81iBefA5g" />
@@ -23,16 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".SearchActivity"/>
-        <activity android:name=".ShowRoomActivity"/>
-        <activity android:name=".BoardActivity"/>
-        <activity android:name=".DetailActivity"/>
-        <activity android:name=".Picture_List_Activity"/>
-        <activity android:name=".SearchwithmapActivity"/>
-        <activity android:name=".MapsActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ShowRoomActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".Picture_List_Activity" />
+        <activity android:name=".SearchwithmapActivity" />
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".TmapActivity" />
     </application>
 
 </manifest>
