@@ -1,7 +1,6 @@
 package csecau.capstone.homeseek;
 
 import android.content.Context;
-import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
