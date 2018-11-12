@@ -1,7 +1,6 @@
 package csecau.capstone.homeseek;
 
 import android.content.Context;
-import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +24,10 @@ public class GridAdapter extends BaseAdapter {
         this.isListView = isListView;
         inflater = LayoutInflater.from(context);
         mSelectedItem = new SparseBooleanArray();
+    }
+
+    public GridAdapter(){
+
     }
 
     @Override
@@ -81,10 +84,6 @@ public class GridAdapter extends BaseAdapter {
             }
         });
         return view;
-    }
-
-    public SparseBooleanArray getSelectedIds(){
-        return mSelectedItem;
     }
 
 
