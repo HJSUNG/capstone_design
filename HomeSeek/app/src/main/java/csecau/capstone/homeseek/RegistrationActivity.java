@@ -24,7 +24,6 @@ import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
 //ip 주소 고정할수 있는 방법 없나?
-    private static String IP_ADDRESS = "10.210.61.66";
     private static String TAG = "phptest";
     private static boolean IDcheck_done = false;
 
@@ -70,7 +69,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String IDcompare= IDEdittext.getText().toString();
                 CheckID task = new CheckID();
-                task.execute("http://" + IP_ADDRESS + "/IDcheck.php",IDcompare);
+                task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php",IDcompare);
             }
         });
 
@@ -93,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
-                        task.execute("http://" + IP_ADDRESS + "/insert.php", ID, PW, nickname, user_type, phone);
+                        task.execute("http://" + MainActivity.IP_ADDRESS + "/insert.php", ID, PW, nickname, user_type, phone);
 
                         IDEdittext.setText("");
                         PWEdittext.setText("");

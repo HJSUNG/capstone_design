@@ -16,6 +16,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
+    public static String IP_ADDRESS = "10.210.61.66";
     public static TextView ID_textview;
     public static TextView nickname_textview;
     public static TextView phone_textview;

@@ -23,7 +23,6 @@ import java.net.URL;
 import static csecau.capstone.homeseek.MainActivity.user;
 
 public class LoginActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "10.210.61.66";
     private static String TAG = "phptest";
 
     private Button loginButton;
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 String PW = PWEdittext.getText().toString();
 
                 Login task = new Login();
-                task.execute("http://" + IP_ADDRESS + "/login.php", ID, PW);
+                task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
             }
         });
     }
