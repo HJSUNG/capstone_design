@@ -98,6 +98,14 @@
           }
         },
         {
+          "client_id": "901702786887-ph8gd51o03elbu6kvrjap0i9230lvfee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "csecau.capstone.homeseek",
+            "certificate_hash": "16f25664c0eb4983bf1ed57dd2abae185608a3de"
+          }
+        },
+        {
           "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
           "client_type": 3
         }
