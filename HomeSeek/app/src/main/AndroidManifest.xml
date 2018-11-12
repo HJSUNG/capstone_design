@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -32,6 +38,11 @@
         <activity android:name=".SearchwithmapActivity" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".TmapActivity" />
+        <activity android:name=".daumAddress"/>
+        <activity android:name=".UploadActivity"/>
+        <activity android:name=".PostingActivity"/>
+        <activity android:name=".testposting"/>
+        <activity android:name=".PostingPage"/>
     </application>
 
 </manifest>
