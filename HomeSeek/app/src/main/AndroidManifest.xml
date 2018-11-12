@@ -26,7 +26,6 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".ShowRoomActivity" />
         <activity android:name=".BoardActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".Picture_List_Activity" />
