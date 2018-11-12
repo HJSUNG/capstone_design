@@ -11,16 +11,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
+    public static TextView ID_textview;
+    public static TextView nickname_textview;
+    public static TextView phone_textview;
+    public static TextView type_textview;
+
+    public static User_information user = new User_information("","","","");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final String[] items = {"Log-In", "Search", "Board", "PictureList","Maps"};
+        ID_textview = (TextView) findViewById(R.id.user_information_ID);
+        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
+        phone_textview = (TextView)findViewById(R.id.user_information_phone);
+        type_textview = (TextView)findViewById(R.id.user_information_type);
+
+
+        final String[] items = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map"};
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         listview = (ListView) findViewById(R.id.drawer_menulist);
         listview.setAdapter(adapter);
@@ -51,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
                     case 4: // menu5
                         Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
                         startActivity(intent4);
+                        break;
+                    case 5: // menu6
+                        Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
+                        startActivity(intent5);
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);

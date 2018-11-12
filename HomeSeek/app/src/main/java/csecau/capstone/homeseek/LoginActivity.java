@@ -20,8 +20,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static csecau.capstone.homeseek.MainActivity.user;
+
 public class LoginActivity extends AppCompatActivity {
-    private static String IP_ADDRESS = "172.30.1.19";
+    private static String IP_ADDRESS = "10.210.61.66";
     private static String TAG = "phptest";
 
     private Button loginButton;
@@ -83,8 +85,15 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+            String result_string[] = (String[]) result.split(",");
 
+            if(result_string.length !=4) {
+                Toast.makeText(LoginActivity.this, "Log-in failed", Toast.LENGTH_SHORT).show();
+            } else {
+                user.log_in(result_string[0], result_string[1], result_string[2], result_string[3]);
+
+                Toast.makeText(LoginActivity.this, "Log-in Success", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
