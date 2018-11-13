@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         type_textview = (TextView)findViewById(R.id.user_information_type);
 
 
-        final String[] items = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map"};
+        final String[] items = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map", "Posting"};
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
         listview = (ListView) findViewById(R.id.drawer_menulist);
         listview.setAdapter(adapter);
@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     case 5: // menu6
                         Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
                         startActivity(intent5);
+                        break;
+                    case 6:
+                        Intent intent6 = new Intent(getApplicationContext(), PostingActivity.class);
+                        startActivity(intent6);
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
