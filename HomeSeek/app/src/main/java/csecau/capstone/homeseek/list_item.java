@@ -9,7 +9,7 @@ public class list_item {
     private int profile_image;//String으로 바꿀수도 있음
     private String  nickname;
     private String title;
-    private Date write_date;
+//    private Date write_date;
     private String content;
 
     public int getProfile_image() {
@@ -36,13 +36,13 @@ public class list_item {
         this.title = title;
     }
 
-    public Date getWrite_date() {
-        return write_date;
-    }
+//    public Date getWrite_date() {
+//        return write_date;
+//    }
 
-    public void setWrite_date(Date write_date) {
-        this.write_date = write_date;
-    }
+//    public void setWrite_date(Date write_date) {
+//        this.write_date = write_date;
+//    }
 
     public String getContent() {
         return content;
@@ -53,11 +53,11 @@ public class list_item {
     }
 
     public list_item(int profile_image, String nickname,
-                     String title, Date write_date, String content) {
+                     String title, String content) {
         this.profile_image = profile_image;
         this.nickname = nickname;
         this.title = title;
-        this.write_date = write_date;
+//        this.write_date = write_date;
         this.content = content;
     }
 }
