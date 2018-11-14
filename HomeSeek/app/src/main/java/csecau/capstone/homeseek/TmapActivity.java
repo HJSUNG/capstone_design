@@ -23,13 +23,14 @@ public class TmapActivity extends AppCompatActivity {
         tmapview.setSKTMapApiKey("d1b4a7e8-4afc-48ee-80a1-157777fbee58");
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(13);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);
+        tmapview.setZoomLevel(10);
+        tmapview.setCenterPoint(126.9572649,37.5039255);
+        tmapview.setLocationPoint(126.9572649,37.5039255);
         tmapview.setCompassMode(false);
         tmapview.setTrackingMode(true);
-        tmapview.setCenterPoint(37.5039255,126.9572649);
-        linearLayoutTmap.addView(tmapview);
 
+        linearLayoutTmap.addView(tmapview);
 
         TMapMarkerItem CAU_marker = new TMapMarkerItem();
         TMapPoint CAU_point = new TMapPoint(37.5039255,126.9572649);
