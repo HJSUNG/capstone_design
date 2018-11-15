@@ -20,7 +20,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static csecau.capstone.homeseek.MainActivity.user;
+import static csecau.capstone.homeseek.MainActivity_before.user;
 
 public class LoginActivity extends AppCompatActivity {
     private static String TAG = "phptest";
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 String PW = PWEdittext.getText().toString();
 
                 Login task = new Login();
-                task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
+                task.execute("http://" + MainActivity_before.IP_ADDRESS + "/login.php", ID, PW);
             }
         });
     }

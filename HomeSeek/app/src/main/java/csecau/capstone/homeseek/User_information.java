@@ -1,9 +1,9 @@
 package csecau.capstone.homeseek;
 
-import static csecau.capstone.homeseek.MainActivity.ID_textview;
-import static csecau.capstone.homeseek.MainActivity.nickname_textview;
-import static csecau.capstone.homeseek.MainActivity.phone_textview;
-import static csecau.capstone.homeseek.MainActivity.type_textview;
+import static csecau.capstone.homeseek.MainActivity_before.ID_textview;
+import static csecau.capstone.homeseek.MainActivity_before.nickname_textview;
+import static csecau.capstone.homeseek.MainActivity_before.phone_textview;
+import static csecau.capstone.homeseek.MainActivity_before.type_textview;
 
 public class User_information {
     public String info_ID = "";

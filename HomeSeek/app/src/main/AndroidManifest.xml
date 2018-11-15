@@ -23,7 +23,7 @@
             android:value="AIzaSyClpEw5IA9xDaIQAujnuFu4zr81iBefA5g" />
 
         <activity
-            android:name=".navigation_main"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
