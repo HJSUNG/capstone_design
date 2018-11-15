@@ -1,49 +1,32 @@
 package csecau.capstone.homeseek;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShowRoomActivity extends AppCompatActivity {
-    ViewPager pager;
+public class PostingPage extends AppCompatActivity {
+    TextView titleView, contentView, depositView, monthlyView, termView;
+    ImageView imageone, imagetwo, imagethree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_posting);
+        titleView = (TextView)findViewById(R.id.titleWrite);
+        contentView = (TextView)findViewById(R.id.contents);
+        imageone = (ImageView)findViewById(R.id.image1);
+        imagetwo = (ImageView)findViewById(R.id.image2);
+        imagethree = (ImageView)findViewById(R.id.image3);
+        depositView = (TextView)findViewById(R.id.depositview);
+        monthlyView = (TextView)findViewById(R.id.monthlyview);
+        termView = (TextView)findViewById(R.id.termview);
 
-        pager =(ViewPager)findViewById(R.id.pager);
-        CustomAdapter adapter = new CustomAdapter(getLayoutInflater());
-        pager.setAdapter(adapter);
 
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-
-        TextView textView = (TextView)findViewById(R.id.textTitle);
-        TextView textView2 = (TextView)findViewById(R.id.text);
-        TextView textView3 = (TextView)findViewById(R.id.text2);
-        textView.setText("방 급매합니다");
-        textView2.setText("---------------------------------");
-        textView3.setText("장소 : 서울특별시 동작구\n월세:40만원\n보증금:1천만원");
         BottomNavigationView navigationView =(BottomNavigationView)findViewById(R.id.main_bar);
 
         BottomNavigationView.OnNavigationItemSelectedListener navigationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
