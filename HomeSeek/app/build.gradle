@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -39,9 +40,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:10.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
 
+
     api ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
     }
-
 }
 apply plugin: 'com.google.gms.google-services'

@@ -3,16 +3,21 @@
     package="csecau.capstone.homeseek">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyClpEw5IA9xDaIQAujnuFu4zr81iBefA5g" />
@@ -24,19 +29,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".SearchActivity"/>
-        <activity android:name=".BoardActivity"/>
-        <activity android:name=".DetailActivity"/>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".Picture_List_Activity" />
+        <activity android:name=".SearchwithmapActivity" />
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".TmapActivity" />
         <activity android:name=".daumAddress"/>
-        <activity android:name=".Picture_List_Activity"/>
-        <activity android:name=".SearchwithmapActivity"/>
-        <activity android:name=".MapsActivity"/>
-        <activity android:name=".testposting"/>
-        <activity android:name=".PostingActivity"/>
         <activity android:name=".UploadActivity"/>
+        <activity android:name=".PostingActivity"/>
+        <activity android:name=".testposting"/>
+        <activity android:name=".PostingPage"/>
     </application>
 
 </manifest>
