@@ -108,7 +108,6 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-//dsds
     class CheckID extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog;
 
