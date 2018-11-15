@@ -9,32 +9,32 @@
         android:layout_width="match_parent"
         android:textSize="15sp"
         android:textColor="@android:color/black"
-        android:text="@string/map"
+        android:text="지도로 찾기"
         android:layout_weight="1"
         android:textStyle="bold"
         android:typeface="normal"
-        android:id="@+id/show_button"/>
+        android:id="@+id/map_button"/>
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textSize="14sp"
         android:textColor="@android:color/black"
-        android:text="@string/building"
+        android:text="검색"
         android:layout_weight="1"
         android:textStyle="bold"
         android:typeface="normal"
-        android:id="@+id/delete_button"/>
+        android:id="@+id/searchButton"/>
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textSize="14sp"
         android:textColor="@android:color/black"
-        android:text="@string/subway"
+        android:text="근처 역으로 찾기"
         android:layout_weight="1"
         android:textStyle="bold"
         android:typeface="normal"
-        android:id="@+id/select_button"/>
+        android:id="@+id/subway_button"/>
 
 </LinearLayout>
