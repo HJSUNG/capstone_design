@@ -67,9 +67,14 @@ public class RegistrationActivity extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String IDcompare= IDEdittext.getText().toString();
-                CheckID task = new CheckID();
-                task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php",IDcompare);
+                String IDcompare = IDEdittext.getText().toString();
+
+                if (IDcompare.contentEquals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Insert ID", Toast.LENGTH_SHORT).show();
+                } else {
+                    CheckID task = new CheckID();
+                    task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php", IDcompare);
+                }
             }
         });
 
@@ -89,6 +94,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if(ID.equals("") || PW.equals("") || confirmPW.equals("") || nickname.equals("") || phone.equals("")) {
                     Toast.makeText(RegistrationActivity.this, "Fill out the form", Toast.LENGTH_SHORT).show();
+                } else if (IDcheck_done == false) {
+                    Toast.makeText(RegistrationActivity.this, "Check your ID first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
@@ -126,14 +133,16 @@ public class RegistrationActivity extends AppCompatActivity {
 
             String result_string = new String("You can use this ID");
 
-            sameID = result.equals(result_string);
+            sameID = result.contentEquals(result_string);
 
             progressDialog.dismiss();
 
-            Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
-
-            if(sameID)
-                textResult.setText("true");
+            if (sameID) {
+                Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
+                IDcheck_done = true;
+            } else {
+                    Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
