@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/nav_app_bar_main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="학교 주변 매물"
+                android:textSize="30sp"
+                android:textColor="@android:color/holo_blue_dark"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--<ImageButton-->
+                <!--android:src="@drawable/frontdoor"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="130dp"/>-->
+
+            <Button
+                android:id="@+id/FrontDoor"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:text="정문"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+            <Button
+                android:id="@+id/MiddleDoor"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:text="중문"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <Button
+                android:id="@+id/BackDoor"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_weight="1"
+                android:text="후문"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="지하철 주변 매물"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@android:color/holo_blue_dark"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:text="흑석역"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:typeface="normal"
+                android:id="@+id/Subway1"/>
+
+            <Button
+                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:text="상도역"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:typeface="normal"
+                android:id="@+id/Subway2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

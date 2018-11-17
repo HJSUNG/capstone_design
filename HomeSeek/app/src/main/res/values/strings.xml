@@ -5,4 +5,7 @@
     <string name="subway">근처 역으로\n찾기</string>
     <string name="call">Call</string>
     <string name="favorite">Favorite</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>
