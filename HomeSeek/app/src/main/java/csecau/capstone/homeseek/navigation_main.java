@@ -24,6 +24,8 @@ public class navigation_main extends AppCompatActivity
     public static TextView phone_textview;
     public static TextView type_textview;
 
+    public static User_information user = new User_information("","","","");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
