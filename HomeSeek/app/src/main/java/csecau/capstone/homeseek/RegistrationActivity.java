@@ -31,7 +31,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText PWEdittext;
     private EditText nicknameEdittext;
     private EditText confirmPWEdittext;
-    private EditText phoneEdittext;
+    private EditText phoneEdittext_first;
+    private EditText phoneEdittext_second;
+    private EditText phoneEdittext_third;
 
     private Button checkButton;
     private Button doneButton;
@@ -50,7 +52,9 @@ public class RegistrationActivity extends AppCompatActivity {
         PWEdittext = (EditText) findViewById(R.id.PWregister);
         confirmPWEdittext = (EditText)findViewById(R.id.ConfirmPW);
         nicknameEdittext = (EditText) findViewById(R.id.NicknameRegister);
-        phoneEdittext = (EditText) findViewById(R.id.phoneregister);
+        phoneEdittext_first = (EditText) findViewById(R.id.first_num);
+        phoneEdittext_second = (EditText) findViewById(R.id.second_num);
+        phoneEdittext_third = (EditText) findViewById(R.id.third_num);
 
         checkButton = (Button) findViewById(R.id.IDcheck);
         doneButton = (Button) findViewById(R.id.DoneRegister);
@@ -86,13 +90,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 String PW = PWEdittext.getText().toString();
                 String confirmPW = confirmPWEdittext.getText().toString();
                 String nickname = nicknameEdittext.getText().toString();
-                String phone = phoneEdittext.getText().toString();
+                String phone = phoneEdittext_first.getText().toString()+"-"+phoneEdittext_second.getText().toString()+"-"+phoneEdittext_third.getText().toString();
                 String user_type = user_type_selected.getText().toString();
 
                 boolean checkConfirmPW;
                 checkConfirmPW = PW.equals(confirmPW);
 
-                if(ID.equals("") || PW.equals("") || confirmPW.equals("") || nickname.equals("") || phone.equals("")) {
+                if(ID.contentEquals("") || PW.contentEquals("") || confirmPW.contentEquals("") || nickname.contentEquals("") || phone.contentEquals("")) {
                     Toast.makeText(RegistrationActivity.this, "Fill out the form", Toast.LENGTH_SHORT).show();
                 } else if (IDcheck_done == false) {
                     Toast.makeText(RegistrationActivity.this, "Check your ID first", Toast.LENGTH_SHORT).show();
@@ -105,7 +109,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         PWEdittext.setText("");
                         confirmPWEdittext.setText("");
                         nicknameEdittext.setText("");
-                        phoneEdittext.setText("");
+                        phoneEdittext_first.setText("");
+                        phoneEdittext_second.setText("");
+                        phoneEdittext_third.setText("");
                     } else {
                         Toast.makeText(RegistrationActivity.this, "Check PW again", Toast.LENGTH_SHORT).show();
                         confirmPWEdittext.setText("");
@@ -129,11 +135,20 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            boolean sameID = false;
+            String input_string = result;
+            String result_string = "You can use this ID";
 
-            String result_string = new String("You can use this ID");
+            Log.d(TAG, input_string);
+            Log.d(TAG, result_string);
 
-            sameID = result.contentEquals(result_string);
+            boolean sameID = input_string.contentEquals(result_string);
+
+            String logtest = new String();
+            if(sameID == true)
+                logtest = "true";
+            else
+                logtest = "false";
+            Log.d(TAG, logtest);
 
             progressDialog.dismiss();
 
@@ -141,7 +156,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
                 IDcheck_done = true;
             } else {
-                    Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
             }
         }
 

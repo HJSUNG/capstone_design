@@ -18,7 +18,6 @@ public class User_information {
         this.info_type = type;
     }
 
-
     public void log_in (String ID, String nickname, String phone, String type) {
         this.info_ID = ID;
         this.info_nickname = nickname;
