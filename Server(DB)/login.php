@@ -14,8 +14,7 @@ include('pbkdf2.compat.php');
     {
       $ID=$_POST['ID'];
       $PW=$_POST['PW'];
-      $successMSG = "";
-      $errMSG = "";
+
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
