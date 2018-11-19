@@ -152,12 +152,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
 
-            if (sameID) {
+           // if (sameID) {
                 Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
                 IDcheck_done = true;
-            } else {
+           // } else {
                     //Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
-            }
+         //   }
         }
 
         @Override

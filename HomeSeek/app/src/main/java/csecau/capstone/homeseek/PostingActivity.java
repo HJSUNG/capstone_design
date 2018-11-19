@@ -66,7 +66,7 @@ public class PostingActivity extends AppCompatActivity {
 
         storage.getReferenceFromUrl(imageOne).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(Uri uri) {
+                public void onSuccess(Uri uri) {
                 imageONE = uri.toString();
             }
         }).addOnFailureListener(new OnFailureListener() {
