@@ -44,7 +44,7 @@
          <activity android:name=".PostingActivity"/>
          <activity android:name=".testposting"/>
          <activity android:name=".PostingPage"/>
-         <activity android:name=".MapEstateList"
+         <activity android:name=".MapsEstateList"
              android:noHistory="true"/>
          <activity android:name=".EditActivity"
              android:noHistory="true"
