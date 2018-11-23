@@ -15,6 +15,11 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,9 +31,8 @@ import java.util.ArrayList;
 
 public class TmapActivity extends AppCompatActivity {
 
-    public static int totalTime;
-    public static int totalDistance;
-    public static String TAG = "T-map test";
+    public static String total_time = "1";
+    public static String total_distance = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class TmapActivity extends AppCompatActivity {
         tmapview.setTrackingMode(true);
 
         linearLayoutTmap.addView(tmapview);
+
+        TMapData tmapdata = new TMapData();
 
         TMapPoint CAU_point = new TMapPoint(37.50423882, 126.95685809);         //중앙대학교
         String CAU_lat = "37.50423882";
@@ -76,9 +82,42 @@ public class TmapActivity extends AppCompatActivity {
             }
         });
 
-        Request_information task = new Request_information();
-        task.execute();
 
+        tmapdata.findPathDataAllType(TMapData.TMapPathType.PEDESTRIAN_PATH, CAU_point, target_point, new TMapData.FindPathDataAllListenerCallback() {
+            @Override
+            public void onFindPathDataAll(Document document) {
+                Element root = document.getDocumentElement();
+                NodeList nodeListTotalTime = root.getElementsByTagName("tmap:totalTime");
+
+                for (int i = 0; i < nodeListTotalTime.getLength(); i++) {
+                    NodeList nodeListTotlaTimeItem = nodeListTotalTime.item(i).getChildNodes();
+                    for (int j = 0; j < nodeListTotlaTimeItem.getLength(); j++) {
+                        if (true) {
+                            Log.d("###", nodeListTotlaTimeItem.item(j).getTextContent().trim());
+                            total_time = nodeListTotlaTimeItem.item(j).getTextContent().trim();
+                            Log.d("@@@", total_time);
+                        }
+                    }
+                }
+
+                NodeList nodeListTotalDistance = root.getElementsByTagName("tmap:totalDistance");
+
+                for (int i = 0; i < nodeListTotalDistance.getLength(); i++) {
+                    NodeList nodeListTotalDistanceItem = nodeListTotalDistance.item(i).getChildNodes();
+                    for (int j = 0; j < nodeListTotalDistanceItem.getLength(); j++) {
+                        if (true) {
+                            Log.d("###", nodeListTotalDistanceItem.item(j).getTextContent().trim());
+                            total_distance = nodeListTotalDistanceItem.item(j).getTextContent().trim();
+                            Log.d("@@@", total_distance);
+                        }
+                    }
+                }
+//                Toast.makeText(getApplicationContext(), total_time + " , " +total_distance, Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        Toast.makeText(TmapActivity.this, total_time + " , " +total_distance, Toast.LENGTH_LONG).show();
         // Function for Getting target's lat & lon
         /*final TMapData tmapdata = new TMapData();
         tmapdata.findAllPOI("흑석역", new TMapData.FindAllPOIListenerCallback() {
@@ -94,70 +133,4 @@ public class TmapActivity extends AppCompatActivity {
             }
         });*/
     }
-
-    class Request_information extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            Toast.makeText(TmapActivity.this, result, Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        protected String doInBackground(String...params) {
-            String ID = (String)params[1];
-            String item_num = (String)params[2];
-
-            String serverURL = (String)params[0];
-            String postParameters = "ID=" + ID;
-
-            try {
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
-
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-
-                return sb.toString();
-            } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
-                return new String("ERROR: " + e.getMessage());
-            }
-        }
-    }
-
 }
