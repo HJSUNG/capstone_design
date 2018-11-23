@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchActivity"
+            android:noHistory="true"/>
         <activity android:name=".BoardActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".Picture_List_Activity" />
@@ -39,10 +40,15 @@
         <activity android:name=".MapsActivity" />
         <activity android:name=".TmapActivity" />
         <activity android:name=".daumAddress"/>
-        <activity android:name=".UploadActivity"/>
-        <activity android:name=".PostingActivity"/>
-        <activity android:name=".testposting"/>
-        <activity android:name=".PostingPage"/>
+         <activity android:name=".UploadActivity"/>
+         <activity android:name=".PostingActivity"/>
+         <activity android:name=".testposting"/>
+         <activity android:name=".PostingPage"/>
+         <activity android:name=".MapEstateList"
+             android:noHistory="true"/>
+         <activity android:name=".EditActivity"
+             android:noHistory="true"
+             />
     </application>
 
 </manifest>
