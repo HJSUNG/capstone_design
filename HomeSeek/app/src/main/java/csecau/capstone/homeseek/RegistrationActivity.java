@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -31,7 +33,9 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText PWEdittext;
     private EditText nicknameEdittext;
     private EditText confirmPWEdittext;
-    private EditText phoneEdittext;
+    private EditText phoneEdittext_first;
+    private EditText phoneEdittext_second;
+    private EditText phoneEdittext_third;
 
     private Button checkButton;
     private Button doneButton;
@@ -50,8 +54,9 @@ public class RegistrationActivity extends AppCompatActivity {
         PWEdittext = (EditText) findViewById(R.id.PWregister);
         confirmPWEdittext = (EditText)findViewById(R.id.ConfirmPW);
         nicknameEdittext = (EditText) findViewById(R.id.NicknameRegister);
-        phoneEdittext = (EditText) findViewById(R.id.phoneregister);
-
+        phoneEdittext_first = (EditText) findViewById(R.id.first_num);
+        phoneEdittext_second = (EditText) findViewById(R.id.second_num);
+        phoneEdittext_third = (EditText) findViewById(R.id.third_num);
         checkButton = (Button) findViewById(R.id.IDcheck);
         doneButton = (Button) findViewById(R.id.DoneRegister);
 
@@ -59,6 +64,12 @@ public class RegistrationActivity extends AppCompatActivity {
         user_type_selected = (RadioButton) findViewById(user_typeRg.getCheckedRadioButtonId());
 
         textResult = (TextView) findViewById(R.id.TextResultRegister);
+
+//        IDEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//        IDEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+//        nicknameEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//        nicknameEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+
 
 
         //중복 아이디 체크할 부분 (지금 primary key가 ID 로 되있어서 자체적으로 체크되는데 이걸 안드로이드로 깔끔하게 할수 있나)
@@ -81,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String PW = PWEdittext.getText().toString();
                 String confirmPW = confirmPWEdittext.getText().toString();
                 String nickname = nicknameEdittext.getText().toString();
-                String phone = phoneEdittext.getText().toString();
+                String phone = phoneEdittext_first.getText().toString()+"-"+phoneEdittext_second.getText().toString()+"-"+phoneEdittext_third.getText().toString();
                 String user_type = user_type_selected.getText().toString();
 
                 boolean checkConfirmPW;
@@ -98,7 +109,9 @@ public class RegistrationActivity extends AppCompatActivity {
                         PWEdittext.setText("");
                         confirmPWEdittext.setText("");
                         nicknameEdittext.setText("");
-                        phoneEdittext.setText("");
+                        phoneEdittext_first.setText("");
+                        phoneEdittext_second.setText("");
+                        phoneEdittext_third.setText("");
                     } else {
                         Toast.makeText(RegistrationActivity.this, "Check PW again", Toast.LENGTH_SHORT).show();
                         confirmPWEdittext.setText("");

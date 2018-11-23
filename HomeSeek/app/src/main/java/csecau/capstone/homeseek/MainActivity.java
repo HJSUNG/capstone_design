@@ -16,11 +16,11 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
-    public static String IP_ADDRESS = "10.210.61.66";
-    public static TextView ID_textview;
-    public static TextView nickname_textview;
-    public static TextView phone_textview;
-    public static TextView type_textview;
+    public static String IP_ADDRESS = "10.210.60.21";
+//    public TextView ID_textview;
+//    public TextView nickname_textview;
+//    public TextView phone_textview;
+//    public TextView type_textview;
 
     public static User_information user = new User_information("","","","");
 
@@ -29,14 +29,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ID_textview = (TextView) findViewById(R.id.user_information_ID);
-        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
-        phone_textview = (TextView)findViewById(R.id.user_information_phone);
-        type_textview = (TextView)findViewById(R.id.user_information_type);
+//        ID_textview = (TextView) findViewById(R.id.user_information_ID);
+//        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
+//        phone_textview = (TextView)findViewById(R.id.user_information_phone);
+//        type_textview = (TextView)findViewById(R.id.user_information_type);
 
 
-        final String[] items = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map", "Posting"};
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        final String[] items_login = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map", "Posting"};
+        //로그인 전 아이템들
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items_login);
         listview = (ListView) findViewById(R.id.drawer_menulist);
         listview.setAdapter(adapter);
 

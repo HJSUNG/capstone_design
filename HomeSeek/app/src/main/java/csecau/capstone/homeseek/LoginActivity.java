@@ -35,10 +35,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView textResult;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        final EditText idinput = (EditText)findViewById(R.id.idinput);
 
         loginButton = (Button) findViewById(R.id.loginButton);
         registrationButton = (Button) findViewById(R.id.signupButton);
@@ -67,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 Login task = new Login();
                 task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
+
+                Intent intent = new Intent(getApplicationContext(), navigation_main.class);
+                startActivity(intent);
             }
         });
     }
@@ -90,8 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Log-in failed", Toast.LENGTH_SHORT).show();
             } else {
                 user.log_in(result_string[0], result_string[1], result_string[2], result_string[3]);
-
                 Toast.makeText(LoginActivity.this, "Log-in Success", Toast.LENGTH_SHORT).show();
+
+                Log.d("test",user.info_ID);
             }
         }
 
