@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,7 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
-//ip 주소 고정할수 있는 방법 없나?
+    //ip 주소 고정할수 있는 방법 없나?
     private static String TAG = "phptest";
     private static boolean IDcheck_done = false;
 
@@ -63,6 +65,12 @@ public class RegistrationActivity extends AppCompatActivity {
         user_type_selected = (RadioButton) findViewById(user_typeRg.getCheckedRadioButtonId());
 
         textResult = (TextView) findViewById(R.id.TextResultRegister);
+
+//        IDEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//        IDEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+//        nicknameEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+//        nicknameEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+
 
 
         //중복 아이디 체크할 부분 (지금 primary key가 ID 로 되있어서 자체적으로 체크되는데 이걸 안드로이드로 깔끔하게 할수 있나)
@@ -203,7 +211,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     class InsertData extends AsyncTask<String, Void, String>{
-            ProgressDialog progressDialog;
+        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {

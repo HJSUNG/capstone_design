@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
+  
     class Bookmark extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog2;
 

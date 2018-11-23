@@ -44,7 +44,7 @@ public class BoardActivity extends AppCompatActivity {
     private  void  prepareSimpleDB() {
 
         for (int i=1; i<13; i++){
-            SimpleDB.addArticle(i + "번글", new ArticleVO(i,i+"번글 제목",i +"번글 내용","누구"));
+            SimpleDB.addArticle(i + "번글", new ArticleVO(i,i+"번글 제목",i +"번글 내용","ID : 누구"));
         }
     }
 }

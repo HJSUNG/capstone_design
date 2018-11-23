@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="로그아웃 기능 넣을것"
+        android:title="로그아웃 기능 넣을 자리"
         app:showAsAction="never" />
 </menu>

@@ -22,7 +22,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyClpEw5IA9xDaIQAujnuFu4zr81iBefA5g" />
 
-        <activity android:name=".navigation_main" android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +42,8 @@
         <activity android:name=".MapsActivity" />
         <activity android:name=".TmapActivity" />
         <activity android:name=".daumAddress"/>
+        <activity android:name=".navigation_main"
+            android:theme="@style/AppTheme.NoActionBar"/>
          <activity android:name=".UploadActivity"/>
          <activity android:name=".PostingActivity"/>
          <activity android:name=".testposting"/>

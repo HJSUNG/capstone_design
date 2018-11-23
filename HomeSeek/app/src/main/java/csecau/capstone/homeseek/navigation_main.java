@@ -2,6 +2,9 @@ package csecau.capstone.homeseek;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,29 +15,46 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import static csecau.capstone.homeseek.MainActivity.user;
+
 public class navigation_main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String IP_ADDRESS = "10.210.61.66";
+
     public static TextView ID_textview;
     public static TextView nickname_textview;
     public static TextView phone_textview;
     public static TextView type_textview;
 
-    public static User_information user = new User_information("","","","");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        setContentView(R.layout.nav_header_main);
+//
+//        ID_textview = (TextView) findViewById(R.id.user_ID);
+//        nickname_textview = (TextView)findViewById(R.id.user_nickname);
+//        phone_textview = (TextView)findViewById(R.id.user_phone);
+//        type_textview = (TextView)findViewById(R.id.user_type);
+//
+//        ID_textview.setText(user.info_ID);
+//        nickname_textview.setText(user.info_nickname);
+//        phone_textview.setText(user.info_phone);
+//        type_textview.setText(user.info_type);
+
         setContentView(R.layout.activity_main_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ID_textview = (TextView) findViewById(R.id.user_information_ID);
-        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
-        phone_textview = (TextView)findViewById(R.id.user_information_phone);
-        type_textview = (TextView)findViewById(R.id.user_information_type);
+//        ID_textview = (TextView) findViewById(R.id.user_information_ID);
+//        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
+//        phone_textview = (TextView)findViewById(R.id.user_information_phone);
+//        type_textview = (TextView)findViewById(R.id.user_information_type);
 
+//        ID_textview.setText((CharSequence) user.info_ID);
+        
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -52,6 +72,19 @@ public class navigation_main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        setContentView(R.layout.nav_header_main);
+//
+//        ID_textview = (TextView) findViewById(R.id.user_ID);
+//        nickname_textview = (TextView)findViewById(R.id.user_nickname);
+//        phone_textview = (TextView)findViewById(R.id.user_phone);
+//        type_textview = (TextView)findViewById(R.id.user_type);
+//
+        ID_textview.setText((CharSequence) user.info_ID);
+        nickname_textview.setText((CharSequence) user.info_nickname);
+        phone_textview.setText((CharSequence) user.info_phone);
+        type_textview.setText((CharSequence) user.info_type);
+
     }
 
     @Override
@@ -93,7 +126,8 @@ public class navigation_main extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_login) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            user.log_out();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_search) {
             Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
