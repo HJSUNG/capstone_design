@@ -1,11 +1,12 @@
 package csecau.capstone.homeseek;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapMarkerItem;
@@ -14,9 +15,20 @@ import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
+
 public class TmapActivity extends AppCompatActivity {
+
+    public static int totalTime;
+    public static int totalDistance;
+    public static String TAG = "T-map test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +51,11 @@ public class TmapActivity extends AppCompatActivity {
         linearLayoutTmap.addView(tmapview);
 
         TMapPoint CAU_point = new TMapPoint(37.50423882, 126.95685809);         //중앙대학교
+        String CAU_lat = "37.50423882";
+        String CAU_lon = "126.95685809";
         TMapPoint target_point = new TMapPoint(37.50884952, 126.96374622);      //흑석역
+        String target_lat = "37.50884952";
+        String target_lon = "126.96374622";
 
         TMapMarkerItem CAU_marker = new TMapMarkerItem();
         CAU_marker.setTMapPoint(CAU_point);
@@ -60,6 +76,9 @@ public class TmapActivity extends AppCompatActivity {
             }
         });
 
+        Request_information task = new Request_information();
+        task.execute();
+
         // Function for Getting target's lat & lon
         /*final TMapData tmapdata = new TMapData();
         tmapdata.findAllPOI("흑석역", new TMapData.FindAllPOIListenerCallback() {
@@ -75,4 +94,70 @@ public class TmapActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    class Request_information extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(TmapActivity.this, result, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+            String item_num = (String)params[2];
+
+            String serverURL = (String)params[0];
+            String postParameters = "ID=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d(TAG, "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
 }

@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
             String result_string_not_concat = result;
             String result_string[] = (String[]) result.split(",");
 
-            if(result_string[0] == "No bookmark !") {
+            if(result_string[0].length() != 2) {
                 Toast.makeText(LoginActivity.this, "No bookmark", Toast.LENGTH_SHORT).show();
             } else {
                 textResult.setText(result_string_not_concat);

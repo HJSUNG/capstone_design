@@ -136,28 +136,18 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             String input_string = result;
-            String result_string = "You can use this ID";
+            String result_string = "1";
 
-            Log.d(TAG, input_string);
-            Log.d(TAG, result_string);
-
-            boolean sameID = input_string.contentEquals(result_string);
-
-            String logtest = new String();
-            if(sameID == true)
-                logtest = "true";
-            else
-                logtest = "false";
-            Log.d(TAG, logtest);
+            boolean sameID = input_string.length() == 2;
 
             progressDialog.dismiss();
 
-           // if (sameID) {
-                Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
+            if (sameID) {
+                Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
                 IDcheck_done = true;
-           // } else {
-                    //Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
-         //   }
+            } else {
+                    Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -205,7 +195,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 bufferedReader.close();
 
-                return sb.toString();
+                return sb.toString().trim();
             } catch (Exception e) {
                 return new String("Error: " + e.getMessage());
             }
