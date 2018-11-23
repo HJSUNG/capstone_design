@@ -23,7 +23,7 @@
             android:value="AIzaSyClpEw5IA9xDaIQAujnuFu4zr81iBefA5g" />
 
 
-        <activity android:name=".Mainactivity">
+        <activity android:name=".MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
