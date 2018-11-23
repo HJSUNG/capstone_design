@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
+                String item_num="";
 
                 Login task = new Login();
                 task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
