@@ -129,10 +129,11 @@
                 android:textSize="15sp" />
 
             <EditText
-                android:layout_width="50dp"
+                android:layout_width="65dp"
                 android:layout_height="match_parent"
                 android:id="@+id/first_num"
                 android:layout_toLeftOf="@+id/first_bar"
+                android:background="@drawable/textfield_default_holo_light"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="3"/>
@@ -145,9 +146,10 @@
                 android:layout_toLeftOf ="@+id/second_num"/>
 
             <EditText
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:id="@+id/second_num"
+                android:background="@drawable/textfield_default_holo_light"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="4"
@@ -161,9 +163,10 @@
                 android:layout_toRightOf ="@+id/second_num"/>
 
             <EditText
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:id="@+id/third_num"
+                android:background="@drawable/textfield_default_holo_light"
                 android:inputType="number"
                 android:maxLength="4"
                 android:layout_toRightOf ="@+id/second_bar"/>
