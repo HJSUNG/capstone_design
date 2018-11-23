@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MapEstateList extends AppCompatActivity {
+public class MapsEstateList extends AppCompatActivity {
     private String JSONstring;
     private ArrayList<posting_list> list_itemArrayList;
 
