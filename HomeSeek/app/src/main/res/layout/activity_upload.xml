@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".MainActivity_before"
+        tools:context=".MainActivity"
         android:scrollbars="vertical">
 
         <LinearLayout

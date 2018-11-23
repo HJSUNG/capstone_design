@@ -1,9 +1,12 @@
 package csecau.capstone.homeseek;
 
-import static csecau.capstone.homeseek.MainActivity_before.ID_textview;
-import static csecau.capstone.homeseek.MainActivity_before.nickname_textview;
-import static csecau.capstone.homeseek.MainActivity_before.phone_textview;
-import static csecau.capstone.homeseek.MainActivity_before.type_textview;
+import android.widget.TextView;
+
+import static csecau.capstone.homeseek.navigation_main.ID_textview;
+import static csecau.capstone.homeseek.navigation_main.nickname_textview;
+import static csecau.capstone.homeseek.navigation_main.phone_textview;
+import static csecau.capstone.homeseek.navigation_main.type_textview;
+
 
 public class User_information {
     public String info_ID = "";
@@ -18,7 +21,6 @@ public class User_information {
         this.info_type = type;
     }
 
-
     public void log_in (String ID, String nickname, String phone, String type) {
         this.info_ID = ID;
         this.info_nickname = nickname;
@@ -29,6 +31,8 @@ public class User_information {
         nickname_textview.setText(this.info_nickname);
         phone_textview.setText(this.info_phone);
         type_textview.setText(this.info_type);
+
+
     }
 
     public void log_out() {
@@ -41,5 +45,6 @@ public class User_information {
         nickname_textview.setText(this.info_nickname);
         phone_textview.setText(this.info_phone);
         type_textview.setText(this.info_type);
+
     }
 }
