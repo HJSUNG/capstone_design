@@ -87,12 +87,12 @@ public class Grid_view extends Fragment{
                             }
                         }
                     }
-                    Intent intent = new Intent(context, MapEstateList.class);
+                    Intent intent = new Intent(context, MapsEstateList.class);
                     intent.putExtra("selected", selected);
                     startActivity(intent);
                 }
                 else{
-                    Intent intent = new Intent(context, MapEstateList.class);
+                    Intent intent = new Intent(context, MapsEstateList.class);
                     intent.putExtra("selected", selected);
                     startActivity(intent);
                 }
