@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Grid_view extends Fragment{
     private Context context;
     private GridAdapter adapter;
-    private Button mapButton, searchButton, subwayButton;
+    private Button mapButton, searchButton;
     ArrayList<List> arrayList;
     int[] selected = new int[6];
 
@@ -44,7 +44,6 @@ public class Grid_view extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         mapButton = (Button)view.findViewById(R.id.map_button);
         searchButton = (Button)view.findViewById(R.id.searchButton);
-        subwayButton = (Button)view.findViewById(R.id.subway_button);
         loadGridView(view);
         onClickEvent(view);
     }
@@ -57,10 +56,46 @@ public class Grid_view extends Fragment{
     }
 
     private void onClickEvent(View view){
+
         view.findViewById(R.id.map_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SparseBooleanArray selectedRows = adapter.getSelectedIds();
+                if (selectedRows.size() > 0) {
+                    for (int i = 0; i < selectedRows.size(); i++) {
+                        if (selectedRows.valueAt(i)) {
+                            String selectedRowLabel = arrayList.get(selectedRows.keyAt(i)).getText();
+                            switch (selectedRowLabel) {
+                                case "세탁기":
+                                    selected[0] = 1;
+                                    break;
+                                case "냉장고":
+                                    selected[1] = 1;
+                                    break;
+                                case "책상":
+                                    selected[2] = 1;
+                                    break;
+                                case "침대":
+                                    selected[3] = 1;
+                                    break;
+                                case "전자레인지":
+                                    selected[4] = 1;
+                                    break;
+                                case "옷장":
+                                    selected[5] = 1;
+                                    break;
+                            }
+                        }
+                    }
+                    Intent intent = new Intent(context, MapEstateList.class);
+                    intent.putExtra("selected", selected);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(context, MapEstateList.class);
+                    intent.putExtra("selected", selected);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -94,23 +129,18 @@ public class Grid_view extends Fragment{
                             }
                         }
                     }
-                    Intent intent = new Intent(context,testposting.class);
+                    Intent intent = new Intent(context, testposting.class);
                     intent.putExtra("selected", selected);
                     startActivity(intent);
                 }
                 else{
-                    Intent intent = new Intent(context,testposting.class);
+                    Intent intent = new Intent(context, testposting.class);
+                    intent.putExtra("selected", selected);
                     startActivity(intent);
                 }
             }
         });
 
-        view.findViewById(R.id.subway_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void loadGridView(View view){

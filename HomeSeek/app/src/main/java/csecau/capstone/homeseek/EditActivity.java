@@ -1,6 +1,8 @@
 package csecau.capstone.homeseek;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -39,10 +41,9 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UploadActivity extends AppCompatActivity{
+public class EditActivity extends AppCompatActivity{
     private static int COUNT_ID;
     private static int COUNT_ESTATE = 100;
-    private static String JSONString;
 
     private Uri filePath, filePath2, filePath3;
 
@@ -58,6 +59,7 @@ public class UploadActivity extends AppCompatActivity{
     CheckBox chkWasing, chkRefri, chkDesk, chkBed, chkMicro, chkCloset;
     ImageView imageView1, imageView2, imageView3;
     Button registerBtn, findAddress;
+    String imageoneURL, imagetwoURL, imagethreeURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +88,43 @@ public class UploadActivity extends AppCompatActivity{
         imageView1 = (ImageView)findViewById(R.id.image1);
         imageView2 = (ImageView)findViewById(R.id.image2);
         imageView3 = (ImageView)findViewById(R.id.image3);
-        imageView1.setImageResource(R.drawable.plusicon);
-        imageView2.setImageResource(R.drawable.plusicon);
-        imageView3.setImageResource(R.drawable.plusicon);
         roomaddress.setEnabled(false);
+
+        Intent intent = getIntent();
+
+        titleRoom.setText(intent.getStringExtra("title"));
+        roomaddress.setText(intent.getStringExtra("address"));
+        roomdetail.setText(intent.getStringExtra("detailaddress"));
+        detailExplain.setText(intent.getStringExtra("content"));
+        deposit.setText(intent.getStringExtra("deposit"));
+        monthly.setText(intent.getStringExtra("monthly"));
+        term.setText(intent.getStringExtra("term"));
+        String homeid_string = intent.getStringExtra("homeid");
+        COUNT_ID = Integer.parseInt(homeid_string);
+
+        String washingChk = intent.getStringExtra("washing");
+        String refrigeChk = intent.getStringExtra("refrigerator");
+        String deskChk = intent.getStringExtra("desk");
+        String bedChk = intent.getStringExtra("bed");
+        String microChk = intent.getStringExtra("microwave");
+        String closetChk = intent.getStringExtra("closet");
+        if(washingChk.equals("1")){ chkWasing.setChecked(true); }
+        if(refrigeChk.equals("1")){ chkRefri.setChecked(true); }
+        if(deskChk.equals("1")){ chkDesk.setChecked(true); }
+        if(bedChk.equals("1")){chkBed.setChecked(true);}
+        if(microChk.equals("1")){chkMicro.setChecked(true);}
+        if(closetChk.equals("1")){chkCloset.setChecked(true);}
+
+        Bitmap bitmap1 = (Bitmap)intent.getParcelableExtra("imageone");
+        Bitmap bitmap2 = (Bitmap)intent.getParcelableExtra("imagetwo");
+        Bitmap bitmap3 = (Bitmap)intent.getParcelableExtra("imagethree");
+        imageoneURL = intent.getStringExtra("imageoneURL");
+        imagetwoURL = intent.getStringExtra("imagetwoURL");
+        imagethreeURL = intent.getStringExtra("imagethreeURL");
+
+        imageView1.setImageBitmap(bitmap1);
+        imageView2.setImageBitmap(bitmap2);
+        imageView3.setImageBitmap(bitmap3);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,35 +156,18 @@ public class UploadActivity extends AppCompatActivity{
                     checkPoint[5] = "1";
                 }else{ checkPoint[5] = "0";}
 
-                homeIDManager homeIDManager = new homeIDManager();
-                homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
-
                 dbManager db_manage = new dbManager();
-                db_manage.execute("http://dozonexx.dothome.co.kr/check.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm);
+                db_manage.execute("http://dozonexx.dothome.co.kr/updateData.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm);
                 checkManager check_manage = new checkManager();
-                check_manage.execute("http://dozonexx.dothome.co.kr/checkDB.php", checkPoint[0], checkPoint[1], checkPoint[2], checkPoint[3], checkPoint[4], checkPoint[5]);
+                check_manage.execute("http://dozonexx.dothome.co.kr/updateInform.php", checkPoint[0], checkPoint[1], checkPoint[2], checkPoint[3], checkPoint[4], checkPoint[5]);
                 imageManager image_manage = new imageManager();
                 uploadFile();
                 uploadFile2();
                 uploadFile3();
-                image_manage.execute("http://dozonexx.dothome.co.kr/imageUpload.php", image_one, image_two, image_three);
+                image_manage.execute("http://dozonexx.dothome.co.kr/updateImage.php", image_one, image_two, image_three);
 
-
-                titleRoom.setText("");
-                roomaddress.setText("");
-                roomdetail.setText("");
-                detailExplain.setText("");
-                deposit.setText("");
-                monthly.setText("");
-                term.setText("");
-                chkWasing.setChecked(false);
-                chkRefri.setChecked(false);
-                chkDesk.setChecked(false);
-                chkBed.setChecked(false);
-                chkMicro.setChecked(false);
-                chkCloset.setChecked(false);
-
-                COUNT_ESTATE++;
+                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(search);
             }
 
         });
@@ -181,10 +199,35 @@ public class UploadActivity extends AppCompatActivity{
         findAddress.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(UploadActivity.this, daumAddress.class);
+                Intent intent = new Intent(EditActivity.this, daumAddress.class);
                 startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("정보 수정 취소");
+
+        alertDialogBuilder
+                .setMessage("수정을 그만하시겠습니까?\n(종료를 누를 경우 바뀐 내용은 저장되지 않습니다)")
+                .setCancelable(false)
+                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -293,6 +336,9 @@ public class UploadActivity extends AppCompatActivity{
                         }
                     });
         }
+        else{
+            image_one = imageoneURL;
+        }
     }
 
     private void uploadFile2(){
@@ -324,6 +370,8 @@ public class UploadActivity extends AppCompatActivity{
                             //double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
                         }
                     });
+        }else{
+            image_two = imagetwoURL;
         }
     }
 
@@ -357,67 +405,11 @@ public class UploadActivity extends AppCompatActivity{
                         }
                     });
         }
-    }
-
-    class homeIDManager extends AsyncTask<String, Void, String>{
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String str){
-            super.onPostExecute(str);
-            JSONString = str;
-            try{
-                JSONObject jsonObject = new JSONObject(JSONString);
-                JSONObject jsonArray = jsonObject.getJSONObject("result");
-                String count_id = jsonArray.getString("homeid");
-                COUNT_ID = Integer.parseInt(count_id);
-                COUNT_ID++;
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String serverURL = params[0];
-            StringBuilder jsonHtml = new StringBuilder();
-            try {
-                URL url = new URL(serverURL);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(5000);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.connect();
-
-                InputStream input;
-                int responseCode = conn.getResponseCode();
-                if(responseCode== HttpURLConnection.HTTP_OK){
-                    input = conn.getInputStream();
-                }
-                else{
-                    input = conn.getErrorStream();
-                }
-                InputStreamReader inputStreamReader = new InputStreamReader(input, "UTF-8");
-                BufferedReader br = new BufferedReader(inputStreamReader);
-                String line;
-                while ((line = br.readLine()) != null) {
-                    jsonHtml.append(line);
-                }
-                br.close();
-                return jsonHtml.toString().trim();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+        else{
+            image_three = imagethreeURL;
         }
     }
+
 
     class imageManager extends AsyncTask<String, Void, String>{
         @Override
@@ -571,7 +563,7 @@ public class UploadActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            loading = ProgressDialog.show(UploadActivity.this, "Wait", null, true, true);
+            loading = ProgressDialog.show(EditActivity.this, "Wait", null, true, true);
         }
 
         @Override
