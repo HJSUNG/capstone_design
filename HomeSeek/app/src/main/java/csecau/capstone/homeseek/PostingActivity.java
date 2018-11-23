@@ -1,13 +1,18 @@
 package csecau.capstone.homeseek;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,12 +33,16 @@ import java.util.ArrayList;
 public class PostingActivity extends AppCompatActivity {
     TextView titleView, contentView, depositView, monthlyView, termView;
     TextView addressView, detailView, checkView;
+    String washingChk, refrigeChk, deskChk, bedChk, microChk, closetChk;
     ImageView imageone, imagetwo, imagethree;
     ViewPager pager;
+    Bitmap bm_one, bm_two, bm_three;
     Button beforeButton, nextButton;
     static int imagePosition = 0;
+    static String homeID;
     static String imageONE, imageTWO, imageTHREE;
     final FirebaseStorage storage = FirebaseStorage.getInstance();
+    static String imageoneURL, imagetwoURL, imagethreeURL;
     StorageReference storageReference = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images");
 
     @Override
@@ -54,19 +65,19 @@ public class PostingActivity extends AppCompatActivity {
         nextButton = (Button)findViewById(R.id.next);
 
         Intent intent = getIntent();
-
-        final String imageOne = intent.getStringExtra("imageone");
-        final String imageTwo = intent.getStringExtra("imagetwo");
-        final String imageThree = intent.getStringExtra("imagethree");
+        homeID = intent.getStringExtra("homeid");
+        imageoneURL = intent.getStringExtra("imageone");
+        imagetwoURL = intent.getStringExtra("imagetwo");
+        imagethreeURL = intent.getStringExtra("imagethree");
         final String phoneNum = intent.getStringExtra("phonenum");
         ArrayList<String> data = new ArrayList<>();
 
         CustomAdapter adapter = new CustomAdapter(this, data);
         pager.setAdapter(adapter);
 
-        storage.getReferenceFromUrl(imageOne).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storage.getReferenceFromUrl(imageoneURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-                public void onSuccess(Uri uri) {
+            public void onSuccess(Uri uri) {
                 imageONE = uri.toString();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -76,7 +87,7 @@ public class PostingActivity extends AppCompatActivity {
             }
         });
 
-        storage.getReferenceFromUrl(imageTwo).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storage.getReferenceFromUrl(imagetwoURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 imageTWO = uri.toString();
@@ -88,7 +99,7 @@ public class PostingActivity extends AppCompatActivity {
             }
         });
 
-        storage.getReferenceFromUrl(imageThree).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storage.getReferenceFromUrl(imagethreeURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 imageTHREE= uri.toString();
@@ -100,12 +111,12 @@ public class PostingActivity extends AppCompatActivity {
             }
         });
 
-        Glide.with(getApplicationContext()).load(imageOne).into(imageone);
+        Glide.with(getApplicationContext()).load(imageoneURL).into(imageone);
 
 
-        setIMAGE(imageOne, 1);
-        setIMAGE(imageTwo, 2);
-        setIMAGE(imageThree, 3);
+        setIMAGE(imageoneURL, 1);
+        setIMAGE(imagetwoURL, 2);
+        setIMAGE(imagethreeURL, 3);
 
 
         beforeButton.setOnClickListener(new View.OnClickListener() {
@@ -163,16 +174,71 @@ public class PostingActivity extends AppCompatActivity {
         monthlyView.setText(intent.getStringExtra("monthly"));
         termView.setText(intent.getStringExtra("term"));
 
-        String washingChk = intent.getStringExtra("washing");
-        String refrigeChk = intent.getStringExtra("refrigerator");
-        String deskChk = intent.getStringExtra("desk");
-        String bedChk = intent.getStringExtra("bed");
-        String microChk = intent.getStringExtra("microwave");
-        String closetChk = intent.getStringExtra("closet");
+        washingChk = intent.getStringExtra("washing");
+        refrigeChk = intent.getStringExtra("refrigerator");
+        deskChk = intent.getStringExtra("desk");
+        bedChk = intent.getStringExtra("bed");
+        microChk = intent.getStringExtra("microwave");
+        closetChk = intent.getStringExtra("closet");
         setCHECK(washingChk, refrigeChk, deskChk, bedChk, microChk, closetChk);
+    }
 
+    private Bitmap resize(Bitmap bm){
 
+        Configuration config=getResources().getConfiguration();
+        if(config.smallestScreenWidthDp>=600)
+            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
+        else if(config.smallestScreenWidthDp>=400)
+            bm = Bitmap.createScaledBitmap(bm, 200, 120, true);
+        else if(config.smallestScreenWidthDp>=360)
+            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
+        else
+            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
 
+        return bm;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_posting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_edit:
+                Intent intent = new Intent(PostingActivity.this, EditActivity.class);
+                intent.putExtra("title", titleView.getText());
+                intent.putExtra("homeid",homeID);
+                intent.putExtra("address", addressView.getText());
+                intent.putExtra("detailaddress",detailView.getText());
+                intent.putExtra("content", contentView.getText());
+                intent.putExtra("deposit", String.valueOf(depositView.getText()));
+                intent.putExtra("monthly", String.valueOf(monthlyView.getText()));
+                intent.putExtra("term", String.valueOf(termView.getText()));
+
+                intent.putExtra("washing", washingChk);
+                intent.putExtra("refrigerator", refrigeChk);
+                intent.putExtra("desk", deskChk);
+                intent.putExtra("bed", bedChk);
+                intent.putExtra("microwave", microChk);
+                intent.putExtra("closet", closetChk);
+
+                intent.putExtra("imageone",bm_one);
+                intent.putExtra("imageoneURL", imageoneURL);
+                intent.putExtra("imagetwo",bm_two);
+                intent.putExtra("imagetwoURL", imagetwoURL);
+                intent.putExtra("imagethree",bm_three);
+                intent.putExtra("imagethreeURL", imagethreeURL);
+                startActivity(intent);
+                return true;
+            case R.id.action_delete:
+                Toast.makeText(this, "delete", Toast.LENGTH_LONG).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setIMAGE(String imageURL, final int i){
@@ -183,12 +249,36 @@ public class PostingActivity extends AppCompatActivity {
                 switch(i){
                     case 1:
                         Glide.with(getApplicationContext()).load(imageURL).into(imageone);
+                        Glide.with(getApplicationContext()).asBitmap().load(imageURL)
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        bm_one = resource;
+                                        bm_one = resize(bm_one);
+                                    }
+                                });
                         break;
                     case 2:
                         Glide.with(getApplicationContext()).load(imageURL).into(imagetwo);
+                        Glide.with(getApplicationContext()).asBitmap().load(imageURL)
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        bm_two = resource;
+                                        bm_two = resize(bm_two);
+                                    }
+                                });
                         break;
                     case 3:
                         Glide.with(getApplicationContext()).load(imageURL).into(imagethree);
+                        Glide.with(getApplicationContext()).asBitmap().load(imageURL)
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        bm_three = resource;
+                                        bm_three = resize(bm_three);
+                                    }
+                                });
                         break;
                 }
 
