@@ -14,20 +14,16 @@ include('dbcon.php');
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT * from user_information WHERE ID = '".$ID."' ";
+              $query_search = "SELECT ID, group_concat(item_num) from bookmark WHERE ID = '".$ID."' group by ID";
               $result = $mysqli->query($query_search);
 
-              if($result->num_rows == 1) {
-                  $_SESSION['ID']= $ID;
-                  if(isset($_SESSION['ID'])) {
-                    $successMSG = "There exists same ID !";
-                  }
-                  else {
-                    $errMSG = "Session save failed";
-                  }
-                } else {
-                  $errMSG = "You can use this ID";
-                }
+              if($result->num_rows == 0) {
+                $errMSG = "No bookmark !";
+              } else {
+                $row=$result->fetch_array(MYSQLI_ASSOC);
+                $return_string = $row['group_concat(item_num)'];
+                $successMSG = "$return_string";
+              }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());
             }

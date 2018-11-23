@@ -26,15 +26,6 @@
         android:typeface="normal"
         android:id="@+id/searchButton"/>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:textSize="13sp"
-        android:textColor="@android:color/black"
-        android:text="근처 역으로 찾기"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:typeface="normal"
-        android:id="@+id/subway_button"/>
+
 
 </LinearLayout>

@@ -21,23 +21,24 @@ public class PictureListAdapter extends BaseAdapter {
 
 
 
-        @Override
-        public int getCount() {
-            return this.list_itemArrayList.size();
-        }
+    @Override
+    public int getCount() {
+        return this.list_itemArrayList.size();
+    }
         /*
         int getCount()는 이 리스트뷰가 몇개의 아이템을 가지고 있는지를 알려주는 함수
          */
 
-        @Override
-        public Object getItem(int position) {
-            return this.list_itemArrayList.get(position);
-        }
+    @Override
+    public Object getItem(int position) {
+        return this.list_itemArrayList.get(position);
+    }
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
 
 
 
@@ -64,8 +65,9 @@ public class PictureListAdapter extends BaseAdapter {
 //            date_textView.setText(list_itemArrayList.get(position).getWrite_date().toString());
             profile_imageView.setImageResource(list_itemArrayList.get(position).getProfile_image());
 
-            return  convertView;
-        }
+
+        return  convertView;
     }
+}
 
 

@@ -20,7 +20,7 @@ import static csecau.capstone.homeseek.MainActivity.user;
 public class navigation_main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String IP_ADDRESS = "10.210.60.21";
+    public static String IP_ADDRESS = "10.210.61.66";
 
     public static TextView ID_textview;
     public static TextView nickname_textview;
@@ -54,6 +54,15 @@ public class navigation_main extends AppCompatActivity
 //        type_textview = (TextView)findViewById(R.id.user_information_type);
 
 //        ID_textview.setText((CharSequence) user.info_ID);
+        
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,8 +72,6 @@ public class navigation_main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
 //        setContentView(R.layout.nav_header_main);
 //
@@ -77,6 +84,7 @@ public class navigation_main extends AppCompatActivity
         nickname_textview.setText((CharSequence) user.info_nickname);
         phone_textview.setText((CharSequence) user.info_phone);
         type_textview.setText((CharSequence) user.info_type);
+
     }
 
     @Override

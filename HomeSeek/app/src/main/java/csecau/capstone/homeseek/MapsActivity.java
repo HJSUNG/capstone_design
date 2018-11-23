@@ -1,17 +1,26 @@
 package csecau.capstone.homeseek;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,21 +37,29 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private ClusterManager<Map_MarkerItem> mClusterManager;
+    private Map_MarkerItem clickedClusterItem;
 
     Marker selectedMarker;
     View marker_root_view;
     TextView tv_marker;
     private GoogleMap mMap;
+    private ArrayList<posting_list> list_itemArrayList;
+    private static final double DEFAULT_RADIUS = 1.0000001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        list_itemArrayList = new ArrayList<posting_list>();
+        Bundle bundle = getIntent().getExtras();
+        list_itemArrayList = bundle.getParcelableArrayList("marker_list");
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -56,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         double CAU_LAT = 37.5039255;
         double CAU_LON = 126.9572649;
-        LatLng CAU = new LatLng(CAU_LAT, CAU_LON);//중앙대학교 서울캠퍼스
+        LatLng CAU = new LatLng(CAU_LAT, CAU_LON);
 
         markerOptions.position(CAU)
                 .title("중앙대 서울캠퍼스")
@@ -70,25 +87,84 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(mClusterManager);
         mMap.setOnInfoWindowClickListener(mClusterManager);
         addMarkerItems();
-        mClusterManager.cluster();
+        mClusterManager.setOnClusterItemInfoWindowClickListener(new ClusterManager.OnClusterItemInfoWindowClickListener<Map_MarkerItem>() {
+            @Override
+            public void onClusterItemInfoWindowClick(Map_MarkerItem map_markerItem) {
 
+            }
+        });
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<Map_MarkerItem>() {
+            @Override
+            public boolean onClusterItemClick(Map_MarkerItem map_markerItem) {
+                int index = map_markerItem.getIndex();
+                Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
+                intent.putExtra("title", list_itemArrayList.get(index).getTitle());
+                intent.putExtra("homeid",list_itemArrayList.get(index).getHomeid());
+                intent.putExtra("address", list_itemArrayList.get(index).getAddress());
+                intent.putExtra("detailAddress", list_itemArrayList.get(index).getDetailaddress());
+                intent.putExtra("explain", list_itemArrayList.get(index).getExplain());
+                intent.putExtra("deposit", list_itemArrayList.get(index).getDeposit());
+                intent.putExtra("monthly", list_itemArrayList.get(index).getMonthly());
+                intent.putExtra("term", list_itemArrayList.get(index).getTerm());
+
+                intent.putExtra("washing", list_itemArrayList.get(index).getWashing());
+                intent.putExtra("refrigerator", list_itemArrayList.get(index).getRefrigerator());
+                intent.putExtra("desk", list_itemArrayList.get(index).getDesk());
+                intent.putExtra("bed", list_itemArrayList.get(index).getBed());
+                intent.putExtra("microwave", list_itemArrayList.get(index).getMicrowave());
+                intent.putExtra("closet", list_itemArrayList.get(index).getCloset());
+
+                intent.putExtra("imageone", list_itemArrayList.get(index).getImageone());
+                intent.putExtra("imagetwo", list_itemArrayList.get(index).getImagetwo());
+                intent.putExtra("imagethree", list_itemArrayList.get(index).getImagethree());
+
+                intent.putExtra("phonenum", list_itemArrayList.get(index).getPhoneNum());
+                startActivity(intent);
+                return false;
+            }
+        });
+        mClusterManager.cluster();
     }
 
-    private  void addMarkerItems() {
-        mClusterManager.addItem(new Map_MarkerItem(37.505478,126.956304, 415000));
-        mClusterManager.addItem(new Map_MarkerItem(37.507144,126.958268, 500000));
-        mClusterManager.addItem(new Map_MarkerItem(37.507204,126.957972, 450000));
-        mClusterManager.addItem(new Map_MarkerItem(37.505629,126.955763, 300000));
-        mClusterManager.addItem(new Map_MarkerItem(37.504824,126.953263, 550000));
-        mClusterManager.addItem(new Map_MarkerItem(37.505731,126.955748, 315000));
-        mClusterManager.addItem(new Map_MarkerItem(37.505909,126.955229, 420000));
-        mClusterManager.addItem(new Map_MarkerItem(37.505440,126.955112, 350000));
-        mClusterManager.addItem(new Map_MarkerItem(37.505191,126.953415, 330000));
-        mClusterManager.addItem(new Map_MarkerItem(37.504415,126.953028, 500000));
-        mClusterManager.addItem(new Map_MarkerItem(37.504543,126.952320, 320000));
-        mClusterManager.addItem(new Map_MarkerItem(37.504159,126.952320, 600000));
-        mClusterManager.addItem(new Map_MarkerItem(37.506447,126.956656, 250000));
-        mClusterManager.addItem(new Map_MarkerItem(37.507335,126.958384, 440000));
+    private void addMarkerItems() {
+        Geocoder geocoder;
+        for (int i = 0; i < list_itemArrayList.size(); i++) {
+            geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addressList = null;
+            try {
+                addressList = geocoder.getFromLocationName(list_itemArrayList.get(i).getAddress(), 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int monthly = Integer.parseInt(list_itemArrayList.get(i).getMonthly());
+            for(int j = 0; j < i; j++){
+                if(compareAddress(addressList.get(0).getLatitude(), addressList.get(0).getLongitude(),list_itemArrayList.get(j).getAddress())){
+                    addressList.get(0).setLatitude(addressList.get(0).getLatitude() * DEFAULT_RADIUS);
+                    addressList.get(0).setLongitude(addressList.get(0).getLongitude() * DEFAULT_RADIUS);
+                }
+            }
+            mClusterManager.addItem(new Map_MarkerItem(addressList.get(0).getLatitude(), addressList.get(0).getLongitude(), monthly, i));
+            mClusterManager.cluster();
+        }
+    }
+
+    private boolean compareAddress(double lat, double lon, String y_address){
+        Geocoder geocoder;
+        List<Address> addressList = null;
+        geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            addressList = geocoder.getFromLocationName(y_address, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(lat == addressList.get(0).getLatitude()){
+            if(lon == addressList.get(0).getLongitude()){
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     private class RenderClusterInfoWindow extends DefaultClusterRenderer<Map_MarkerItem> {
@@ -116,36 +192,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         tv_marker = (TextView) marker_root_view.findViewById(R.id.tv_marker);
     }
 
-
-    private void getSampleMarkerItems() {
-        ArrayList<Map_MarkerItem> sampleList = new ArrayList();
-
-
-        sampleList.add(new Map_MarkerItem(37.505478,126.956304, 415000));
-        sampleList.add(new Map_MarkerItem(37.507144,126.958268, 500000));
-        sampleList.add(new Map_MarkerItem(37.507204,126.957972, 450000));
-        sampleList.add(new Map_MarkerItem(37.505629,126.955763, 300000));
-        sampleList.add(new Map_MarkerItem(37.504824,126.953263, 550000));
-        sampleList.add(new Map_MarkerItem(37.505731,126.955748, 315000));
-        sampleList.add(new Map_MarkerItem(37.505909,126.955229, 420000));
-        sampleList.add(new Map_MarkerItem(37.505440,126.955112, 350000));
-        sampleList.add(new Map_MarkerItem(37.505191,126.953415, 330000));
-        sampleList.add(new Map_MarkerItem(37.504415,126.953028, 500000));
-        sampleList.add(new Map_MarkerItem(37.504543,126.952320, 320000));
-        sampleList.add(new Map_MarkerItem(37.504159,126.952320, 600000));
-        sampleList.add(new Map_MarkerItem(37.506447,126.956656, 250000));
-        sampleList.add(new Map_MarkerItem(37.507335,126.958384, 440000));
-        //나중에 db에서 갔고 오는 형식으로 바꿔야됨
-
-
-        for (Map_MarkerItem markerItem : sampleList) {
-            addMarker(markerItem, false);
-        }
-
-    }
-
-
-
     private Marker addMarker(Map_MarkerItem markerItem, boolean isSelectedMarker) {
 
 
@@ -168,15 +214,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.position(position);
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
 
-
         return mMap.addMarker(markerOptions);
-
     }
 
-
-
-
-    // View를 Bitmap으로 변환
     private Bitmap createDrawableFromView(Context context, View view) {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -193,21 +233,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return bitmap;
     }
 
-
     private Marker addMarker(Marker marker, boolean isSelectedMarker) {
         double lat = marker.getPosition().latitude;
         double lon = marker.getPosition().longitude;
         int price = Integer.parseInt(marker.getTitle());
-        Map_MarkerItem temp = new Map_MarkerItem(lat, lon, price);
+        Map_MarkerItem temp = new Map_MarkerItem(lat, lon, price, price);
         return addMarker(temp, isSelectedMarker);
 
     }
 
-
-
     @Override
     public boolean onMarkerClick(Marker marker) {
-
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
 
@@ -215,8 +251,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         return true;
     }
-
-
 
     private void changeSelectedMarker(Marker marker) {
         // 선택했던 마커 되돌리기
@@ -230,15 +264,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             selectedMarker = addMarker(marker, true);
             marker.remove();
         }
-
-
     }
-
 
     @Override
     public void onMapClick(LatLng latLng) {
         changeSelectedMarker(null);
     }
-
-
 }
