@@ -9,7 +9,9 @@ public class list_item {
     private int profile_image;//String으로 바꿀수도 있음
     private String  nickname;
     private String title;
+
 //    private Date write_date;
+
     private String content;
 
     public int getProfile_image() {

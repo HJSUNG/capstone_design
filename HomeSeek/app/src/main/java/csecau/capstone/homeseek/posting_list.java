@@ -1,11 +1,14 @@
 package csecau.capstone.homeseek;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class posting_list implements Serializable {
+public class posting_list implements Parcelable {
 
     private int profile_image;
-    private String title, address, detailaddress, explain, deposit, monthly, term;
+    private String title, homeid, address, detailaddress, explain, deposit, monthly, term;
     private String washing, refrigerator, desk, bed, microwave, closet;
     private String imageone, imagetwo, imagethree;
     private String phoneNum;
@@ -22,6 +25,8 @@ public class posting_list implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+    public String getHomeid() {return homeid;}
+    public void setHomeid(String homeid){this.homeid = homeid;}
     public String getAddress(){return address;}
     public void setAddress(String address){this.address = address;}
     public String getDetailaddress(){return detailaddress;}
@@ -59,11 +64,12 @@ public class posting_list implements Serializable {
     public void setPhoneNum(String phoneNum){this.phoneNum = phoneNum;}
 
 
-    public posting_list(int profile_image, String title, String address, String detailaddress, String explain, String deposit, String monthly, String term,
+    public posting_list(int profile_image, String title, String homeid, String address, String detailaddress, String explain, String deposit, String monthly, String term,
                         String washing, String refrigerator, String desk, String bed, String microwave, String closet,
                         String imageone, String imagetwo, String imagethree, String phoneNum) {
         this.profile_image = profile_image;
         this.title = title;
+        this.homeid = homeid;
         this.address = address;
         this.detailaddress = detailaddress;
         this.explain = explain;
@@ -84,4 +90,70 @@ public class posting_list implements Serializable {
 
         this.phoneNum = phoneNum;
     }
+
+    public posting_list(Parcel in){
+        this.profile_image = in.readInt();
+        this.title = in.readString();
+        this.address = in.readString();
+        this.detailaddress = in.readString();
+        this.explain = in.readString();
+        this.deposit = in.readString();
+        this.monthly = in.readString();
+        this.term = in.readString();
+
+        this.washing =in.readString();
+        this.refrigerator = in.readString();
+        this.desk = in.readString();
+        this.bed = in.readString();
+        this.microwave = in.readString();
+        this.closet = in.readString();
+
+        this.imageone = in.readString();
+        this.imagethree = in.readString();
+        this.imagetwo = in.readString();
+
+        this.phoneNum = in.readString();
+    }
+
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeInt(this.profile_image);
+        dest.writeString(this.title);
+        dest.writeString(this.address);
+        dest.writeString(this.detailaddress);
+        dest.writeString(this.explain);
+        dest.writeString(this.deposit);
+        dest.writeString(this.monthly);
+        dest.writeString(this.term);
+
+        dest.writeString(this.washing);
+        dest.writeString(this.refrigerator);
+        dest.writeString(this.desk);
+        dest.writeString(this.bed);
+        dest.writeString(this.microwave);
+        dest.writeString(this.closet);
+
+        dest.writeString(this.imageone);
+        dest.writeString(this.imagetwo);
+        dest.writeString(this.imagethree);
+
+        dest.writeString(this.phoneNum);
+    }
+
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator(){
+        @Override
+        public posting_list createFromParcel(Parcel in){
+            return new posting_list(in);
+        }
+        @Override
+        public posting_list[] newArray(int size){
+            return new posting_list[size];
+        }
+    };
 }

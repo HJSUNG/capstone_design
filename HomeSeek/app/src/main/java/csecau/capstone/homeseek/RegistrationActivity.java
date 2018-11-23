@@ -57,6 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
         phoneEdittext_first = (EditText) findViewById(R.id.first_num);
         phoneEdittext_second = (EditText) findViewById(R.id.second_num);
         phoneEdittext_third = (EditText) findViewById(R.id.third_num);
+
         checkButton = (Button) findViewById(R.id.IDcheck);
         doneButton = (Button) findViewById(R.id.DoneRegister);
 
@@ -78,9 +79,14 @@ public class RegistrationActivity extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String IDcompare= IDEdittext.getText().toString();
-                CheckID task = new CheckID();
-                task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php",IDcompare);
+                String IDcompare = IDEdittext.getText().toString();
+
+                if (IDcompare.contentEquals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Insert ID", Toast.LENGTH_SHORT).show();
+                } else {
+                    CheckID task = new CheckID();
+                    task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php", IDcompare);
+                }
             }
         });
 
@@ -98,8 +104,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 boolean checkConfirmPW;
                 checkConfirmPW = PW.equals(confirmPW);
 
-                if(ID.equals("") || PW.equals("") || confirmPW.equals("") || nickname.equals("") || phone.equals("")) {
+                if(ID.contentEquals("") || PW.contentEquals("") || confirmPW.contentEquals("") || nickname.contentEquals("") || phone.contentEquals("")) {
                     Toast.makeText(RegistrationActivity.this, "Fill out the form", Toast.LENGTH_SHORT).show();
+                } else if (IDcheck_done == false) {
+                    Toast.makeText(RegistrationActivity.this, "Check your ID first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
@@ -135,18 +143,19 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            boolean sameID = false;
+            String input_string = result;
+            String result_string = "1";
 
-            String result_string = new String("You can use this ID");
-
-            sameID = result.equals(result_string);
+            boolean sameID = input_string.length() == 2;
 
             progressDialog.dismiss();
 
-            Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
-
-            if(sameID)
-                textResult.setText("true");
+            if (sameID) {
+                Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
+                IDcheck_done = true;
+            } else {
+                    Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -194,7 +203,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 bufferedReader.close();
 
-                return sb.toString();
+                return sb.toString().trim();
             } catch (Exception e) {
                 return new String("Error: " + e.getMessage());
             }
