@@ -75,10 +75,10 @@ public class navigation_main extends AppCompatActivity
 //        phone_textview = (TextView)findViewById(R.id.user_phone);
 //        type_textview = (TextView)findViewById(R.id.user_type);
 //
-        ID_textview.setText((CharSequence) user.info_ID);
-        nickname_textview.setText((CharSequence) user.info_nickname);
-        phone_textview.setText((CharSequence) user.info_phone);
-        type_textview.setText((CharSequence) user.info_type);
+//        ID_textview.setText((CharSequence) user.info_ID);
+//        nickname_textview.setText((CharSequence) user.info_nickname);
+//        phone_textview.setText((CharSequence) user.info_phone);
+//        type_textview.setText((CharSequence) user.info_type);
 
     }
 
