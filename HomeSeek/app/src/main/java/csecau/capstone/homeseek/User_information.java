@@ -27,10 +27,10 @@ public class User_information {
         this.info_phone = phone;
         this.info_type = type;
 
-        ID_textview.setText(this.info_ID);
-        nickname_textview.setText(this.info_nickname);
-        phone_textview.setText(this.info_phone);
-        type_textview.setText(this.info_type);
+//        ID_textview.setText(this.info_ID);
+//        nickname_textview.setText(this.info_nickname);
+//        phone_textview.setText(this.info_phone);
+//        type_textview.setText(this.info_type);
 
 
     }
@@ -41,10 +41,10 @@ public class User_information {
         this.info_phone = "";
         this.info_type = "";
 
-        ID_textview.setText(this.info_ID);
-        nickname_textview.setText(this.info_nickname);
-        phone_textview.setText(this.info_phone);
-        type_textview.setText(this.info_type);
+//        ID_textview.setText(this.info_ID);
+//        nickname_textview.setText(this.info_nickname);
+//        phone_textview.setText(this.info_phone);
+//        type_textview.setText(this.info_type);
 
     }
 }

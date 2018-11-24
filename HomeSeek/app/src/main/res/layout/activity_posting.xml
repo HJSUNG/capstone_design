@@ -199,6 +199,16 @@
                 android:paddingTop="20dp"
                 android:textColor="@android:color/black"/>
 
+            <fragment
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:id="@+id/map_posting"
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
         </LinearLayout>
 
     </ScrollView>

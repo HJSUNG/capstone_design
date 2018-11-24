@@ -20,30 +20,19 @@ import static csecau.capstone.homeseek.MainActivity.user;
 public class navigation_main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String IP_ADDRESS = "10.210.60.21";
+//    public static String IP_ADDRESS;
 
     public static TextView ID_textview;
     public static TextView nickname_textview;
     public static TextView phone_textview;
     public static TextView type_textview;
 
+    TextView user_id, user_nickname, user_phone, user_type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        setContentView(R.layout.nav_header_main);
-//
-//        ID_textview = (TextView) findViewById(R.id.user_ID);
-//        nickname_textview = (TextView)findViewById(R.id.user_nickname);
-//        phone_textview = (TextView)findViewById(R.id.user_phone);
-//        type_textview = (TextView)findViewById(R.id.user_type);
-//
-//        ID_textview.setText(user.info_ID);
-//        nickname_textview.setText(user.info_nickname);
-//        phone_textview.setText(user.info_phone);
-//        type_textview.setText(user.info_type);
-
         setContentView(R.layout.activity_main_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,6 +53,7 @@ public class navigation_main extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        user_id= (TextView)findViewById(R.id.user_ID);
 
 
 //        setContentView(R.layout.nav_header_main);
@@ -73,10 +63,10 @@ public class navigation_main extends AppCompatActivity
 //        phone_textview = (TextView)findViewById(R.id.user_phone);
 //        type_textview = (TextView)findViewById(R.id.user_type);
 //
-        ID_textview.setText((CharSequence) user.info_ID);
-        nickname_textview.setText((CharSequence) user.info_nickname);
-        phone_textview.setText((CharSequence) user.info_phone);
-        type_textview.setText((CharSequence) user.info_type);
+//        ID_textview.setText((CharSequence) user.info_ID);
+//        nickname_textview.setText((CharSequence) user.info_nickname);
+//        phone_textview.setText((CharSequence) user.info_phone);
+//        type_textview.setText((CharSequence) user.info_type);
     }
 
     @Override

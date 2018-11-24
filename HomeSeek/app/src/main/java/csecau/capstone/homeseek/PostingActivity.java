@@ -16,6 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,8 +31,20 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class PostingActivity extends AppCompatActivity {
-    TextView titleView, contentView, depositView, monthlyView, termView;
+public class PostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+    TextView titleView;
+
+    private GoogleMap mMap;
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    TextView contentView;
+    TextView depositView;
+    TextView monthlyView;
+    TextView termView;
     TextView addressView, detailView, checkView;
     ImageView imageone, imagetwo, imagethree;
     ViewPager pager;
@@ -38,6 +58,11 @@ public class PostingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map_posting);
+        mapFragment.getMapAsync(this);
+
         pager = (ViewPager)findViewById(R.id.Viewpager);
         titleView = (TextView)findViewById(R.id.titleWrite);
         contentView = (TextView)findViewById(R.id.contents);
@@ -172,7 +197,6 @@ public class PostingActivity extends AppCompatActivity {
         setCHECK(washingChk, refrigeChk, deskChk, bedChk, microChk, closetChk);
 
 
-
     }
 
     public void setIMAGE(String imageURL, final int i){
@@ -223,5 +247,16 @@ public class PostingActivity extends AppCompatActivity {
             check += "옷장";
         }
         checkView.setText(check);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng SEOUL = new LatLng(37.5054544,126.9562383);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(SEOUL)
+                .title("중문");
+        mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,18));
     }
 }
