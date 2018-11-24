@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listview;
 
-    public static String IP_ADDRESS = "10.210.60.21";
+    public static String IP_ADDRESS = "10.210.62.22";
 //    public TextView ID_textview;
 //    public TextView nickname_textview;
 //    public TextView phone_textview;

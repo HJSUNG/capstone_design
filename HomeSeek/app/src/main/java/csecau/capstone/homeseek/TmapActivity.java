@@ -34,6 +34,14 @@ public class TmapActivity extends AppCompatActivity {
     public static String total_time = "1";
     public static String total_distance = "2";
 
+    public void set_total_time (String input) {
+        total_time = input;
+    }
+
+    public void set_total_distance (String input) {
+        total_distance = input;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,11 +98,11 @@ public class TmapActivity extends AppCompatActivity {
                 NodeList nodeListTotalTime = root.getElementsByTagName("tmap:totalTime");
 
                 for (int i = 0; i < nodeListTotalTime.getLength(); i++) {
-                    NodeList nodeListTotlaTimeItem = nodeListTotalTime.item(i).getChildNodes();
-                    for (int j = 0; j < nodeListTotlaTimeItem.getLength(); j++) {
+                    NodeList nodeListTotalTimeItem = nodeListTotalTime.item(i).getChildNodes();
+                    for (int j = 0; j < nodeListTotalTimeItem.getLength(); j++) {
                         if (true) {
-                            Log.d("###", nodeListTotlaTimeItem.item(j).getTextContent().trim());
-                            total_time = nodeListTotlaTimeItem.item(j).getTextContent().trim();
+                            Log.d("###", nodeListTotalTimeItem.item(j).getTextContent().trim());
+                            set_total_time(nodeListTotalTimeItem.item(j).getTextContent().trim());
                             Log.d("@@@", total_time);
                         }
                     }
@@ -107,7 +115,7 @@ public class TmapActivity extends AppCompatActivity {
                     for (int j = 0; j < nodeListTotalDistanceItem.getLength(); j++) {
                         if (true) {
                             Log.d("###", nodeListTotalDistanceItem.item(j).getTextContent().trim());
-                            total_distance = nodeListTotalDistanceItem.item(j).getTextContent().trim();
+                            set_total_distance(nodeListTotalDistanceItem.item(j).getTextContent().trim());
                             Log.d("@@@", total_distance);
                         }
                     }
@@ -118,6 +126,8 @@ public class TmapActivity extends AppCompatActivity {
 
 
         Toast.makeText(TmapActivity.this, total_time + " , " +total_distance, Toast.LENGTH_LONG).show();
+
+
         // Function for Getting target's lat & lon
         /*final TMapData tmapdata = new TMapData();
         tmapdata.findAllPOI("흑석역", new TMapData.FindAllPOIListenerCallback() {
