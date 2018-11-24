@@ -10,10 +10,12 @@ public class Map_MarkerItem implements ClusterItem{
     double lon;
     LatLng mPosition;
     int price;
+    int index;
 
-    public Map_MarkerItem(double lat, double lon, int price) {
+    public Map_MarkerItem(double lat, double lon, int price, int index) {
         mPosition = new LatLng(lat, lon);
         this.price = price;
+        this.index= index;
     }
 
     public double getLat() {
@@ -28,6 +30,7 @@ public class Map_MarkerItem implements ClusterItem{
         return price;
     }
 
+    public int getIndex(){return index;}
 
     @Override
     public LatLng getPosition() {

@@ -85,7 +85,7 @@
                     android:textColor="@android:color/holo_blue_dark"/>
             </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -116,15 +116,6 @@
                     android:typeface="normal"
                     android:id="@+id/Subway2"/>
             </LinearLayout>
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<ImageView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:src="@drawable/library"/>-->
-            <!--</LinearLayout>-->
 
         </LinearLayout>
 

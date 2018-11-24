@@ -31,8 +31,6 @@ public class User_information {
 //        nickname_textview.setText(this.info_nickname);
 //        phone_textview.setText(this.info_phone);
 //        type_textview.setText(this.info_type);
-
-
     }
 
     public void log_out() {

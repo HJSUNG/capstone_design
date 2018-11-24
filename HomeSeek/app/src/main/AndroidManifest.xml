@@ -22,7 +22,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAiqKE4D1zp5jpUQFZW3vysNfJfUKIHO8Y" />
 
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchActivity"
+            android:noHistory="true"/>
         <activity android:name=".BoardActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".Picture_List_Activity" />
@@ -39,12 +40,18 @@
         <activity android:name=".MapsActivity" />
         <activity android:name=".TmapActivity" />
         <activity android:name=".daumAddress"/>
-        <activity android:name=".UploadActivity"/>
-        <activity android:name=".PostingActivity"/>
-        <activity android:name=".testposting"/>
-        <activity android:name=".PostingPage"/>
+
         <activity android:name=".navigation_main"
             android:theme="@style/AppTheme.NoActionBar"/>
+         <activity android:name=".UploadActivity"/>
+         <activity android:name=".PostingActivity"/>
+         <activity android:name=".testposting"/>
+         <activity android:name=".PostingPage"/>
+         <activity android:name=".MapsEstateList"
+             android:noHistory="true"/>
+         <activity android:name=".EditActivity"
+             android:noHistory="true"
+             />
     </application>
 
 </manifest>

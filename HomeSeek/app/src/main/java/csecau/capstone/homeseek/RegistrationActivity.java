@@ -1,5 +1,6 @@
 package csecau.capstone.homeseek;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
-//ip 주소 고정할수 있는 방법 없나?
+    //ip 주소 고정할수 있는 방법 없나?
     private static String TAG = "phptest";
     private static boolean IDcheck_done = false;
 
@@ -45,6 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private TextView textResult;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +80,14 @@ public class RegistrationActivity extends AppCompatActivity {
         checkButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String IDcompare= IDEdittext.getText().toString();
-                CheckID task = new CheckID();
-                task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php",IDcompare);
+                String IDcompare = IDEdittext.getText().toString();
+
+                if (IDcompare.contentEquals("")) {
+                    Toast.makeText(RegistrationActivity.this, "Insert ID", Toast.LENGTH_SHORT).show();
+                } else {
+                    CheckID task = new CheckID();
+                    task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php", IDcompare);
+                }
             }
         });
 
@@ -98,8 +105,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 boolean checkConfirmPW;
                 checkConfirmPW = PW.equals(confirmPW);
 
-                if(ID.equals("") || PW.equals("") || confirmPW.equals("") || nickname.equals("") || phone.equals("")) {
+                if(ID.contentEquals("") || PW.contentEquals("") || confirmPW.contentEquals("") || nickname.contentEquals("") || phone.contentEquals("")) {
                     Toast.makeText(RegistrationActivity.this, "Fill out the form", Toast.LENGTH_SHORT).show();
+                } else if (IDcheck_done == false) {
+                    Toast.makeText(RegistrationActivity.this, "Check your ID first", Toast.LENGTH_SHORT).show();
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
@@ -135,18 +144,19 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            boolean sameID = false;
+            String input_string = result;
+            String result_string = "1";
 
-            String result_string = new String("You can use this ID");
-
-            sameID = result.equals(result_string);
+            boolean sameID = input_string.length() == 2;
 
             progressDialog.dismiss();
 
-            Toast.makeText(RegistrationActivity.this, result, Toast.LENGTH_SHORT).show();
-
-            if(sameID)
-                textResult.setText("true");
+            if (sameID) {
+                Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
+                IDcheck_done = true;
+            } else {
+                    Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -194,7 +204,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 bufferedReader.close();
 
-                return sb.toString();
+                return sb.toString().trim();
             } catch (Exception e) {
                 return new String("Error: " + e.getMessage());
             }
@@ -202,7 +212,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     class InsertData extends AsyncTask<String, Void, String>{
-            ProgressDialog progressDialog;
+        ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
