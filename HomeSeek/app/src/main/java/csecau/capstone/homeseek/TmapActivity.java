@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.skt.Tmap.TMapData;
@@ -34,18 +36,24 @@ public class TmapActivity extends AppCompatActivity {
     public static String total_time = "1";
     public static String total_distance = "2";
 
+    TextView total_time_textview;
+    TextView total_distance_textview;
+
     public void set_total_time (String input) {
-        total_time = input;
+        total_time_textview.setText(input);
     }
 
     public void set_total_distance (String input) {
-        total_distance = input;
+        total_distance_textview.setText(input);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tmap);
+
+        total_time_textview = (TextView)findViewById(R.id.total_time);
+        total_distance_textview = (TextView)findViewById(R.id.total_distance);
 
         LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.TmapLayout);
         final TMapView tmapview = new TMapView(this);
@@ -102,7 +110,18 @@ public class TmapActivity extends AppCompatActivity {
                     for (int j = 0; j < nodeListTotalTimeItem.getLength(); j++) {
                         if (true) {
                             Log.d("###", nodeListTotalTimeItem.item(j).getTextContent().trim());
-                            set_total_time(nodeListTotalTimeItem.item(j).getTextContent().trim());
+
+                            int time = Integer.parseInt(nodeListTotalTimeItem.item(j).getTextContent().trim());
+                            int time_quotient, time_remainder;
+
+                            time_quotient = time/60;
+                            time_remainder = time%60;
+
+                            if(time_remainder>30) {
+                                time_quotient +=1;
+                            }
+
+                            set_total_time("총 소요 시간 : 약 " + time_quotient+ " 분");
                             Log.d("@@@", total_time);
                         }
                     }
@@ -115,18 +134,41 @@ public class TmapActivity extends AppCompatActivity {
                     for (int j = 0; j < nodeListTotalDistanceItem.getLength(); j++) {
                         if (true) {
                             Log.d("###", nodeListTotalDistanceItem.item(j).getTextContent().trim());
-                            set_total_distance(nodeListTotalDistanceItem.item(j).getTextContent().trim());
+
+                            int distance = Integer.parseInt(nodeListTotalDistanceItem.item(j).getTextContent().trim());
+                            int distance_quotient, distance_remainder;
+                            int distance_remainder_quotient, distance_remainder_remainder;
+                            double distance_quotient_double = 0, distance_remainder_quotient_double =0;
+
+                            if(distance >= 1000) {
+                                distance_quotient = distance / 1000;
+                                distance_remainder = distance % 1000;
+
+                                distance_quotient_double +=distance_quotient;
+
+                                distance_remainder_quotient = distance_remainder / 100;
+                                distance_remainder_quotient_double = distance_remainder_quotient;
+                                distance_quotient_double += distance_remainder_quotient_double / 10;
+
+                                distance_remainder_remainder = distance_remainder % 100;
+
+                                if (distance_remainder_remainder > 50) {
+                                    distance_quotient_double += 0.1;
+                                }
+
+                                set_total_distance("총 거리 : 약 " + distance_quotient_double + " km");
+                            } else {
+                                distance_quotient = distance / 10;
+                                distance_quotient = distance_quotient * 10;
+
+                                set_total_distance("총 거리 : 약 " + distance_quotient + " m");
+                            }
                             Log.d("@@@", total_distance);
                         }
                     }
                 }
-//                Toast.makeText(getApplicationContext(), total_time + " , " +total_distance, Toast.LENGTH_LONG).show();
             }
         });
-
-
-        Toast.makeText(TmapActivity.this, total_time + " , " +total_distance, Toast.LENGTH_LONG).show();
-
 
         // Function for Getting target's lat & lon
         /*final TMapData tmapdata = new TMapData();
