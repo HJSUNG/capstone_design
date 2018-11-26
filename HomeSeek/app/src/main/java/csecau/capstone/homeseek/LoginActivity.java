@@ -67,15 +67,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
-                String item_num="";
+//                String item_num="";
 
                 Login task = new Login();
                 task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
 
-                Bookmark bookmark_task = new Bookmark();
-                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
-                //Insert_bookmark insert_bookmark_task = new Insert_bookmark();
-                //insert_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID, item_num);
+//                Bookmark bookmark_task = new Bookmark();
+//                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
+//                Delete_bookmark delete_bookmark_task = new Delete_bookmark();
+//                Delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", ID, item_num);
 
             }
         });
@@ -237,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    class Insert_bookmark extends AsyncTask<String, Void, String>{
+    class Delete_bookmark extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog2;
 
         @Override
@@ -250,7 +250,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 //            progressDialog2.dismiss();
-            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Delete done !", Toast.LENGTH_SHORT).show();
         }
 
         @Override

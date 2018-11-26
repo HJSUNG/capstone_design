@@ -145,7 +145,8 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             String input_string = result;
-            String result_string = "1";
+            String correct_string = "1";
+            String exist_string = "22";
 
             boolean sameID = input_string.length() == 2;
 

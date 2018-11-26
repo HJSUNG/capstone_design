@@ -162,7 +162,7 @@ public class TmapActivity extends AppCompatActivity {
                                 distance_quotient = distance_quotient * 10;
 
                                 set_total_distance("총 거리 : 약 " + distance_quotient + " m");
-                            }
+                                                                       }
                             Log.d("@@@", total_distance);
                         }
                     }
