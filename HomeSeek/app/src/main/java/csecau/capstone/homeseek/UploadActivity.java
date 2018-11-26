@@ -593,7 +593,7 @@ public class UploadActivity extends AppCompatActivity{
             String term = (String)params[7];
 
             String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+COUNT_ESTATE+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
-            data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term;
+            data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term+"&visible=1";
 
             try{
                 URL url = new URL(link);

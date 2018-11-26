@@ -25,9 +25,6 @@ public class PictureListAdapter extends BaseAdapter {
     public int getCount() {
         return this.list_itemArrayList.size();
     }
-        /*
-        int getCount()는 이 리스트뷰가 몇개의 아이템을 가지고 있는지를 알려주는 함수
-         */
 
     @Override
     public Object getItem(int position) {

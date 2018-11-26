@@ -35,12 +35,6 @@ public class Picture_List_Activity extends Activity {
         list_itemArrayList.add(
                 new list_item(R.drawable.room_05,"흑석원룸","신축 좋은 방 있습니다.", "신축이라 깨끗합니다."));
 
-//        list_itemArrayList.add(
-//                new list_item(R.drawable.room_06,"중앙대자취방","신축원룸 월세,관리비포함 55요", "신축에 풀옵션이에요"));
-//
-//        list_itemArrayList.add(
-//                new list_item(R.drawable.room_07,"중앙대자취방","신축원룸 전세로도 가능합니다.", "1000/60 또는 전세로 8000"));
-
 
         pictureListAdapter = new PictureListAdapter(Picture_List_Activity.this, list_itemArrayList);
         listView.setAdapter(pictureListAdapter);

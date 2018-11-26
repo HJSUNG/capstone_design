@@ -26,7 +26,7 @@ public class SearchActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), navigation_main.class);
         startActivity(intent);
     }
 }

@@ -130,6 +130,7 @@ public class testposting extends Activity {
 
                 String title = item.getString("title");
                 String homeid = item.getString("homeid");
+                String estateid = item.getString("estateid");
                 String address = item.getString("address");
                 String detailaddress = item.getString("detailaddress");
                 String explain = item.getString("detail_exp");
@@ -173,7 +174,7 @@ public class testposting extends Activity {
                     addList = false;
                 }
                 if (addList) {
-                    list_itemArrayList.add(new posting_list(R.mipmap.ic_launcher, title, homeid, address, detailaddress, explain, deposit, monthly, term,
+                    list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
                             washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
                     pictureListAdapter.notifyDataSetChanged();
                 }

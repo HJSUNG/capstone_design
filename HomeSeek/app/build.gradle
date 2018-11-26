@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -40,6 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:10.2.0'
     implementation 'com.google.firebase:firebase-core:10.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     api ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'

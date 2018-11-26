@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static TextView phone_textview;
     public static TextView type_textview;
 
+
     public static User_information user = new User_information("","","","");
 
     @Override
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent2);
                         break;
                     case 3: // menu4
-                        Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
+                        Intent intent3 = new Intent(getApplicationContext(), testposting.class);
                         startActivity(intent3);
                         break;
                     case 4: // menu5

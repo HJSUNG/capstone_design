@@ -20,6 +20,7 @@ public class navigation_main extends AppCompatActivity
     public static TextView nickname_textview;
     public static TextView phone_textview;
     public static TextView type_textview;
+    int[] selected =  new int[6];
 
     public static User_information user = new User_information("","","","");
 
@@ -99,13 +100,14 @@ public class navigation_main extends AppCompatActivity
             Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent1);
         } else if (id == R.id.nav_board) {
-            Intent intent2 = new Intent(getApplicationContext(), BoardActivity.class);
+            Intent intent2 = new Intent(getApplicationContext(), BoardShow.class);
             startActivity(intent2);
         } else if (id == R.id.nav_picturelist) {
             Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
+            intent3.putExtra("selected", selected);
             startActivity(intent3);
         } else if (id == R.id.nav_maps) {
-            Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
+            Intent intent4 = new Intent(getApplicationContext(), testposting.class);
             startActivity(intent4);
         } else if (id == R.id.nav_tmap) {
             Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);

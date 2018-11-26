@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".MainActivity"
+        tools:context=".UploadActivity"
         android:scrollbars="vertical">
 
         <LinearLayout
@@ -65,15 +65,6 @@
                 android:clickable="true"
                 android:background="@drawable/edittext_frame"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnImage"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:text="사진 불러오기"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@android:color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
