@@ -11,19 +11,12 @@ include('dbcon.php');
     if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
     {
       $ID=$_POST['ID'];
+      $item_num=$_POST['item_num'];
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT ID, group_concat(DISTINCT item_num) from bookmark WHERE ID = '".$ID."' group by ID";
+              $query_search = "DELETE from bookmark WHERE ID = '".$ID."' AND item_num = '".$item_num."'";
               $result = $mysqli->query($query_search);
-
-              if($result->num_rows == 0) {
-                $errMSG = "No bookmark !";
-              } else {
-                $row=$result->fetch_array(MYSQLI_ASSOC);
-                $return_string = $row['group_concat(item_num)'];
-                $successMSG = "$return_string";
-              }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());
             }
@@ -32,12 +25,8 @@ include('dbcon.php');
 ?>
 
 <?php
-    if (isset($errMSG)) {
-      echo $errMSG;
-    } else if (isset($successMSG)) {
-      echo $successMSG;
-    }
 
+      echo "1";
 
     if (!$android)
     {

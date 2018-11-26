@@ -37,9 +37,9 @@ include('dbcon.php');
 
 <?php
     if (isset($errMSG)) {
-      echo $errMSG;
+      echo "1";
     } else if (isset($successMSG)) {
-      echo $successMSG;
+      echo "22";
     }
 
 
