@@ -2,9 +2,6 @@ package csecau.capstone.homeseek;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,14 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
 public class navigation_main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    public static String IP_ADDRESS = "10.210.61.66";
 
     public static TextView ID_textview;
     public static TextView nickname_textview;
@@ -34,6 +30,20 @@ public class navigation_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View nav_header_main = navigationView.getHeaderView(0);
+
+        TextView nav_header_nickname = (TextView) nav_header_main.findViewById(R.id.user_nav_nickname);
+        TextView nav_header_id = (TextView) nav_header_main.findViewById(R.id.user_nav_ID);
+        TextView nav_header_phone = (TextView) nav_header_main.findViewById(R.id.user_nav_phone);
+        TextView nav_header_type = (TextView) nav_header_main.findViewById(R.id.user_nav_type);
+
+        nav_header_nickname.setText(user.info_nickname);
+        nav_header_id.setText(user.info_ID);
+        nav_header_phone.setText(user.info_phone);
+        nav_header_type.setText(user.info_type);
 //        setContentView(R.layout.nav_header_main);
 //
 //        ID_textview = (TextView) findViewById(R.id.user_ID);
@@ -63,9 +73,9 @@ public class navigation_main extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        user_id= (TextView)findViewById(R.id.user_ID);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//        user_id= (TextView)findViewById(R.id.user_ID);
 
 
 //        setContentView(R.layout.nav_header_main);
@@ -107,12 +117,14 @@ public class navigation_main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_close) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -130,18 +142,21 @@ public class navigation_main extends AppCompatActivity
         } else if (id == R.id.nav_board) {
             Intent intent2 = new Intent(getApplicationContext(), BoardActivity.class);
             startActivity(intent2);
-        } else if (id == R.id.nav_picturelist) {
-            Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
+//        } else if (id == R.id.nav_picturelist) {
+//            Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
+//            startActivity(intent3);
+//        } else if (id == R.id.nav_maps) {
+//            Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
+//            startActivity(intent4);
+//        } else if (id == R.id.nav_tmap) {
+//            Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
+//            startActivity(intent5);
+        } else if (id == R.id.nav_upload) {
+            Intent intent3 = new Intent(getApplicationContext(), UploadActivity.class);
             startActivity(intent3);
-        } else if (id == R.id.nav_maps) {
-            Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
+        } else if (id == R.id.nav_mypage){
+            Intent intent4 = new Intent(getApplicationContext(), MypageActivity.class);
             startActivity(intent4);
-        } else if (id == R.id.nav_tmap) {
-            Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
-            startActivity(intent5);
-        } else if (id == R.id.nav_posting) {
-            Intent intent6 = new Intent(getApplicationContext(), PostingActivity.class);
-            startActivity(intent6);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

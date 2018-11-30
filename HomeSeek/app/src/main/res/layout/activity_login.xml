@@ -96,15 +96,7 @@
         android:layout_alignEnd="@+id/passwordinput"/>
         </LinearLayout>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Remember Login"
-        android:id="@+id/checkbox"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true"/>
-    <TextView
+        <TextView
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/TextResultLogin"

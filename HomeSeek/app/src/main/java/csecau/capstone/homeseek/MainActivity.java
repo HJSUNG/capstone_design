@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
-    public static String IP_ADDRESS = "10.210.62.22";
+    public static String IP_ADDRESS = "10.210.61.16";
 //    public TextView ID_textview;
 //    public TextView nickname_textview;
 //    public TextView phone_textview;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        type_textview = (TextView)findViewById(R.id.user_information_type);
 
 
-        final String[] items_login = {"Log-In", "Search", "Board", "PictureList","Maps", "T-Map", "Posting"};
+        final String[] items_login = {"Log-In", "Search", "Board", "PictureList"};
         //로그인 전 아이템들
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items_login);
         listview = (ListView) findViewById(R.id.drawer_menulist);
@@ -64,17 +64,17 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
                         startActivity(intent3);
                         break;
-                    case 4: // menu5
-                        Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
-                        startActivity(intent4);
-                        break;
-                    case 5: // menu6
-                        Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
-                        startActivity(intent5);
-                        break;
-                    case 6:
-                        Intent intent6 = new Intent(getApplicationContext(), PostingActivity.class);
-                        startActivity(intent6);
+//                    case 4: // menu5
+//                        Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
+//                        startActivity(intent4);
+//                        break;
+//                    case 5: // menu6
+//                        Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
+//                        startActivity(intent5);
+//                        break;
+//                    case 6:
+//                        Intent intent6 = new Intent(getApplicationContext(), PostingActivity.class);
+//                        startActivity(intent6);
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
