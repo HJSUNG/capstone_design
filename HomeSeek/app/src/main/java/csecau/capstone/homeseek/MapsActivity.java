@@ -52,6 +52,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<posting_list> list_itemArrayList;
     private static final double DEFAULT_RADIUS = 1.0000001;
 
+    private void mapLocationZoomInit() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true); 
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mClusterManager = new ClusterManager<>(this, googleMap);
         MarkerOptions markerOptions = new MarkerOptions();
+        mapLocationZoomInit();
 
         double CAU_LAT = 37.5039255;
         double CAU_LON = 126.9572649;

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="내 정보"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/mypagecolor"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닉네임 공간"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:paddingLeft="@dimen/my_padding"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:id="@+id/mypage_nickname"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/my_padding"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:text="ID 공간"
+            android:id="@+id/mypage_ID"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/my_padding"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:text="전화번호 공간"
+            android:id="@+id/mypage_phone"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/my_padding"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:text="타입 공간"
+            android:id="@+id/mypage_type"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="계정"
+            android:paddingLeft="10dp"
+            android:background="@color/mypagecolor"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="매물 관리"
+            android:textSize="20dp"
+            android:layout_marginTop="@dimen/my_margin"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:paddingLeft="@dimen/my_padding"
+            android:id="@+id/my_supervise"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/mypagecolor"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="즐겨찾기 관리"
+            android:textSize="20dp"
+            android:layout_marginTop="@dimen/my_margin"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:paddingLeft="@dimen/my_padding"
+            android:id="@+id/favorite_supervise"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/mypagecolor"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="회원 탈퇴"
+            android:textSize="20dp"
+            android:layout_marginTop="@dimen/my_margin"
+            android:layout_marginBottom="@dimen/my_margin"
+            android:paddingLeft="@dimen/my_padding"
+            android:id="@+id/ID_supervise"/>
+
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

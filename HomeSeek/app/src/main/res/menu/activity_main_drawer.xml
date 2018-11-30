@@ -13,18 +13,21 @@
         <item
             android:id="@+id/nav_board"
             android:title="Board" />
+        <!--<item-->
+            <!--android:id="@+id/nav_picturelist"-->
+            <!--android:title="PictureList" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_maps"-->
+            <!--android:title="Maps"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_tmap"-->
+            <!--android:title="T-Map"/>-->
         <item
-            android:id="@+id/nav_picturelist"
-            android:title="PictureList" />
+            android:id="@+id/nav_upload"
+            android:title="Upload"/>
         <item
-            android:id="@+id/nav_maps"
-            android:title="Maps"/>
-        <item
-            android:id="@+id/nav_tmap"
-            android:title="T-Map"/>
-        <item
-            android:id="@+id/nav_posting"
-            android:title="Posting"/>
+            android:id="@+id/nav_mypage"
+            android:title="Mypage"/>
     </group>
 
 </menu>

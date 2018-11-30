@@ -72,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                 Login task = new Login();
                 task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
 
-                Bookmark bookmark_task = new Bookmark();
-                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
+//                Bookmark bookmark_task = new Bookmark();
+//                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
                 //Insert_bookmark insert_bookmark_task = new Insert_bookmark();
                 //insert_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID, item_num);
 

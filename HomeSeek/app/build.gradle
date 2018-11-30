@@ -42,6 +42,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:10.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
 
+    //butterknife 위한 거
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     api ('cn.trinea.android.view.autoscrollviewpager:android-auto-scroll-view-pager:1.1.2') {
         exclude module: 'support-v4'
