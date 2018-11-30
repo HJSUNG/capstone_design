@@ -24,6 +24,7 @@ import static csecau.capstone.homeseek.MainActivity.user;
 
 public class LoginActivity extends AppCompatActivity {
     private static String TAG = "phptest";
+    private static boolean login_check = false;
 
     private Button loginButton;
     private Button registrationButton;
@@ -67,15 +68,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ID = IDEdittext.getText().toString();
                 String PW = PWEdittext.getText().toString();
-                String item_num="";
+//                String item_num="";
 
                 Login task = new Login();
                 task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
 
 //                Bookmark bookmark_task = new Bookmark();
 //                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
-                //Insert_bookmark insert_bookmark_task = new Insert_bookmark();
-                //insert_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID, item_num);
+//                Delete_bookmark delete_bookmark_task = new Delete_bookmark();
+//                Delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", ID, item_num);
+                if(login_check) {
+                    Intent intent = new Intent(getApplicationContext(), navigation_main.class);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -94,19 +99,27 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            String result_string[] = (String[]) result.split(",");
+            String result_string_temp[] = (String[]) result.split(",");
+            String result_string[]={"","","",""};
 
-            if(result_string.length !=4) {
+
+            for(int i=1;i<result_string_temp.length;i++) {
+                result_string[i-1] = result_string_temp[i];
+            }
+
+
+            if(result_string[3].equals("")) {
                 Toast.makeText(LoginActivity.this, "Log-in failed", Toast.LENGTH_SHORT).show();
             } else {
                 user.log_in(result_string[0], result_string[1], result_string[2], result_string[3]);
                 Toast.makeText(LoginActivity.this, "Log-in Success", Toast.LENGTH_SHORT).show();
-
-                Log.d("test",user.info_ID);
-
-                Intent intent = new Intent(getApplicationContext(), navigation_main.class);
-                startActivity(intent);
+                login_check = true;
             }
+
+            String temp_string[] = {"zzz","zzz","010-1111-1111","Buyer"};
+
+            Log.d("@@@", Integer.toString(temp_string.length));
+            Log.d("###", Integer.toString(result_string.length));
         }
 
         @Override
@@ -161,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-  
+
     class Bookmark extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog2;
 
@@ -175,13 +188,17 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 //            progressDialog2.dismiss();
-            String result_string_not_concat = result;
-            String result_string[] = (String[]) result.split(",");
+            String result_string_temp[] = (String[]) result.split(",");
+            String result_string[] = new String[100];
 
-            if(result_string[0].length() != 2) {
+            for(int i=0;i<result_string_temp.length-1;i++) {
+                result_string[i] = result_string_temp[i+1];
+            }
+
+            if(result_string[0].equals("No bookmark !")) {
                 Toast.makeText(LoginActivity.this, "No bookmark", Toast.LENGTH_SHORT).show();
             } else {
-                textResult.setText(result_string_not_concat);
+
             }
         }
 
@@ -237,7 +254,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    class Insert_bookmark extends AsyncTask<String, Void, String>{
+    class Delete_bookmark extends AsyncTask<String, Void, String>{
         ProgressDialog progressDialog2;
 
         @Override
@@ -250,7 +267,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 //            progressDialog2.dismiss();
-            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Delete done !", Toast.LENGTH_SHORT).show();
         }
 
         @Override
