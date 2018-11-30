@@ -77,10 +77,6 @@ public class LoginActivity extends AppCompatActivity {
 //                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
 //                Delete_bookmark delete_bookmark_task = new Delete_bookmark();
 //                Delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", ID, item_num);
-                if(login_check) {
-                    Intent intent = new Intent(getApplicationContext(), navigation_main.class);
-                    startActivity(intent);
-                }
 
             }
         });
@@ -114,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                 user.log_in(result_string[0], result_string[1], result_string[2], result_string[3]);
                 Toast.makeText(LoginActivity.this, "Log-in Success", Toast.LENGTH_SHORT).show();
                 login_check = true;
+
+                if(login_check) {
+                    Intent intent = new Intent(getApplicationContext(), navigation_main.class);
+                    startActivity(intent);
+                }
             }
 
             String temp_string[] = {"zzz","zzz","010-1111-1111","Buyer"};

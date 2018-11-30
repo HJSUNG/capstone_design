@@ -32,10 +32,10 @@ public class MypageActivity extends AppCompatActivity{
         favorite_supervise = (TextView)findViewById(R.id.favorite_supervise);
         ID_supervise = (TextView)findViewById(R.id.ID_supervise);
 
-        nickname.setText(user.info_nickname);
-        ID.setText(user.info_ID);
-        phone.setText(user.info_phone);
-        type.setText(user.info_type);
+//        nickname.setText(user.info_nickname);
+//        ID.setText(user.info_ID);
+//        phone.setText(user.info_phone);
+//        type.setText(user.info_type);
 
         my_supervise.setOnClickListener(new View.OnClickListener() {
             @Override

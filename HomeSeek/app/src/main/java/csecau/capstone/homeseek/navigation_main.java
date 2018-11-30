@@ -30,20 +30,21 @@ public class navigation_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//
+//        View nav_header_main = navigationView.getHeaderView(0);
+//
+//        TextView nav_header_nickname = (TextView) nav_header_main.findViewById(R.id.user_nav_nickname);
+//        TextView nav_header_id = (TextView) nav_header_main.findViewById(R.id.user_nav_ID);
+//        TextView nav_header_phone = (TextView) nav_header_main.findViewById(R.id.user_nav_phone);
+//        TextView nav_header_type = (TextView) nav_header_main.findViewById(R.id.user_nav_type);
+//
+//        nav_header_nickname.setText(user.info_nickname);
+//        nav_header_id.setText(user.info_ID);
+//        nav_header_phone.setText(user.info_phone);
+//        nav_header_type.setText(user.info_type);
 
-        View nav_header_main = navigationView.getHeaderView(0);
-
-        TextView nav_header_nickname = (TextView) nav_header_main.findViewById(R.id.user_nav_nickname);
-        TextView nav_header_id = (TextView) nav_header_main.findViewById(R.id.user_nav_ID);
-        TextView nav_header_phone = (TextView) nav_header_main.findViewById(R.id.user_nav_phone);
-        TextView nav_header_type = (TextView) nav_header_main.findViewById(R.id.user_nav_type);
-
-        nav_header_nickname.setText(user.info_nickname);
-        nav_header_id.setText(user.info_ID);
-        nav_header_phone.setText(user.info_phone);
-        nav_header_type.setText(user.info_type);
 //        setContentView(R.layout.nav_header_main);
 //
 //        ID_textview = (TextView) findViewById(R.id.user_ID);
@@ -73,8 +74,8 @@ public class navigation_main extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 //        user_id= (TextView)findViewById(R.id.user_ID);
 
 
