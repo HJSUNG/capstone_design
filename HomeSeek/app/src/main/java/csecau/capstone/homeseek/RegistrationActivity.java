@@ -145,8 +145,6 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             String input_string = result;
-            String correct_string = "1";
-            String exist_string = "22";
 
             boolean sameID = input_string.length() == 2;
 
@@ -154,6 +152,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             if (sameID) {
                 Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
+                IDEdittext.setClickable(false);
                 IDcheck_done = true;
             } else {
                     Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
