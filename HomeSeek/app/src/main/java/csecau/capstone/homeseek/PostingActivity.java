@@ -1,15 +1,20 @@
 package csecau.capstone.homeseek;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,12 +44,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
@@ -68,6 +75,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     ViewPager pager;
     Bitmap bm_one, bm_two, bm_three;
     Button beforeButton, nextButton;
+
+    //    String tv;
+    double lat, lon;
+
     static int imagePosition = 0;
     static String homeID;
     static String imageONE, imageTWO, imageTHREE;
@@ -182,6 +193,34 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
+//        mapbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<Address> list = null;
+//
+//                String str = addressView.getText().toString();
+//                {
+//                    try {
+//                        list = geocoder.getFromLocationName(str, 10);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                        Log.e("test","입출력 오류 - 서버에서 주소변환 에러발생");
+//                    }
+//
+//                    if(list != null){
+//                        if(list.size() ==0){
+//                            Log.e("test", "해당되는 주소 정보가 없습니다.");
+//                        } else{
+//                            tv=list.get(0).toString();
+//                            Address addr = list.get(0);
+//                            lat = addr.getLatitude();
+//                            lon = addr.getLongitude();
+//                        }
+//                    }
+//                }
+//            }
+//        });
+
         BottomNavigationView navigationView =(BottomNavigationView)findViewById(R.id.main_bar);
 
         BottomNavigationView.OnNavigationItemSelectedListener navigationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -196,7 +235,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 //                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
 
                         Insert_bookmark task = new Insert_bookmark();
-                        task.execute("http://" + MainActivity.IP_ADDRESS + "/insert_bookmark.php", user.info_ID, homeID);
+                        task.execute("http://"+ MainActivity.IP_ADDRESS+"/insert_bookmark.php", user.info_ID,homeID);
                         return true;
                 }
                 return false;
@@ -353,16 +392,47 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         checkView.setText(check);
     }
 
+
+    private void mapLocationZoomInit(){
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng SEOUL = new LatLng(37.5054544,126.9562383);
+        mapLocationZoomInit();
+        final Geocoder geocoder = new Geocoder(this);
+
+        List<Address> list = null;
+
+        String str = addressView.getText().toString();
+
+        try {
+            list = geocoder.getFromLocationName(str, 10);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test","입출력 오류 - 서버에서 주소변환시 에러발생");
+        }
+
+        if(list != null){
+            if(list.size() ==0){
+                Log.e("test", "해당되는 주소 정보가 없습니다.");
+            } else{
+//                tv=list.get(0).toString();
+                Address addr = list.get(0);
+                lat = addr.getLatitude();
+                lon = addr.getLongitude();
+            }
+        }
+
+
+        LatLng location = new LatLng(lat,lon);
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL)
-                .title("중문");
+        markerOptions.position(location);
         mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,16));
     }
+
 
     class Insert_bookmark extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog2;
