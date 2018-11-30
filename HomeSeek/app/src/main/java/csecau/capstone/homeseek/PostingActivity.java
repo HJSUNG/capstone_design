@@ -53,6 +53,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static csecau.capstone.homeseek.MainActivity.user;
+
 public class PostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     TextView titleView;
 
@@ -230,7 +232,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                         startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0"+phoneNum)));
                         return true;
                     case R.id.favorite:
-                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
+
+                        Insert_bookmark task = new Insert_bookmark();
+                        task.execute("http://"+ MainActivity.IP_ADDRESS+"/insert_bookmark.php", user.info_ID,homeID);
                         return true;
                 }
                 return false;
