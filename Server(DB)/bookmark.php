@@ -18,11 +18,11 @@ include('dbcon.php');
               $result = $mysqli->query($query_search);
 
               if($result->num_rows == 0) {
-                $errMSG = "No bookmark !";
+                $errMSG = "$id,No bookmark !";
               } else {
                 $row=$result->fetch_array(MYSQLI_ASSOC);
                 $return_string = $row['group_concat(item_num)'];
-                $successMSG = "$return_string";
+                $successMSG = "$ID,$return_string";
               }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());

@@ -30,7 +30,7 @@ include('pbkdf2.compat.php');
                   $return_type = $row['user_type'];
 
                   if(isset($_SESSION['ID'])) {
-                    $successMSG = "$ID,$return_nickname,$return_phone,$return_type";
+                    $successMSG = "$ID,$ID,$return_nickname,$return_phone,$return_type";
                   }
                   else {
                     $errMSG = "error";
