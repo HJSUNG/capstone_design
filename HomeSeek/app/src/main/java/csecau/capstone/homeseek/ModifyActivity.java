@@ -38,7 +38,7 @@ public class ModifyActivity extends Activity {
         pictureListAdapter = new PostingTitle(this, list_itemArrayList);
         listView.setAdapter(pictureListAdapter);
         phpDown task = new phpDown();
-        task.execute("http://dozonexx.dothome.co.kr/getInform.php");
+        task.execute("http://dozonexx.dothome.co.kr/getAllInform.php");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
