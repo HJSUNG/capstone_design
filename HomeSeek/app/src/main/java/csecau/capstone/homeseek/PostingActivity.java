@@ -239,7 +239,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
         titleView.setText(intent.getStringExtra("title"));
-        postingUser.setText(intent.getStringExtra("postUser"));
+        postingUser.setText(intent.getStringExtra("estateid"));
         addressView.setText(intent.getStringExtra("address"));
         detailView.setText(intent.getStringExtra("detailAddress"));
         contentView.setText(intent.getStringExtra("explain"));
@@ -299,7 +299,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             case R.id.action_edit:
                 Intent intent = new Intent(PostingActivity.this, EditActivity.class);
                 intent.putExtra("title", titleView.getText());
-                intent.putExtra("postUser",postingUser.getText());
+                intent.putExtra("estateid",postingUser.getText());
                 intent.putExtra("homeid",homeID);
                 intent.putExtra("address", addressView.getText());
                 intent.putExtra("detailaddress",detailView.getText());
