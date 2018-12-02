@@ -43,8 +43,8 @@ public class BoardComment extends BaseAdapter {
         }
         if(convertView==null){
             convertView = inflater.inflate(R.layout.activity_board_detail, parent, false);
-            id_tv = convertView.findViewById(R.id.id_tv_comment);
-            title_tv = convertView.findViewById(R.id.title_tv_comment);
+            id_tv = convertView.findViewById(R.id.id_tv);
+            title_tv = convertView.findViewById(R.id.title_tv);
         }
 
         title_tv.setText(list_itemArrayList.get(position).getDetail());
