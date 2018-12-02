@@ -1,6 +1,7 @@
 package csecau.capstone.homeseek;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
 
 public class PostingTitle extends BaseAdapter{
     Context context;
     ArrayList<posting_list> list_itemArrayList;
+    String profile_image;
+    LayoutInflater inflater;
 
     public PostingTitle(Context context, ArrayList<posting_list> list_itemArrayList) {
         this.context = context;
@@ -34,20 +39,21 @@ public class PostingTitle extends BaseAdapter{
         return position;
     }
 
-    TextView title_textView;
-    ImageView profile_imageView;
-
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
+        if (inflater == null){
+            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
         if(convertView==null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.posting_list_item,null);
-            title_textView = (TextView) convertView.findViewById(R.id.title_text);
-            profile_imageView = (ImageView) convertView.findViewById(R.id.profile_image);
+            convertView = inflater.inflate(R.layout.posting_list_item, parent, false);
         }
 
-        title_textView.setText(list_itemArrayList.get(position).getTitle());
-        profile_imageView.setImageResource(list_itemArrayList.get(position).getProfile_image());
-
-        return  convertView;
+        PostHolder holder = new PostHolder(convertView);
+        holder.title_textView.setText(list_itemArrayList.get(position).getTitle());
+        holder.name_textView.setText(list_itemArrayList.get(position).getEstateid());
+        holder.content_textView.setText(list_itemArrayList.get(position).getExplain());
+        GlideClient.downloadimg(context, list_itemArrayList.get(position).getProfile_image(), holder.profile_imageView);
+        return convertView;
     }
 }
