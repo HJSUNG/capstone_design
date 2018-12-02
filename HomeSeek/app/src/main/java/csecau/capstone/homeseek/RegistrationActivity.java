@@ -91,6 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
                     CheckID task = new CheckID();
                     task.execute("http://tjdghwns.cafe24.com/IDcheck.php", IDcompare);
+
                 }
             }
         });
@@ -169,6 +170,8 @@ public class RegistrationActivity extends AppCompatActivity {
             if (sameID) {
                 Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
                 IDcheck_done = true;
+                IDEdittext.setFocusable(false);
+                IDEdittext.setClickable(false);
             } else {
                     Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
             }

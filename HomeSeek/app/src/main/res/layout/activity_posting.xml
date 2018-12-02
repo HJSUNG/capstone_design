@@ -27,6 +27,14 @@
                 android:textSize="30dp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"/>
+            <TextView
+                android:id="@+id/postingUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/titleWrite"
+                android:text="매물 주인 ID"
+                android:textSize="15dp"
+                android:textColor="#487532"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

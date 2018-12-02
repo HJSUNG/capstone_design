@@ -1,17 +1,23 @@
 package csecau.capstone.homeseek;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
@@ -30,22 +36,9 @@ public class navigation_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
 
-//        View nav_header_main = navigationView.getHeaderView(0);
-//
-//        TextView nav_header_nickname = (TextView) nav_header_main.findViewById(R.id.user_nav_nickname);
-//        TextView nav_header_id = (TextView) nav_header_main.findViewById(R.id.user_nav_ID);
-//        TextView nav_header_phone = (TextView) nav_header_main.findViewById(R.id.user_nav_phone);
-//        TextView nav_header_type = (TextView) nav_header_main.findViewById(R.id.user_nav_type);
-//
-//        nav_header_nickname.setText(user.info_nickname);
-//        nav_header_id.setText(user.info_ID);
-//        nav_header_phone.setText(user.info_phone);
-//        nav_header_type.setText(user.info_type);
 //        setContentView(R.layout.nav_header_main);
-//
+
 //        ID_textview = (TextView) findViewById(R.id.user_ID);
 //        nickname_textview = (TextView)findViewById(R.id.user_nickname);
 //        phone_textview = (TextView)findViewById(R.id.user_phone);
@@ -77,6 +70,17 @@ public class navigation_main extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 //        user_id= (TextView)findViewById(R.id.user_ID);
 
+        View nav_header_main = navigationView.getHeaderView(0);
+
+        TextView nav_header_nickname = (TextView) nav_header_main.findViewById(R.id.user_nav_nickname);
+        TextView nav_header_id = (TextView) nav_header_main.findViewById(R.id.user_nav_ID);
+        TextView nav_header_phone = (TextView) nav_header_main.findViewById(R.id.user_nav_phone);
+        TextView nav_header_type = (TextView) nav_header_main.findViewById(R.id.user_nav_type);
+
+        nav_header_nickname.setText(user.info_nickname);
+        nav_header_id.setText(user.info_ID);
+        nav_header_phone.setText(user.info_phone);
+        nav_header_type.setText(user.info_type);
 
 //        setContentView(R.layout.nav_header_main);
 //
@@ -102,12 +106,13 @@ public class navigation_main extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    상단우측 기능
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,10 +137,9 @@ public class navigation_main extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_login) {
+        if (id == R.id.nav_logout) {
             user.log_out();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_search) {
             Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent1);
@@ -152,8 +156,21 @@ public class navigation_main extends AppCompatActivity
 //            Intent intent5 = new Intent(getApplicationContext(), TmapActivity.class);
 //            startActivity(intent5);
         } else if (id == R.id.nav_upload) {
-            Intent intent3 = new Intent(getApplicationContext(), UploadActivity.class);
-            startActivity(intent3);
+            if(user.info_type.equals("Seller")) {
+                Intent intent3 = new Intent(getApplicationContext(), UploadActivity.class);
+                startActivity(intent3);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("업로더 기능을 사용하실수 없습니다.");
+                builder.setMessage("Seller만이 업로더 기능이 가능합니다.");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
+            }
         } else if (id == R.id.nav_mypage){
             Intent intent4 = new Intent(getApplicationContext(), MypageActivity.class);
             startActivity(intent4);

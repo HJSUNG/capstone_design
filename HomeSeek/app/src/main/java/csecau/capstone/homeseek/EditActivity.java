@@ -64,7 +64,7 @@ public class EditActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload);
+        setContentView(R.layout.activity_modify);
 
         titleRoom = (EditText)findViewById(R.id.title);
         roomaddress = (EditText)findViewById(R.id.address);

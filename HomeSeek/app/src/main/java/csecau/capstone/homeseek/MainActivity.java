@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        type_textview = (TextView)findViewById(R.id.user_information_type);
 
 
-        final String[] items_login = {"Log-In", "Search", "Board", "PictureList"};
+        final String[] items_login = {"Log-In", "Search", "Board"};
         //로그인 전 아이템들
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items_login);
         listview = (ListView) findViewById(R.id.drawer_menulist);
@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent2 = new Intent(getApplicationContext(), BoardActivity.class);
                         startActivity(intent2);
                         break;
-                    case 3: // menu4
-                        Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
-                        startActivity(intent3);
-                        break;
+//                    case 3: // menu4
+//                        Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);
+//                        startActivity(intent3);
+//                        break;
 //                    case 4: // menu5
 //                        Intent intent4 = new Intent(getApplicationContext(), MapsActivity.class);
 //                        startActivity(intent4);

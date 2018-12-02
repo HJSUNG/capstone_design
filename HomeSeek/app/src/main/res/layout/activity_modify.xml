@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/linear_layout"
+    >
+    <LinearLayout
+
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".navigation_main"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/write_title"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:text="제목"/>
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:clickable="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/edittext_frame"/>
+            <ImageView
+                android:id="@+id/image2"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:background="@drawable/edittext_frame"/>
+            <ImageView
+                android:id="@+id/image3"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:clickable="true"
+                android:background="@drawable/edittext_frame"/>
+        </LinearLayout>
+
+        <!--<Button-->
+        <!--android:id="@+id/btnImage"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="사진 불러오기"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="15dp"-->
+        <!--android:textColor="@android:color/black" />-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/write_address"
+                android:text="주소"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"/>
+            <Button
+                android:id="@+id/find_address"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="주소 검색"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/write_detailaddress"
+                android:text="상세주소"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/detailaddress"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/washingChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="세탁기" />
+            <CheckBox
+                android:id="@+id/refriChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="냉장고" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/deskChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="책상" />
+            <CheckBox
+                android:id="@+id/bedChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="침대" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/microwaveChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="전자레인지" />
+            <CheckBox
+                android:id="@+id/closetChk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:text="옷장" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="보증금"/>
+            <EditText
+                android:id="@+id/depositwrite"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/depositend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="만원"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/monthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="월세"/>
+            <EditText
+                android:id="@+id/monthlywrite"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/monthlyend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="만원"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="계약 기간"/>
+            <EditText
+                android:id="@+id/termwrite"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/termend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="개월"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/detail_explain"
+                android:text="상세 설명"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/detail_exp"
+                android:layout_width="350dp"
+                android:layout_height="325dp"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:background="@drawable/corner"
+                android:gravity="top"
+                android:maxLength="500"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:scrollbars="vertical"/>
+
+            <RadioGroup
+                android:layout_width="210dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:id="@+id/user_type"
+                android:layout_below="@+id/RegisterLinear">
+
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/open"
+                    android:gravity="center"
+                    android:text="공개"
+                    android:checked="true"/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <RadioButton
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/close"
+                    android:gravity="center"
+                    android:text="비공개"/>
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:clickable="true"
+                android:backgroundTint="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="19dp"
+                android:onClick="insert"
+                android:text="수정"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>
