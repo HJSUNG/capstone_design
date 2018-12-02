@@ -114,6 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                 if(login_check) {
                     Intent intent = new Intent(getApplicationContext(), navigation_main.class);
                     startActivity(intent);
+                    if(MainActivity.activity !=null) {
+                        MainActivity activity = (MainActivity)MainActivity.activity;
+                        activity.finish();
+                    }
                     finish();
 
                 }

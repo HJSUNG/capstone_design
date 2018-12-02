@@ -137,6 +137,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         phoneEdittext_first.setText("");
                         phoneEdittext_second.setText("");
                         phoneEdittext_third.setText("");
+                        finish();
                     } else {
                         Toast.makeText(RegistrationActivity.this, "Check PW again", Toast.LENGTH_SHORT).show();
                         confirmPWEdittext.setText("");

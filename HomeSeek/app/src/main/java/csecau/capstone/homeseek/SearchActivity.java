@@ -23,10 +23,4 @@ public class SearchActivity extends AppCompatActivity{
         adapter.addFrag(new Grid_view(), "GridView");
         viewPager.setAdapter(adapter);
     }
-
-    @Override
-    public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-    }
 }
