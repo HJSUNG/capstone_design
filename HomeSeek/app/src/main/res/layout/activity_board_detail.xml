@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <LinearLayout android:paddingTop="5dp"
+    <LinearLayout
+    android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:layout_height="80dp"
     android:orientation="horizontal"
