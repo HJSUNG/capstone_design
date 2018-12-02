@@ -178,6 +178,7 @@ public class ModifyActivity extends Activity {
                 if (user.info_ID.equals(estateid)) {
                     addList= true;
                 }
+
                 if (addList) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
                             washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
