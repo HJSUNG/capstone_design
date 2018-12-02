@@ -41,7 +41,7 @@ import java.util.Date;
 
 public class UploadActivity extends AppCompatActivity{
     private static int COUNT_ID;
-    private static int COUNT_ESTATE = 100;
+    private static int COUNT_ESTATE = 1000;
     private static String JSONString;
 
     private Uri filePath, filePath2, filePath3;
@@ -58,6 +58,8 @@ public class UploadActivity extends AppCompatActivity{
     CheckBox chkWasing, chkRefri, chkDesk, chkBed, chkMicro, chkCloset;
     ImageView imageView1, imageView2, imageView3;
     Button registerBtn, findAddress;
+    String sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm;
+    String[] checkPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,14 +96,14 @@ public class UploadActivity extends AppCompatActivity{
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sTitle = titleRoom.getText().toString();
-                String sAddress = roomaddress.getText().toString();
-                String sDetailAddr = roomdetail.getText().toString();
-                String sDetail_info = detailExplain.getText().toString();
-                String sDeposit = deposit.getText().toString();
-                String sMonthly = monthly.getText().toString();
-                String sTerm = term.getText().toString();
-                String[] checkPoint = new String[6];
+                sTitle = titleRoom.getText().toString();
+                sAddress = roomaddress.getText().toString();
+                sDetailAddr = roomdetail.getText().toString();
+                sDetail_info = detailExplain.getText().toString();
+                sDeposit = deposit.getText().toString();
+                sMonthly = monthly.getText().toString();
+                sTerm = term.getText().toString();
+                checkPoint = new String[6];
                 if(chkWasing.isChecked()){
                     checkPoint[0] = "1";
                 } else{ checkPoint[0] = "0"; }
@@ -124,17 +126,6 @@ public class UploadActivity extends AppCompatActivity{
                 homeIDManager homeIDManager = new homeIDManager();
                 homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
 
-                dbManager db_manage = new dbManager();
-                db_manage.execute("http://dozonexx.dothome.co.kr/check.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm);
-                checkManager check_manage = new checkManager();
-                check_manage.execute("http://dozonexx.dothome.co.kr/checkDB.php", checkPoint[0], checkPoint[1], checkPoint[2], checkPoint[3], checkPoint[4], checkPoint[5]);
-                imageManager image_manage = new imageManager();
-                uploadFile();
-                uploadFile2();
-                uploadFile3();
-                image_manage.execute("http://dozonexx.dothome.co.kr/imageUpload.php", image_one, image_two, image_three);
-
-
                 titleRoom.setText("");
                 roomaddress.setText("");
                 roomdetail.setText("");
@@ -149,7 +140,7 @@ public class UploadActivity extends AppCompatActivity{
                 chkMicro.setChecked(false);
                 chkCloset.setChecked(false);
 
-                COUNT_ESTATE++;
+                finish();
             }
 
         });
@@ -185,6 +176,7 @@ public class UploadActivity extends AppCompatActivity{
                 startActivityForResult(intent, SEARCH_ADDRESS_ACTIVITY);
             }
         });
+
     }
 
     @Override
@@ -375,6 +367,16 @@ public class UploadActivity extends AppCompatActivity{
                 String count_id = jsonArray.getString("homeid");
                 COUNT_ID = Integer.parseInt(count_id);
                 COUNT_ID++;
+
+                dbManager db_manage = new dbManager();
+                db_manage.execute("http://dozonexx.dothome.co.kr/check.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm);
+                checkManager check_manage = new checkManager();
+                check_manage.execute("http://dozonexx.dothome.co.kr/checkDB.php", checkPoint[0], checkPoint[1], checkPoint[2], checkPoint[3], checkPoint[4], checkPoint[5]);
+                imageManager image_manage = new imageManager();
+                uploadFile();
+                uploadFile2();
+                uploadFile3();
+                image_manage.execute("http://dozonexx.dothome.co.kr/imageUpload.php", image_one, image_two, image_three);
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -592,8 +594,9 @@ public class UploadActivity extends AppCompatActivity{
             String monthly = (String)params[6];
             String term = (String)params[7];
 
+            //String name = new User_information()
             String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+COUNT_ESTATE+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
-            data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term;
+            data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term+"&visible=1";
 
             try{
                 URL url = new URL(link);
