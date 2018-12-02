@@ -23,7 +23,6 @@ import java.net.URL;
 import static csecau.capstone.homeseek.MainActivity.user;
 
 public class LoginActivity extends AppCompatActivity {
-    private static String TAG = "phptest";
     private static boolean login_check = false;
 
     private Button loginButton;
@@ -122,11 +121,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             }
-
-            String temp_string[] = {"zzz","zzz","010-1111-1111","Buyer"};
-
-            Log.d("@@@", Integer.toString(temp_string.length));
-            Log.d("###", Integer.toString(result_string.length));
         }
 
         @Override
@@ -152,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -176,25 +170,22 @@ public class LoginActivity extends AppCompatActivity {
 
                 return sb.toString();
             } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
+                Log.d("@@@", "Login Error ", e);
                 return new String("ERROR: " + e.getMessage());
             }
         }
     }
 
     class Bookmark extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog2;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog2 = progressDialog2.show(LoginActivity.this, "Please Wait", null, true, true);
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-//            progressDialog2.dismiss();
             String result_string_temp[] = (String[]) result.split(",");
             String result_string[] = new String[100];
             result_string[0] = "No bookmark !";
@@ -232,7 +223,7 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -256,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 return sb.toString();
             } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
+                Log.d("@@@", "Login Error ", e);
                 return new String("ERROR: " + e.getMessage());
             }
         }
@@ -301,7 +292,7 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -325,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 return sb.toString();
             } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
+                Log.d("@@@", "Login Error ", e);
                 return new String("ERROR: " + e.getMessage());
             }
         }

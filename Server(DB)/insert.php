@@ -40,7 +40,7 @@
         {
             try{
 
-                $stmt = $con->prepare('INSERT INTO user_information(ID, PW, nickname, user_type, phone) VALUES(:ID, :PW, :nickname, :user_type, :phone)');
+                $stmt = $con->prepare('INSERT INTO homeseek_user(ID, PW, nickname, user_type, phone) VALUES(:ID, :PW, :nickname, :user_type, :phone)');
                 $stmt->bindParam(':ID', $ID);
                 $stmt->bindParam(':PW', $PW);
                 $PW = $hash;

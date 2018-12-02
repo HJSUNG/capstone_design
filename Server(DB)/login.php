@@ -18,7 +18,7 @@ include('pbkdf2.compat.php');
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT * from user_information WHERE ID = '".$ID."' ";
+              $query_search = "SELECT * from homeseek_user WHERE ID = '".$ID."' ";
               $result = $mysqli->query($query_search);
 
               if($result->num_rows == 1) {
@@ -30,7 +30,7 @@ include('pbkdf2.compat.php');
                   $return_type = $row['user_type'];
 
                   if(isset($_SESSION['ID'])) {
-                    $successMSG = "$ID,$PW,$return_phone,$return_type";
+                    $successMSG = "$ID,$ID,$return_nickname,$return_phone,$return_type";
                   }
                   else {
                     $errMSG = "error";
