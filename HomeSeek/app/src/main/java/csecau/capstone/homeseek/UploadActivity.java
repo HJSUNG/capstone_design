@@ -596,7 +596,6 @@ public class UploadActivity extends AppCompatActivity{
             String monthly = (String)params[6];
             String term = (String)params[7];
 
-            //String name = new User_information()
             String phoneNum[] = user.info_phone.split("-");
             String phone = "";
             for(int i =0; i< phoneNum.length; i++){
