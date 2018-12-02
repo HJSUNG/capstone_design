@@ -39,6 +39,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static csecau.capstone.homeseek.MainActivity.user;
+
 public class UploadActivity extends AppCompatActivity{
     private static int COUNT_ID;
     private static int COUNT_ESTATE = 1000;
@@ -595,7 +597,7 @@ public class UploadActivity extends AppCompatActivity{
             String term = (String)params[7];
 
             //String name = new User_information()
-            String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+COUNT_ESTATE+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
+            String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+user.info_ID+"&phonenum="+user.info_phone+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
             data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term+"&visible=1";
 
             try{
