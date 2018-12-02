@@ -158,7 +158,6 @@ public class MyPostActivity extends Activity {
                             washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
                     pictureListAdapter.notifyDataSetChanged();
                 }
-
             }
         }
         catch(Exception e){
