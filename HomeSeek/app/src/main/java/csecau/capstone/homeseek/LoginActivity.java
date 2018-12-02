@@ -71,16 +71,12 @@ public class LoginActivity extends AppCompatActivity {
 //                String item_num="";
 
                 Login task = new Login();
-                task.execute("http://" + MainActivity.IP_ADDRESS + "/login.php", ID, PW);
+                task.execute("http://tjdghwns.cafe24.com/login.php", ID, PW);
 
 //                Bookmark bookmark_task = new Bookmark();
 //                bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/bookmark.php", ID);
 //                Delete_bookmark delete_bookmark_task = new Delete_bookmark();
 //                Delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", ID, item_num);
-                if(login_check) {
-                    Intent intent = new Intent(getApplicationContext(), navigation_main.class);
-                    startActivity(intent);
-                }
 
             }
         });
@@ -114,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                 user.log_in(result_string[0], result_string[1], result_string[2], result_string[3]);
                 Toast.makeText(LoginActivity.this, "Log-in Success", Toast.LENGTH_SHORT).show();
                 login_check = true;
+
+                if(login_check) {
+                    Intent intent = new Intent(getApplicationContext(), navigation_main.class);
+                    startActivity(intent);
+                }
             }
 
             String temp_string[] = {"zzz","zzz","010-1111-1111","Buyer"};
@@ -254,72 +255,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    class Delete_bookmark extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog2;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-//            progressDialog2 = progressDialog2.show(LoginActivity.this, "Please Wait", null, true, true);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-//            progressDialog2.dismiss();
-            Toast.makeText(LoginActivity.this, "Delete done !", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        protected String doInBackground(String...params) {
-            String ID = (String)params[1];
-            String item_num = (String)params[2];
-
-            String serverURL = (String)params[0];
-            String postParameters = "ID=" + ID;
-
-            try {
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
-
-                InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                }
-                else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-
-                bufferedReader.close();
-
-                return sb.toString();
-            } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
-                return new String("ERROR: " + e.getMessage());
-            }
-        }
-    }
 }
