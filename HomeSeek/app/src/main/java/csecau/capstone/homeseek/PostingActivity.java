@@ -126,7 +126,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         Check_bookmark check_bookmark_task = new Check_bookmark();
-        check_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/check_bookmark.php", user.info_ID);
+        check_bookmark_task.execute("http://tjdghwns.cafe24.com/check_bookmark.php", user.info_ID);
 
         storage.getReferenceFromUrl(imageoneURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -246,12 +246,12 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                         } else {
                             if (isInBookmark == false) {
                                 Insert_bookmark insert_bookmark_task = new Insert_bookmark();
-                                insert_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/insert_bookmark.php", user.info_ID, homeID);
+                                insert_bookmark_task.execute("http://tjdghwns.cafe24.com/insert_bookmark.php", user.info_ID, homeID);
                                 isInBookmark = true;
                                 return true;
                             } else {
                                 Delete_bookmark delete_bookmark_task = new Delete_bookmark();
-                                delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", user.info_ID, homeID);
+                                delete_bookmark_task.execute("http://tjdghwns.cafe24.com/delete_bookmark.php", user.info_ID, homeID);
                                 isInBookmark = false;
                                 return true;
                             }

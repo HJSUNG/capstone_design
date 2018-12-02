@@ -47,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private TextView textResult;
 
-    private String user_type="";
+    private String user_type="Buyer";
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -90,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Insert ID", Toast.LENGTH_SHORT).show();
                 } else {
                     CheckID task = new CheckID();
-                    task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php", IDcompare);
+                    task.execute("http://tjdghwns.cafe24.com/IDcheck.php", IDcompare);
                 }
             }
         });
@@ -127,7 +127,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
-                        task.execute("http://" + MainActivity.IP_ADDRESS + "/insert.php", ID, PW, nickname, user_type, phone);
+                        task.execute("http://tjdghwns.cafe24.com/insert.php", ID, PW, nickname, user_type, phone);
 
                         IDEdittext.setText("");
                         PWEdittext.setText("");
