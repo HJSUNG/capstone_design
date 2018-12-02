@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:10.2.0'
     implementation 'com.google.firebase:firebase-core:10.2.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+    implementation 'com.squareup.picasso:picasso:2.5.1'
 
     //butterknife 위한 거
     implementation 'com.jakewharton:butterknife:8.8.1'

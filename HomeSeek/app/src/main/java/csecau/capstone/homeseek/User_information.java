@@ -9,7 +9,7 @@ import static csecau.capstone.homeseek.navigation_main.type_textview;
 
 
 public class User_information {
-    public String info_ID = "";
+    public static String info_ID = "";
     public String info_nickname = "";
     public String info_phone = "";
     public String info_type = "";
