@@ -58,6 +58,8 @@ import static csecau.capstone.homeseek.MainActivity.user;
 public class PostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     TextView titleView;
 
+    boolean isInBookmark = false;
+
     private GoogleMap mMap;
 
     @Override
@@ -74,10 +76,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     ImageView imageone, imagetwo, imagethree;
     ViewPager pager;
     Bitmap bm_one, bm_two, bm_three;
-    Button beforeButton, nextButton;
+    Button beforeButton, nextButton, directionButton;
 
 //    String tv;
-    double lat, lon;
+    private static double lat, lon;
 
     static int imagePosition = 0;
     static String homeID;
@@ -109,6 +111,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         checkView = (TextView)findViewById(R.id.checkview);
         beforeButton = (Button)findViewById(R.id.before);
         nextButton = (Button)findViewById(R.id.next);
+        directionButton = (Button)findViewById(R.id.direction);
 
         Intent intent = getIntent();
         homeID = intent.getStringExtra("homeid");
@@ -120,6 +123,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 
         CustomAdapter adapter = new CustomAdapter(this, data);
         pager.setAdapter(adapter);
+
+
+        Check_bookmark check_bookmark_task = new Check_bookmark();
+        check_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/check_bookmark.php", user.info_ID);
 
         storage.getReferenceFromUrl(imageoneURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -234,9 +241,21 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                     case R.id.favorite:
 //                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
 
-                        Insert_bookmark task = new Insert_bookmark();
-                        task.execute("http://"+ MainActivity.IP_ADDRESS+"/insert_bookmark.php", user.info_ID,homeID);
-                        return true;
+                        if(user.info_ID.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Log-in first !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (isInBookmark == false) {
+                                Insert_bookmark insert_bookmark_task = new Insert_bookmark();
+                                insert_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/insert_bookmark.php", user.info_ID, homeID);
+                                isInBookmark = true;
+                                return true;
+                            } else {
+                                Delete_bookmark delete_bookmark_task = new Delete_bookmark();
+                                delete_bookmark_task.execute("http://" + MainActivity.IP_ADDRESS + "/delete_bookmark.php", user.info_ID, homeID);
+                                isInBookmark = false;
+                                return true;
+                            }
+                        }
                 }
                 return false;
             }
@@ -258,6 +277,18 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         microChk = intent.getStringExtra("microwave");
         closetChk = intent.getStringExtra("closet");
         setCHECK(washingChk, refrigeChk, deskChk, bedChk, microChk, closetChk);
+
+        directionButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TmapActivity.class);
+                intent.putExtra("latitude", lat);
+                intent.putExtra("longitude", lon);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private Bitmap resize(Bitmap bm){
@@ -434,20 +465,158 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
 
-    class Insert_bookmark extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog2;
+    class Check_bookmark extends AsyncTask<String, Void, String>{
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog2 = progressDialog2.show(LoginActivity.this, "Please Wait", null, true, true);
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-//            progressDialog2.dismiss();
-            Toast.makeText(PostingActivity.this, result, Toast.LENGTH_SHORT).show();
+
+            String result_string_arr[] = (String[]) result.split(",");
+
+            boolean sameID = result_string_arr[1].equals("1");
+
+            if (sameID) {
+                isInBookmark = false;
+            } else {
+                isInBookmark = true;
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "ID=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+            } catch (Exception e) {
+                return new String("Error: " + e.getMessage());
+            }
+        }
+    }
+
+    class Insert_bookmark extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(PostingActivity.this, "Added to Bookmark !", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+            String item_num = (String)params[2];
+
+            String serverURL = (String)params[0];
+            String postParameters ="ID=" + ID + "&item_num=" + item_num;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class Delete_bookmark extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(PostingActivity.this, "Successfully deleted !", Toast.LENGTH_SHORT).show();
         }
 
         @Override

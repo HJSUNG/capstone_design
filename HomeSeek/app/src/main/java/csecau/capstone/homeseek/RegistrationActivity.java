@@ -42,9 +42,12 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button doneButton;
 
     private RadioGroup user_typeRg;
-    private RadioButton user_type_selected;
+    private RadioButton user_type_buyer;
+    private RadioButton user_type_seller;
 
     private TextView textResult;
+
+    private String user_type="";
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,7 +66,8 @@ public class RegistrationActivity extends AppCompatActivity {
         doneButton = (Button) findViewById(R.id.DoneRegister);
 
         user_typeRg = (RadioGroup) findViewById(R.id.user_type);
-        user_type_selected = (RadioButton) findViewById(user_typeRg.getCheckedRadioButtonId());
+        user_type_buyer = (RadioButton) findViewById(R.id.user_type1);
+        user_type_seller = (RadioButton) findViewById(R.id.user_type2);
 
         textResult = (TextView) findViewById(R.id.TextResultRegister);
 
@@ -91,6 +95,18 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        user_typeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.user_type1) {
+                    user_type = "Buyer";
+                } else {
+                    user_type = "Seller";
+                }
+            }
+        });
+
+
         //다 하고 완료 누르면 DB 에 넣는 부분
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +116,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 String confirmPW = confirmPWEdittext.getText().toString();
                 String nickname = nicknameEdittext.getText().toString();
                 String phone = phoneEdittext_first.getText().toString()+"-"+phoneEdittext_second.getText().toString()+"-"+phoneEdittext_third.getText().toString();
-                String user_type = user_type_selected.getText().toString();
 
                 boolean checkConfirmPW;
                 checkConfirmPW = PW.equals(confirmPW);
