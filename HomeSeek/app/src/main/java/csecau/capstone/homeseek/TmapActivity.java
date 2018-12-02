@@ -1,6 +1,7 @@
 package csecau.capstone.homeseek;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,9 @@ public class TmapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Double latitude_from_posting = intent.getExtras().getDouble("latitude");
+        Double longitude_from_posting = intent.getExtras().getDouble("longitude");
         setContentView(R.layout.activity_tmap);
 
         total_time_textview = (TextView)findViewById(R.id.total_time);
@@ -73,21 +77,21 @@ public class TmapActivity extends AppCompatActivity {
         TMapData tmapdata = new TMapData();
 
         TMapPoint CAU_point = new TMapPoint(37.50423882, 126.95685809);         //중앙대학교
-        String CAU_lat = "37.50423882";
-        String CAU_lon = "126.95685809";
-        TMapPoint target_point = new TMapPoint(37.50884952, 126.96374622);      //흑석역
-        String target_lat = "37.50884952";
-        String target_lon = "126.96374622";
+//        String CAU_lat = "37.50423882";
+//        String CAU_lon = "126.95685809";
+        TMapPoint target_point = new TMapPoint(latitude_from_posting, longitude_from_posting);      //흑석역
+//        String target_lat = "37.50884952";
+//        String target_lon = "126.96374622";
 
         TMapMarkerItem CAU_marker = new TMapMarkerItem();
         CAU_marker.setTMapPoint(CAU_point);
         CAU_marker.setName("중앙대학교");
         tmapview.addMarkerItem("중앙대학교", CAU_marker);
 
-        TMapMarkerItem station_marker = new TMapMarkerItem();
-        station_marker.setTMapPoint(target_point);
-        station_marker.setName("흑석역");
-        tmapview.addMarkerItem("흑석역", station_marker);
+        TMapMarkerItem target_marker = new TMapMarkerItem();
+        target_marker.setTMapPoint(target_point);
+        target_marker.setName("매물");
+        tmapview.addMarkerItem("매물", target_marker);
 
         TMapData tMapData = new TMapData();
 

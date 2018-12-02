@@ -36,6 +36,7 @@ public class navigation_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
 //        setContentView(R.layout.nav_header_main);
 
 //        ID_textview = (TextView) findViewById(R.id.user_ID);
