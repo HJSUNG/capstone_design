@@ -43,6 +43,7 @@ public class testposting extends Activity {
                 Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
                 intent.putExtra("title", list_itemArrayList.get(position).getTitle());
                 intent.putExtra("homeid", list_itemArrayList.get(position).getHomeid());
+                intent.putExtra("estateid", list_itemArrayList.get(position).getEstateid());
                 intent.putExtra("address", list_itemArrayList.get(position).getAddress());
                 intent.putExtra("detailAddress", list_itemArrayList.get(position).getDetailaddress());
                 intent.putExtra("explain", list_itemArrayList.get(position).getExplain());

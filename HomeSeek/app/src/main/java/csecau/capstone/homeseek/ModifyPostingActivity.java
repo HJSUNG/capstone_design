@@ -55,7 +55,7 @@ import java.util.List;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
-public class PostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+public class ModifyPostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     TextView titleView;
     TextView userView;
 
@@ -79,7 +79,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     Bitmap bm_one, bm_two, bm_three;
     Button beforeButton, nextButton, directionButton;
 
-//    String tv;
+    //    String tv;
     private static double lat, lon;
 
     static int imagePosition = 0;
@@ -284,20 +284,18 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     //포스팅 쪽의 수정,삭제 기능창
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        MenuInflater inflater = getMenuInflater();
-//        if(user.info_ID.equals(estateid)){//유저 아이디랑 매물 주인이랑 확인
-//            inflater.inflate(R.menu.menu_posting, menu);
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_posting, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.action_edit:
-                Intent intent = new Intent(PostingActivity.this, EditActivity.class);
+                Intent intent = new Intent(ModifyPostingActivity.this, EditActivity.class);
                 intent.putExtra("title", titleView.getText());
                 intent.putExtra("estateid",userView.getText());
                 intent.putExtra("homeid",homeID);
@@ -330,7 +328,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                 deleteImage.execute("http://dozonexx.dothome.co.kr/deleteImage.php", homeID);
                 deleteCheck deleteCheck = new deleteCheck();
                 deleteCheck.execute("http://dozonexx.dothome.co.kr/deleteCheck.php", homeID);
-                startActivity(new Intent(PostingActivity.this, SearchActivity.class));
+                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
                 return true;
             case R.id.action_hide:
                 dbManager dbManager = new dbManager();
@@ -791,7 +789,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(PostingActivity.this, "Added to Bookmark !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ModifyPostingActivity.this, "Added to Bookmark !", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -857,7 +855,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(PostingActivity.this, "Successfully deleted !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ModifyPostingActivity.this, "Successfully deleted !", Toast.LENGTH_SHORT).show();
         }
 
         @Override

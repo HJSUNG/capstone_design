@@ -1,10 +1,9 @@
 package csecau.capstone.homeseek;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,8 +20,8 @@ import java.util.ArrayList;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
-public class MyPostActivity extends Activity {
 
+public class ModifyActivity extends Activity {
     private PostingTitle pictureListAdapter;
     private ListView listView;
     private ArrayList<posting_list> list_itemArrayList;
@@ -31,7 +30,6 @@ public class MyPostActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //array =test.split(",");
         setContentView(R.layout.activity_posting_test);
 
         listView = (ListView) findViewById(R.id.my_list);
@@ -40,14 +38,15 @@ public class MyPostActivity extends Activity {
         pictureListAdapter = new PostingTitle(this, list_itemArrayList);
         listView.setAdapter(pictureListAdapter);
         phpDown task = new phpDown();
-        task.execute("http://dozonexx.dothome.co.kr/getAllInform.php");
+        task.execute("http://dozonexx.dothome.co.kr/getInform.php");
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ModifyPostingActivity.class);
                 intent.putExtra("title", list_itemArrayList.get(position).getTitle());
                 intent.putExtra("homeid", list_itemArrayList.get(position).getHomeid());
+                intent.putExtra("estateid", list_itemArrayList.get(position).getEstateid());
                 intent.putExtra("address", list_itemArrayList.get(position).getAddress());
                 intent.putExtra("detailAddress", list_itemArrayList.get(position).getDetailaddress());
                 intent.putExtra("explain", list_itemArrayList.get(position).getExplain());
@@ -153,7 +152,33 @@ public class MyPostActivity extends Activity {
                 String imagethree = item.getString("imagethree");
 
                 String phoneNum = item.getString("phonenum");
-                if(estateid.equals(user.info_ID)) {
+
+                Intent intent = getIntent();
+                int[] checkARRAY = intent.getIntArrayExtra("selected");
+                boolean addList = false;
+
+//                if (checkARRAY[0] == 1 && washing.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[1] == 1 && refrigerator.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[2] == 1 && desk.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[3] == 1 && bed.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[4] == 1 && microwave.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[5] == 1 && closet.equals("0")) {
+//                    addList = false;
+//                }
+                if (user.info_ID.equals(estateid)) {
+                    addList= true;
+                }
+                if (addList) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
                             washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
                     pictureListAdapter.notifyDataSetChanged();
