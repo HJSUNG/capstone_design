@@ -44,7 +44,7 @@ public class MypageActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if(user.info_type.equals("Seller")){
-                    Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MyPostActivity.class);
                     startActivity(intent);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MypageActivity.this);
@@ -63,7 +63,7 @@ public class MypageActivity extends AppCompatActivity{
         favorite_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
                 startActivity(intent);
             }
         });
