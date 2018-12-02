@@ -216,11 +216,6 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                     case R.id.favorite:
 //                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
 
-
-                        Insert_bookmark task = new Insert_bookmark();
-                        task.execute("http://tjdghwns.cafe24.com/insert_bookmark.php", user.info_ID,homeID);
-                        return true;
-
                         if(user.info_ID.equals("")) {
                             Toast.makeText(getApplicationContext(), "Log-in first !", Toast.LENGTH_SHORT).show();
                         } else {
