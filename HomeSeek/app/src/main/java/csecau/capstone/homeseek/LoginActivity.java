@@ -23,7 +23,6 @@ import java.net.URL;
 import static csecau.capstone.homeseek.MainActivity.user;
 
 public class LoginActivity extends AppCompatActivity {
-    private static String TAG = "phptest";
     private static boolean login_check = false;
 
     private Button loginButton;
@@ -114,15 +113,14 @@ public class LoginActivity extends AppCompatActivity {
                 if(login_check) {
                     Intent intent = new Intent(getApplicationContext(), navigation_main.class);
                     startActivity(intent);
+                    if(MainActivity.activity !=null) {
+                        MainActivity activity = (MainActivity)MainActivity.activity;
+                        activity.finish();
+                    }
                     finish();
 
                 }
             }
-
-            String temp_string[] = {"zzz","zzz","010-1111-1111","Buyer"};
-
-            Log.d("@@@", Integer.toString(temp_string.length));
-            Log.d("###", Integer.toString(result_string.length));
         }
 
         @Override
@@ -148,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -172,27 +170,25 @@ public class LoginActivity extends AppCompatActivity {
 
                 return sb.toString();
             } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
+                Log.d("@@@", "Login Error ", e);
                 return new String("ERROR: " + e.getMessage());
             }
         }
     }
 
     class Bookmark extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog2;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog2 = progressDialog2.show(LoginActivity.this, "Please Wait", null, true, true);
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-//            progressDialog2.dismiss();
             String result_string_temp[] = (String[]) result.split(",");
             String result_string[] = new String[100];
+            result_string[0] = "No bookmark !";
 
             for(int i=0;i<result_string_temp.length-1;i++) {
                 result_string[i] = result_string_temp[i+1];
@@ -227,7 +223,7 @@ public class LoginActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -251,10 +247,78 @@ public class LoginActivity extends AppCompatActivity {
 
                 return sb.toString();
             } catch (Exception e) {
-                Log.d(TAG, "Login Error ", e);
+                Log.d("@@@", "Login Error ", e);
                 return new String("ERROR: " + e.getMessage());
             }
         }
     }
 
+    class Delete extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+
+
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+            String PW = (String)params[2];
+
+            String serverURL = (String)params[0];
+            String postParameters = "ID=" + ID + "&PW=" + PW;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
 }

@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors',1);
 
 include('dbcon.php');
+include('pbkdf2.compat.php');
 
     $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 
@@ -11,6 +12,7 @@ include('dbcon.php');
     if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
     {
       $ID=$_POST['ID'];
+      $PW=$_POST['PW'];
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
@@ -18,17 +20,18 @@ include('dbcon.php');
               $result = $mysqli->query($query_search);
 
               if($result->num_rows == 1) {
-                  $_SESSION['ID']= $ID;
-                  if(isset($_SESSION['ID'])) {
-                    $successMSG = "There exists same ID !";
-                  }
-                  else {
-                    $errMSG = "Session save failed";
-                  }
+                if(validate_password($PW, $row['PW'])) {
+                  $query_delete = "DELETE from homeseek_user WHERE ID = '".$ID."' ";
+                  $result = $mysqli->query($query_delete);
+                  $successMSG = "Successfully withdrawn !"
                 } else {
-                  $errMSG = "You can use this ID";
+                  $errMSG = "Check PW again !"
                 }
-              }catch(PDOException $e) {
+              } else {
+                $errMSG = "No such ID !"
+              }
+
+            } catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());
             }
     }
@@ -37,9 +40,9 @@ include('dbcon.php');
 
 <?php
     if (isset($errMSG)) {
-      echo "1";
+      echo $errMSG;
     } else if (isset($successMSG)) {
-      echo "22";
+      echo $successMSG;
     }
 
 

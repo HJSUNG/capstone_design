@@ -14,15 +14,15 @@ include('dbcon.php');
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT ID, group_concat(item_num) from bookmark WHERE ID = '".$ID."' group by ID";
+              $query_search = "SELECT ID, group_concat(DISTINCT item_num) from bookmark WHERE ID = '".$ID."' group by ID";
               $result = $mysqli->query($query_search);
 
               if($result->num_rows == 0) {
-                $errMSG = "No bookmark !";
+                $errMSG = "$id,No bookmark !";
               } else {
                 $row=$result->fetch_array(MYSQLI_ASSOC);
-                $return_string = $row['group_concat(item_num)'];
-                $successMSG = "$return_string";
+                $return_string = $row['group_concat(DISTINCT item_num)'];
+                $successMSG = "$ID,$return_string";
               }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());

@@ -14,19 +14,19 @@ include('dbcon.php');
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT * from homeseek_user WHERE ID = '".$ID."' ";
+              $query_search = "SELECT * from bookmark WHERE ID = '".$ID."' ";
               $result = $mysqli->query($query_search);
 
-              if($result->num_rows == 1) {
+              if($result->num_rows >= 1) {
                   $_SESSION['ID']= $ID;
                   if(isset($_SESSION['ID'])) {
-                    $successMSG = "There exists same ID !";
+                    $successMSG = "Already in bookmark !";
                   }
                   else {
                     $errMSG = "Session save failed";
                   }
                 } else {
-                  $errMSG = "You can use this ID";
+                  $errMSG = "You can add bookmark";
                 }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());
@@ -37,9 +37,9 @@ include('dbcon.php');
 
 <?php
     if (isset($errMSG)) {
-      echo "1";
+      echo "$id,1";
     } else if (isset($successMSG)) {
-      echo "22";
+      echo "$id,22";
     }
 
 

@@ -1,9 +1,9 @@
 ﻿<?php
 
     $host = 'localhost';
-    $username = 'app';
-    $password = 'app';
-    $dbname = 'homeseek';
+    $username = 'tjdghwns';
+    $password = 'homeseek11';
+    $dbname = 'tjdghwns';
 
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8');
 

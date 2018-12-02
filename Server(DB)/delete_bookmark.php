@@ -11,23 +11,12 @@ include('dbcon.php');
     if( (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['submit'])) || $android )
     {
       $ID=$_POST['ID'];
+      $item_num=$_POST['item_num'];
       $mysqli=mysqli_connect("$host", "$username", "$password", "$dbname");
 
             try{
-              $query_search = "SELECT * from homeseek_user WHERE ID = '".$ID."' ";
+              $query_search = "DELETE from bookmark WHERE ID = '".$ID."' AND item_num = '".$item_num."'";
               $result = $mysqli->query($query_search);
-
-              if($result->num_rows == 1) {
-                  $_SESSION['ID']= $ID;
-                  if(isset($_SESSION['ID'])) {
-                    $successMSG = "There exists same ID !";
-                  }
-                  else {
-                    $errMSG = "Session save failed";
-                  }
-                } else {
-                  $errMSG = "You can use this ID";
-                }
               }catch(PDOException $e) {
                 die("Database error: " . $e->getMessage());
             }
@@ -36,12 +25,8 @@ include('dbcon.php');
 ?>
 
 <?php
-    if (isset($errMSG)) {
-      echo "1";
-    } else if (isset($successMSG)) {
-      echo "22";
-    }
 
+      echo "1";
 
     if (!$android)
     {

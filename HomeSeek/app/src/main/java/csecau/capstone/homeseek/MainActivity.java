@@ -16,15 +16,20 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
+
 //    public TextView ID_textview;
 //    public TextView nickname_textview;
 //    public TextView phone_textview;
 //    public TextView type_textview;
 
+
     public static User_information user = new User_information("","","","");
+
+    public static MainActivity activity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

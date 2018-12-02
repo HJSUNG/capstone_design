@@ -139,6 +139,8 @@ public class navigation_main extends AppCompatActivity
 
         if (id == R.id.nav_logout) {
             user.log_out();
+            Intent intent0 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent0);
             finish();
         } else if (id == R.id.nav_search) {
             Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);

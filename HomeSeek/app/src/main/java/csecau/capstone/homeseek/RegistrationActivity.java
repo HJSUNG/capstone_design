@@ -26,8 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegistrationActivity extends AppCompatActivity {
-    //ip 주소 고정할수 있는 방법 없나?
-    private static String TAG = "phptest";
     private static boolean IDcheck_done = false;
 
     private EditText IDEdittext;
@@ -71,15 +69,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         textResult = (TextView) findViewById(R.id.TextResultRegister);
 
-//        IDEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-//        IDEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
-//        nicknameEdittext.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-//        nicknameEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
-
-
-
-        //중복 아이디 체크할 부분 (지금 primary key가 ID 로 되있어서 자체적으로 체크되는데 이걸 안드로이드로 깔끔하게 할수 있나)
-        //어플 레벨에서 아예 체크해서 넘기는 걸로
 
         checkButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -137,6 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         phoneEdittext_first.setText("");
                         phoneEdittext_second.setText("");
                         phoneEdittext_third.setText("");
+                        finish();
                     } else {
                         Toast.makeText(RegistrationActivity.this, "Check PW again", Toast.LENGTH_SHORT).show();
                         confirmPWEdittext.setText("");
@@ -161,7 +151,6 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             String input_string = result;
-            String result_string = "1";
 
             boolean sameID = input_string.length() == 2;
 
@@ -200,7 +189,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
@@ -273,7 +262,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 outputStream.close();
 
                 int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
+                Log.d("@@@", "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
                 if(responseStatusCode == HttpURLConnection.HTTP_OK) {
