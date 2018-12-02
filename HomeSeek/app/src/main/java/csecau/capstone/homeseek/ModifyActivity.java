@@ -18,7 +18,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class testposting extends Activity {
+import static csecau.capstone.homeseek.MainActivity.user;
+
+
+public class ModifyActivity extends Activity {
     private PostingTitle pictureListAdapter;
     private ListView listView;
     private ArrayList<posting_list> list_itemArrayList;
@@ -40,7 +43,7 @@ public class testposting extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ModifyPostingActivity.class);
                 intent.putExtra("title", list_itemArrayList.get(position).getTitle());
                 intent.putExtra("homeid", list_itemArrayList.get(position).getHomeid());
                 intent.putExtra("estateid", list_itemArrayList.get(position).getEstateid());
@@ -152,25 +155,28 @@ public class testposting extends Activity {
 
                 Intent intent = getIntent();
                 int[] checkARRAY = intent.getIntArrayExtra("selected");
-                boolean addList = true;
+                boolean addList = false;
 
-                if (checkARRAY[0] == 1 && washing.equals("0")) {
-                    addList = false;
-                }
-                if (checkARRAY[1] == 1 && refrigerator.equals("0")) {
-                    addList = false;
-                }
-                if (checkARRAY[2] == 1 && desk.equals("0")) {
-                    addList = false;
-                }
-                if (checkARRAY[3] == 1 && bed.equals("0")) {
-                    addList = false;
-                }
-                if (checkARRAY[4] == 1 && microwave.equals("0")) {
-                    addList = false;
-                }
-                if (checkARRAY[5] == 1 && closet.equals("0")) {
-                    addList = false;
+//                if (checkARRAY[0] == 1 && washing.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[1] == 1 && refrigerator.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[2] == 1 && desk.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[3] == 1 && bed.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[4] == 1 && microwave.equals("0")) {
+//                    addList = false;
+//                }
+//                if (checkARRAY[5] == 1 && closet.equals("0")) {
+//                    addList = false;
+//                }
+                if (user.info_ID.equals(estateid)) {
+                    addList= true;
                 }
                 if (addList) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,

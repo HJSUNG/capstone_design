@@ -44,7 +44,7 @@ public class MypageActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if(user.info_type.equals("Seller")){
-                    Intent intent = new Intent(getApplicationContext(), testposting.class);
+                    Intent intent = new Intent(getApplicationContext(), ModifyActivity.class);
                     startActivity(intent);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MypageActivity.this);
