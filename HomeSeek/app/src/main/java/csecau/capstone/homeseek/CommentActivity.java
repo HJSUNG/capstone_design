@@ -41,6 +41,7 @@ public class CommentActivity extends AppCompatActivity {
         imageButton = (ImageButton)findViewById(R.id.commentBtn);
 
         list_itemArrayList = new ArrayList<>();
+
         comment = new comment(this, list_itemArrayList);
         list.setAdapter(comment);
         Intent intent = getIntent();
