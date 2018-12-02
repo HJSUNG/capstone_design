@@ -19,10 +19,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static csecau.capstone.homeseek.User_information.info_ID;
+import static csecau.capstone.homeseek.MainActivity.user;
 
 public class MyPostActivity extends Activity {
-    String test = "101,102";
 
     private PostingTitle pictureListAdapter;
     private ListView listView;
@@ -154,9 +153,7 @@ public class MyPostActivity extends Activity {
                 String imagethree = item.getString("imagethree");
 
                 String phoneNum = item.getString("phonenum");
-                Log.d("outaqua", homeid);
-                if(estateid == info_ID) {
-                    Log.d("aqua", homeid);
+                if(estateid.equals(user.info_ID)) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
                             washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
                     pictureListAdapter.notifyDataSetChanged();
