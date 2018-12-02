@@ -324,7 +324,17 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                 startActivity(intent);
                 return true;
             case R.id.action_delete:
-                Toast.makeText(this, "delete", Toast.LENGTH_LONG).show();
+                deleteManage deleteManage = new deleteManage();
+                deleteManage.execute("http://dozonexx.dothome.co.kr/deletePost.php", homeID);
+                deleteImage deleteImage = new deleteImage();
+                deleteImage.execute("http://dozonexx.dothome.co.kr/deleteImage.php", homeID);
+                deleteCheck deleteCheck = new deleteCheck();
+                deleteCheck.execute("http://dozonexx.dothome.co.kr/deleteCheck.php", homeID);
+                startActivity(new Intent(PostingActivity.this, SearchActivity.class));
+                return true;
+            case R.id.action_hide:
+                dbManager dbManager = new dbManager();
+                dbManager.execute("http://dozonexx.dothome.co.kr/updateHide.php", "0", homeID);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -402,6 +412,256 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             check += "옷장";
         }
         checkView.setText(check);
+    }
+
+    class dbManager extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... params){
+            String link = (String)params[0];
+
+            String visible = (String)params[1];
+            String homeid = (String)params[2];
+
+            String data = "visible="+visible+"&homeid="+homeid;
+
+            try{
+                URL url = new URL(link);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(5000);
+                connection.setConnectTimeout(5000);
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                OutputStream writer = connection.getOutputStream();
+                writer.write(data.getBytes("UTF-8"));
+                writer.flush();
+                writer.close();
+
+                int responseStatusCode = connection.getResponseCode();
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                }
+                else {
+                    inputStream = connection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine())!= null){
+                    stringBuilder.append(line);
+                }
+
+                bufferedReader.close();
+
+                return stringBuilder.toString();
+            }
+            catch(Exception e){
+                return new String("Exception: "+e.getMessage());
+            }
+        }
+    }
+
+    class deleteManage extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... params){
+            String link = (String)params[0];
+            String homeid = (String)params[1];
+
+            String data = "homeid="+homeid;
+
+            try{
+                URL url = new URL(link);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(5000);
+                connection.setConnectTimeout(5000);
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                OutputStream writer = connection.getOutputStream();
+                writer.write(data.getBytes("UTF-8"));
+                writer.flush();
+                writer.close();
+
+                int responseStatusCode = connection.getResponseCode();
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                }
+                else {
+                    inputStream = connection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine())!= null){
+                    stringBuilder.append(line);
+                }
+
+                bufferedReader.close();
+
+                return stringBuilder.toString();
+            }
+            catch(Exception e){
+                return new String("Exception: "+e.getMessage());
+            }
+        }
+    }
+
+    class deleteImage extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... params){
+            String link = (String)params[0];
+            String homeid = (String)params[1];
+
+            String data = "homeid="+homeid;
+
+            try{
+                URL url = new URL(link);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(5000);
+                connection.setConnectTimeout(5000);
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                OutputStream writer = connection.getOutputStream();
+                writer.write(data.getBytes("UTF-8"));
+                writer.flush();
+                writer.close();
+
+                int responseStatusCode = connection.getResponseCode();
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                }
+                else {
+                    inputStream = connection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine())!= null){
+                    stringBuilder.append(line);
+                }
+
+                bufferedReader.close();
+
+                return stringBuilder.toString();
+            }
+            catch(Exception e){
+                return new String("Exception: "+e.getMessage());
+            }
+        }
+    }
+
+    class deleteCheck extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String... params){
+            String link = (String)params[0];
+            String homeid = (String)params[1];
+
+            String data = "homeid="+homeid;
+
+            try{
+                URL url = new URL(link);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setReadTimeout(5000);
+                connection.setConnectTimeout(5000);
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                OutputStream writer = connection.getOutputStream();
+                writer.write(data.getBytes("UTF-8"));
+                writer.flush();
+                writer.close();
+
+                int responseStatusCode = connection.getResponseCode();
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = connection.getInputStream();
+                }
+                else {
+                    inputStream = connection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine())!= null){
+                    stringBuilder.append(line);
+                }
+
+                bufferedReader.close();
+
+                return stringBuilder.toString();
+            }
+            catch(Exception e){
+                return new String("Exception: "+e.getMessage());
+            }
+        }
     }
 
 
