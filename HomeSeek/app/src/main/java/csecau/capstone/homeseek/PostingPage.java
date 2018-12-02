@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PostingPage extends AppCompatActivity {
-    TextView titleView, contentView, depositView, monthlyView, termView;
+    TextView titleView, postingUser, contentView, depositView, monthlyView, termView;
     ImageView imageone, imagetwo, imagethree;
 
     @Override
@@ -18,6 +18,7 @@ public class PostingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
         titleView = (TextView)findViewById(R.id.titleWrite);
+        postingUser = (TextView)findViewById(R.id.postingUser);
         contentView = (TextView)findViewById(R.id.contents);
         imageone = (ImageView)findViewById(R.id.image1);
         imagetwo = (ImageView)findViewById(R.id.image2);

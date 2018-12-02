@@ -31,7 +31,6 @@
                 android:id="@+id/postingUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/titleWrite"
                 android:text="매물 주인 ID"
                 android:textSize="15dp"
                 android:textColor="#487532"/>
