@@ -597,7 +597,12 @@ public class UploadActivity extends AppCompatActivity{
             String term = (String)params[7];
 
             //String name = new User_information()
-            String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+user.info_ID+"&phonenum="+user.info_phone+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
+            String phoneNum[] = user.info_phone.split("-");
+            String phone = "";
+            for(int i =0; i< phoneNum.length; i++){
+                phone += phoneNum[i];
+            }
+            String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+user.info_ID+"&phonenum="+phone+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
             data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term+"&visible=1";
 
             try{
