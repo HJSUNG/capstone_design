@@ -4,7 +4,6 @@
     <item
         android:id="@+id/action_close"
         android:orderInCategory="50"
-        android:title="닫기"
-        android:icon="@drawable/subway1"/>
+        android:title="닫기" />
 
 </menu>

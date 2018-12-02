@@ -57,6 +57,7 @@ import static csecau.capstone.homeseek.MainActivity.user;
 
 public class PostingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     TextView titleView;
+    TextView postingUser;
 
     private GoogleMap mMap;
 
@@ -97,6 +98,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 
         pager = (ViewPager)findViewById(R.id.Viewpager);
         titleView = (TextView)findViewById(R.id.titleWrite);
+        postingUser = (TextView)findViewById(R.id.postingUser);
         contentView = (TextView)findViewById(R.id.contents);
         addressView = (TextView)findViewById(R.id.addressview);
         detailView = (TextView)findViewById(R.id.detailaddressview);
@@ -193,33 +195,6 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-//        mapbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                List<Address> list = null;
-//
-//                String str = addressView.getText().toString();
-//                {
-//                    try {
-//                        list = geocoder.getFromLocationName(str, 10);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                        Log.e("test","입출력 오류 - 서버에서 주소변환 에러발생");
-//                    }
-//
-//                    if(list != null){
-//                        if(list.size() ==0){
-//                            Log.e("test", "해당되는 주소 정보가 없습니다.");
-//                        } else{
-//                            tv=list.get(0).toString();
-//                            Address addr = list.get(0);
-//                            lat = addr.getLatitude();
-//                            lon = addr.getLongitude();
-//                        }
-//                    }
-//                }
-//            }
-//        });
 
         BottomNavigationView navigationView =(BottomNavigationView)findViewById(R.id.main_bar);
 
@@ -235,7 +210,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 //                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();
 
                         Insert_bookmark task = new Insert_bookmark();
-                        task.execute("http://"+ MainActivity.IP_ADDRESS+"/insert_bookmark.php", user.info_ID,homeID);
+                        task.execute("http://tjdghwns.cafe24.com/insert_bookmark.php", user.info_ID,homeID);
                         return true;
                 }
                 return false;
@@ -244,6 +219,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
         titleView.setText(intent.getStringExtra("title"));
+        postingUser.setText(intent.getStringExtra("postUser"));
         addressView.setText(intent.getStringExtra("address"));
         detailView.setText(intent.getStringExtra("detailAddress"));
         contentView.setText(intent.getStringExtra("explain"));
@@ -275,12 +251,15 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         return bm;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_posting, menu);
-        return true;
-    }
+    //포스팅 쪽의 수정,삭제 기능창
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu){
+//        MenuInflater inflater = getMenuInflater();
+//        if(user.info_ID.equals()){//유저 아이디랑 매물 주인이랑 확인
+//            inflater.inflate(R.menu.menu_posting, menu);
+//        }
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -288,6 +267,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             case R.id.action_edit:
                 Intent intent = new Intent(PostingActivity.this, EditActivity.class);
                 intent.putExtra("title", titleView.getText());
+                intent.putExtra("postUser",postingUser.getText());
                 intent.putExtra("homeid",homeID);
                 intent.putExtra("address", addressView.getText());
                 intent.putExtra("detailaddress",detailView.getText());

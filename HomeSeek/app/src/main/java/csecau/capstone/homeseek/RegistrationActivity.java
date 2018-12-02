@@ -86,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Insert ID", Toast.LENGTH_SHORT).show();
                 } else {
                     CheckID task = new CheckID();
-                    task.execute("http://" + MainActivity.IP_ADDRESS + "/IDcheck.php", IDcompare);
+                    task.execute("http://tjdghwns.cafe24.com/IDcheck.php", IDcompare);
                 }
             }
         });
@@ -112,7 +112,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
                     if (checkConfirmPW) {
                         InsertData task = new InsertData();
-                        task.execute("http://" + MainActivity.IP_ADDRESS + "/insert.php", ID, PW, nickname, user_type, phone);
+                        task.execute("http://tjdghwns.cafe24.com/insert.php", ID, PW, nickname, user_type, phone);
 
                         IDEdittext.setText("");
                         PWEdittext.setText("");
@@ -154,6 +154,8 @@ public class RegistrationActivity extends AppCompatActivity {
             if (sameID) {
                 Toast.makeText(RegistrationActivity.this, "You can use this ID", Toast.LENGTH_SHORT).show();
                 IDcheck_done = true;
+                IDEdittext.setFocusable(false);
+                IDEdittext.setClickable(false);
             } else {
                     Toast.makeText(RegistrationActivity.this, "Same ID exists", Toast.LENGTH_SHORT).show();
             }
