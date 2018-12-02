@@ -1,6 +1,7 @@
 package csecau.capstone.homeseek;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,6 +57,7 @@ public class UploadActivity extends AppCompatActivity{
     private static String image_one = null;
     private static String image_two = null;
     private static String image_three = null;
+    private static int imageCounter = 0;
 
     EditText titleRoom, roomaddress, roomdetail, detailExplain, deposit, monthly, term;
     CheckBox chkWasing, chkRefri, chkDesk, chkBed, chkMicro, chkCloset;
@@ -125,24 +128,37 @@ public class UploadActivity extends AppCompatActivity{
                     checkPoint[5] = "1";
                 }else{ checkPoint[5] = "0";}
 
-                homeIDManager homeIDManager = new homeIDManager();
-                homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
+                if(imageCounter==3) {
+                    homeIDManager homeIDManager = new homeIDManager();
+                    homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
 
-                titleRoom.setText("");
-                roomaddress.setText("");
-                roomdetail.setText("");
-                detailExplain.setText("");
-                deposit.setText("");
-                monthly.setText("");
-                term.setText("");
-                chkWasing.setChecked(false);
-                chkRefri.setChecked(false);
-                chkDesk.setChecked(false);
-                chkBed.setChecked(false);
-                chkMicro.setChecked(false);
-                chkCloset.setChecked(false);
+                    titleRoom.setText("");
+                    roomaddress.setText("");
+                    roomdetail.setText("");
+                    detailExplain.setText("");
+                    deposit.setText("");
+                    monthly.setText("");
+                    term.setText("");
+                    chkWasing.setChecked(false);
+                    chkRefri.setChecked(false);
+                    chkDesk.setChecked(false);
+                    chkBed.setChecked(false);
+                    chkMicro.setChecked(false);
+                    chkCloset.setChecked(false);
 
-                finish();
+                    finish();
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
+                    builder.setMessage("사진을 3장 다 올리셔야 매물 등록이 가능합니다.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
             }
 
         });
@@ -201,6 +217,7 @@ public class UploadActivity extends AppCompatActivity{
                         image = resize(image);
                         in.close();
                         imageView1.setImageBitmap(image);
+                        imageCounter++;
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -216,6 +233,7 @@ public class UploadActivity extends AppCompatActivity{
                         image = resize(image);
                         in.close();
                         imageView2.setImageBitmap(image);
+                        imageCounter++;
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -231,6 +249,7 @@ public class UploadActivity extends AppCompatActivity{
                         image = resize(image);
                         in.close();
                         imageView3.setImageBitmap(image);
+                        imageCounter++;
                     }
                     catch(Exception e) {
                         e.printStackTrace();
