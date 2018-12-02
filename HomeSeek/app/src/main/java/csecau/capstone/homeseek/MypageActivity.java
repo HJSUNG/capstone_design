@@ -63,7 +63,7 @@ public class MypageActivity extends AppCompatActivity{
         favorite_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), UploadActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
                 startActivity(intent);
             }
         });
