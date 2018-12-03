@@ -16,7 +16,6 @@ public class BoardTitle extends BaseAdapter {
     ArrayList<board_list> list_itemArrayList;
     TextView id_tv, title_tv, content_tv;
     LayoutInflater inflater;
-    FloatingActionButton floatingActionButton;
 
     public BoardTitle(Context context, ArrayList<board_list> list_itemArrayList) {
         this.context = context;

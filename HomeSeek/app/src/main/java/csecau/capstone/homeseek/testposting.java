@@ -23,15 +23,15 @@ import java.util.Comparator;
 
 public class testposting extends Activity {
     private PostingTitle pictureListAdapter;
-    private ListView listView;
-    private ArrayList<posting_list> list_itemArrayList;
-    private String JSONstring;
-    private Button basic, money, areaDesc;
+        private ListView listView;
+        private ArrayList<posting_list> list_itemArrayList;
+        private String JSONstring;
+        private Button basic, money, areaDesc;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posting_test);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_posting_test);
 
         listView = (ListView) findViewById(R.id.my_list);
 
