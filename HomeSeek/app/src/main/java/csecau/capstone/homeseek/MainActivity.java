@@ -36,15 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(navigation_main.activity !=null) {
-            navigation_main.activity = (navigation_main)navigation_main.activity;
-            activity.finish();
-        }
-
-        if(MypageActivity.activity !=null) {
-            MypageActivity.activity = (MypageActivity) MypageActivity.activity;
-            activity.finish();
-        }
 
 //        ID_textview = (TextView) findViewById(R.id.user_information_ID);
 //        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);

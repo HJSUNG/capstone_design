@@ -1,6 +1,7 @@
 package csecau.capstone.homeseek;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,11 +34,11 @@ public class navigation_main extends AppCompatActivity
 
     public static  navigation_main activity = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
+
 
 //        setContentView(R.layout.nav_header_main);
 
@@ -199,4 +200,12 @@ public class navigation_main extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void withdrawal() {
+        user.log_out();
+
+        Intent intent3 = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent3);
+    }
+
 }
