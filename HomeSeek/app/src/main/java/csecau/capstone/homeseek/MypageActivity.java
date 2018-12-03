@@ -97,6 +97,7 @@ public class MypageActivity extends AppCompatActivity{
                                 deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
                                 deleteComment deleteComment = new deleteComment();
                                 deleteComment.execute("http://dozonexx.dothome.co.kr/deleteCommentID.php", user.info_ID);
+                                Toast.makeText(getApplicationContext(), "탈퇴하였습니다", Toast.LENGTH_LONG).show();
 
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -124,7 +125,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -190,7 +190,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -256,7 +255,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -322,7 +320,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -387,8 +384,6 @@ public class MypageActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
