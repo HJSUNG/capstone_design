@@ -23,7 +23,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static csecau.capstone.homeseek.MainActivity.user;
 
@@ -35,7 +37,6 @@ public class CommentActivity extends AppCompatActivity {
     private EditText commentText;
     private ImageButton imageButton;
     static String board;
-    static int commentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -55,8 +56,6 @@ public class CommentActivity extends AppCompatActivity {
         phpDown task = new phpDown();
         task.execute("http://dozonexx.dothome.co.kr/getComment.php");
 
-        commentIDManager commentIDmanager = new commentIDManager();
-        commentIDmanager.execute("http://dozonexx.dothome.co.kr/commentID.php");
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,10 +81,11 @@ public class CommentActivity extends AppCompatActivity {
                 else {
                     String comment_text = commentText.getText().toString();
                     if (comment_text.length() != 0) {
-                        list_itemArrayList.add(new comment_list(board, user.info_ID, comment_text));
-                        comment.notifyDataSetChanged();
                         uploadComment uploadComment = new uploadComment();
                         uploadComment.execute("http://dozonexx.dothome.co.kr/comment.php", comment_text);
+                        list_itemArrayList.clear();
+                        phpDown task = new phpDown();
+                        task.execute("http://dozonexx.dothome.co.kr/getComment.php");
                     }
                     commentText.setText("");
                 }
@@ -113,7 +113,14 @@ public class CommentActivity extends AppCompatActivity {
             String link = (String)params[0];
             String content = (String)params[1];
 
-            String data = "board="+board+"&commentid="+commentID+"&id="+user.info_ID+"&comment="+content;
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat time = new SimpleDateFormat("hhmmss");
+            String getDate = sdf.format(date);
+            String getTime = time.format(date);
+            int random = (int)(Math.random()*100)+1;
+            String data = "board="+board+"&commentid="+getDate+getTime+String.valueOf(random)+"&id="+user.info_ID+"&comment="+content;
 
             try{
                 URL url = new URL(link);
@@ -149,7 +156,6 @@ public class CommentActivity extends AppCompatActivity {
                 }
 
                 bufferedReader.close();
-                commentID++;
 
                 return stringBuilder.toString();
             }
@@ -159,65 +165,6 @@ public class CommentActivity extends AppCompatActivity {
         }
     }
 
-    private class commentIDManager extends AsyncTask<String, Void, String>{
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String str){
-            super.onPostExecute(str);
-            try{
-                JSONObject jsonObject = new JSONObject(str);
-                JSONObject jsonArray = jsonObject.getJSONObject("result");
-                String count_id = jsonArray.getString("commentid");
-                commentID = Integer.parseInt(count_id);
-                commentID++;
-
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String serverURL = params[0];
-            StringBuilder jsonHtml = new StringBuilder();
-            try {
-                URL url = new URL(serverURL);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setConnectTimeout(5000);
-                conn.setReadTimeout(5000);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.connect();
-
-                InputStream input;
-                int responseCode = conn.getResponseCode();
-                if(responseCode== HttpURLConnection.HTTP_OK){
-                    input = conn.getInputStream();
-                }
-                else{
-                    input = conn.getErrorStream();
-                }
-                InputStreamReader inputStreamReader = new InputStreamReader(input, "UTF-8");
-                BufferedReader br = new BufferedReader(inputStreamReader);
-                String line;
-                while ((line = br.readLine()) != null) {
-                    jsonHtml.append(line);
-                }
-                br.close();
-                return jsonHtml.toString().trim();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
 
     private class phpDown extends AsyncTask<String, Void, String> {
         @Override
@@ -296,5 +243,4 @@ public class CommentActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }
