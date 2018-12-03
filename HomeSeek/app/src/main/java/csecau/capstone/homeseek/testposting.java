@@ -63,6 +63,8 @@ public class testposting extends Activity {
                 intent.putExtra("imagethree", list_itemArrayList.get(position).getImagethree());
 
                 intent.putExtra("phonenum", list_itemArrayList.get(position).getPhoneNum());
+                intent.putExtra("manage", list_itemArrayList.get(position).getManage());
+                intent.putExtra("area", list_itemArrayList.get(position).getArea());
                 startActivity(intent);
             }
         });
@@ -149,6 +151,8 @@ public class testposting extends Activity {
                 String imagethree = item.getString("imagethree");
 
                 String phoneNum = item.getString("phonenum");
+                String Manage = item.getString("manage");
+                String Area = item.getString("area");
 
                 Intent intent = getIntent();
                 int[] checkARRAY = intent.getIntArrayExtra("selected");
@@ -174,7 +178,7 @@ public class testposting extends Activity {
                 }
                 if (addList) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
-                            washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
+                            washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum, Manage, Area));
                     pictureListAdapter.notifyDataSetChanged();
                 }
 

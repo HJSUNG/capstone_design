@@ -59,11 +59,11 @@ public class UploadActivity extends AppCompatActivity{
     private static String image_three = null;
     private static int imageCounter = 0;
 
-    EditText titleRoom, roomaddress, roomdetail, detailExplain, deposit, monthly, term;
+    EditText titleRoom, roomaddress, roomdetail, detailExplain, deposit, monthly, term, manage, area;
     CheckBox chkWasing, chkRefri, chkDesk, chkBed, chkMicro, chkCloset;
     ImageView imageView1, imageView2, imageView3;
     Button registerBtn, findAddress;
-    String sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm;
+    String sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm, sManage, sArea;
     String[] checkPoint;
 
     @Override
@@ -78,7 +78,8 @@ public class UploadActivity extends AppCompatActivity{
         deposit = (EditText)findViewById(R.id.depositwrite);
         monthly = (EditText)findViewById(R.id.monthlywrite);
         term = (EditText)findViewById(R.id.termwrite);
-
+        manage = (EditText)findViewById(R.id.managewrite);
+        area = (EditText)findViewById(R.id.areawrite);
 
         registerBtn = (Button)findViewById(R.id.btnRegister);
         findAddress = (Button)findViewById(R.id.find_address);
@@ -108,6 +109,8 @@ public class UploadActivity extends AppCompatActivity{
                 sDeposit = deposit.getText().toString();
                 sMonthly = monthly.getText().toString();
                 sTerm = term.getText().toString();
+                sManage = manage.getText().toString();
+                sArea = manage.getText().toString();
                 checkPoint = new String[6];
                 if(chkWasing.isChecked()){
                     checkPoint[0] = "1";
@@ -139,6 +142,8 @@ public class UploadActivity extends AppCompatActivity{
                     deposit.setText("");
                     monthly.setText("");
                     term.setText("");
+                    manage.setText("");
+                    area.setText("");
                     chkWasing.setChecked(false);
                     chkRefri.setChecked(false);
                     chkDesk.setChecked(false);
@@ -390,7 +395,7 @@ public class UploadActivity extends AppCompatActivity{
                 COUNT_ID++;
 
                 dbManager db_manage = new dbManager();
-                db_manage.execute("http://dozonexx.dothome.co.kr/check.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm);
+                db_manage.execute("http://dozonexx.dothome.co.kr/check.php", sTitle, sAddress, sDetailAddr, sDetail_info, sDeposit, sMonthly, sTerm, sManage, sArea);
                 checkManager check_manage = new checkManager();
                 check_manage.execute("http://dozonexx.dothome.co.kr/checkDB.php", checkPoint[0], checkPoint[1], checkPoint[2], checkPoint[3], checkPoint[4], checkPoint[5]);
                 imageManager image_manage = new imageManager();
@@ -616,6 +621,8 @@ public class UploadActivity extends AppCompatActivity{
             String deposit = (String)params[5];
             String monthly = (String)params[6];
             String term = (String)params[7];
+            String manage_input = (String)params[8];
+            String area_input = (String)params[9];
 
             String phoneNum[] = user.info_phone.split("-");
             String phone = "";
@@ -623,7 +630,7 @@ public class UploadActivity extends AppCompatActivity{
                 phone += phoneNum[i];
             }
             String data = "title="+title+"&homeid="+COUNT_ID+"&estateid="+user.info_ID+"&phonenum="+phone+"&address="+address+"&detailaddress="+detailAddress+"&detail_exp="+detail_inform;
-            data += "&deposit="+deposit+"&monthly="+monthly+"&term="+term+"&visible=1";
+            data += "&deposit="+deposit+"&monthly="+monthly+"&manage="+manage_input+"&term="+term+"&area="+area_input+"&visible=1";
 
             try{
                 URL url = new URL(link);
