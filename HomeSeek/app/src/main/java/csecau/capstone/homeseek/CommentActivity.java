@@ -26,6 +26,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import static csecau.capstone.homeseek.MainActivity.user;
@@ -120,11 +122,11 @@ public class CommentActivity extends AppCompatActivity {
             long now = System.currentTimeMillis();
             Date date = new Date(now);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            SimpleDateFormat time = new SimpleDateFormat("hhmmss");
+            SimpleDateFormat time = new SimpleDateFormat("hhmmssSSS");
             String getDate = sdf.format(date);
             String getTime = time.format(date);
-            int random = (int)(Math.random()*100)+1;
-            String data = "board="+board+"&commentid="+getDate+getTime+String.valueOf(random)+"&id="+user.info_ID+"&comment="+content;
+            int random = (int)(Math.random()*99)+1;
+            String data = "board="+board+"&commentid="+getDate+getTime+String.valueOf(random)+"&id="+user.info_ID+"&comment="+content+"&datentime="+getDate+getTime;
 
             try{
                 URL url = new URL(link);
@@ -240,12 +242,30 @@ public class CommentActivity extends AppCompatActivity {
                 String board = item.getString("board");
                 String id = item.getString("id");
                 String comment_in = item.getString("comment");
-                list_itemArrayList.add(new comment_list(board, id, comment_in));
-                comment.notifyDataSetChanged();
+                String datetime = item.getString("datentime");
+                list_itemArrayList.add(new comment_list(board, id, comment_in, datetime));
+
             }
+            Comparator<comment_list> array = new Comparator<comment_list>() {
+                @Override
+                public int compare(comment_list o1, comment_list o2) {
+                    int ret;
+
+                    if(Long.parseLong(o1.getDatetime())< Long.parseLong(o2.getDatetime())){ ret = -1;}
+                    else if(Long.parseLong(o1.getDatetime())==Long.parseLong(o2.getDatetime())){
+                        ret = 0;
+                    }
+                    else ret = 1;
+                    return ret;
+                }
+            };
+            Collections.sort(list_itemArrayList, array);
+            comment.notifyDataSetChanged();
         }
         catch(Exception e){
             e.printStackTrace();
         }
+
+
     }
 }
