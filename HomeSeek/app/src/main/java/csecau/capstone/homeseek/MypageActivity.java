@@ -89,8 +89,15 @@ public class MypageActivity extends AppCompatActivity{
 //                                Delete delete_task = new Delete();
 //                                delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
 
-                                Houselist houselist = new Houselist();
-                                houselist.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
+                                Houselist house = new Houselist();
+                                house.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
+                                //Delete delete = new Delete();
+                                //delete.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
+                                deleteBoard deleteBoard = new deleteBoard();
+                                deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
+                                deleteComment deleteComment = new deleteComment();
+                                deleteComment.execute("http://dozonexx.dothome.co.kr/deleteCommentID.php", user.info_ID);
+
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
@@ -104,6 +111,270 @@ public class MypageActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    class deleteBoard extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "id=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class deleteComment extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "id=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class deleteInform extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "homeid=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class deleteImage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "homeid=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
     }
 
     class Delete extends AsyncTask<String, Void, String> {
@@ -125,7 +396,7 @@ public class MypageActivity extends AppCompatActivity{
             String ID = (String)params[1];
 
             String serverURL = (String)params[0];
-            String postParameters = "ID=" + ID;
+            String postParameters = "estateid=" + ID;
 
             try {
                 URL url = new URL(serverURL);
@@ -199,6 +470,18 @@ public class MypageActivity extends AppCompatActivity{
                         houselist = houselist + "," + result_string[j];
                     }
                 }
+
+                if(houselist!=null){
+                    String[] number_estate = houselist.split(",");
+                    for(int i =0 ; i< number_estate.length; i++){
+                        Log.d("americano","count"+i+"-"+number_estate[i]);
+                        deleteImage deleteImage = new deleteImage();
+                        deleteImage.execute("http://dozonexx.dothome.co.kr/deleteEstateImage.php", number_estate[i]);
+                        deleteInform deleteInform = new deleteInform();
+                        deleteInform.execute("http://dozonexx.dothome.co.kr/deleteEstateInform.php",number_estate[i]);
+                    }
+                }
+
             }
 
 //            Delete_houselist delete_houselist = new Delete_houselist();
