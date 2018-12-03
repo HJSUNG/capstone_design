@@ -88,7 +88,6 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     static String imageoneURL, imagetwoURL, imagethreeURL;
     private TextView manageView, areaView;
-    StorageReference storageReference = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
