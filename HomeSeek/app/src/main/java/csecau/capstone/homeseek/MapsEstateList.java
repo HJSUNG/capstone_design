@@ -27,9 +27,6 @@ public class MapsEstateList extends AppCompatActivity {
 
         phpDown task = new phpDown();
         task.execute("http://dozonexx.dothome.co.kr/getInform.php");
-
-
-
     }
 
     private class phpDown extends AsyncTask<String, Void, String> {
@@ -112,6 +109,8 @@ public class MapsEstateList extends AppCompatActivity {
                 String imagethree = item.getString("imagethree");
 
                 String phoneNum = item.getString("phonenum");
+                String Manage = item.getString("manage");
+                String Area = item.getString("area");
                 Intent intent = getIntent();
                 int[] checkARRAY = intent.getIntArrayExtra("selected");
                 boolean addList = true;
@@ -136,7 +135,7 @@ public class MapsEstateList extends AppCompatActivity {
                 }
                 if (addList) {
                     list_itemArrayList.add(new posting_list(imageone, title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term,
-                            washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum));
+                            washing, refrigerator, desk, bed, microwave, closet, imageone, imagetwo, imagethree, phoneNum, Manage, Area));
                 }
             }
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
