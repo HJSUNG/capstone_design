@@ -97,6 +97,7 @@ public class posting_list implements Parcelable {
     public posting_list(Parcel in){
         this.profile_image = in.readString();
         this.title = in.readString();
+        this.estateid = in.readString();
         this.address = in.readString();
         this.detailaddress = in.readString();
         this.explain = in.readString();
