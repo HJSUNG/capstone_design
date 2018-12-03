@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -17,12 +18,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class testposting extends Activity {
     private PostingTitle pictureListAdapter;
     private ListView listView;
     private ArrayList<posting_list> list_itemArrayList;
     private String JSONstring;
+    private Button basic, money, areaDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +35,78 @@ public class testposting extends Activity {
 
         listView = (ListView) findViewById(R.id.my_list);
 
+        basic = (Button)findViewById(R.id.basic);
+        money = (Button)findViewById(R.id.money);
+        areaDesc = (Button)findViewById(R.id.areaDesc);
+
         list_itemArrayList = new ArrayList<>();
         pictureListAdapter = new PostingTitle(this, list_itemArrayList);
         listView.setAdapter(pictureListAdapter);
         phpDown task = new phpDown();
         task.execute("http://dozonexx.dothome.co.kr/getInform.php");
+
+        basic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Comparator<posting_list> basic_array = new Comparator<posting_list>() {
+                    @Override
+                    public int compare(posting_list o1, posting_list o2) {
+                        int ret;
+
+                        if(Integer.parseInt(o1.getHomeid())< Integer.parseInt(o2.getHomeid())){ ret = -1;}
+                        else if(Integer.parseInt(o1.getHomeid())==Integer.parseInt(o2.getHomeid())){
+                            ret = 0;
+                        }
+                        else ret = 1;
+                        return ret;
+                    }
+                };
+                Collections.sort(list_itemArrayList, basic_array);
+                pictureListAdapter.notifyDataSetChanged();
+            }
+        });
+
+        money.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Comparator<posting_list> monthly_array = new Comparator<posting_list>() {
+                    @Override
+                    public int compare(posting_list o1, posting_list o2) {
+                        int ret;
+
+                        if(Integer.parseInt(o1.getMonthly())< Integer.parseInt(o2.getMonthly())){ ret = -1;}
+                        else if(Integer.parseInt(o1.getMonthly())== Integer.parseInt(o2.getMonthly())){
+                            ret = 0;
+                        }
+                        else ret = 1;
+                        return ret;
+                    }
+                };
+                Collections.sort(list_itemArrayList, monthly_array);
+                pictureListAdapter.notifyDataSetChanged();
+            }
+        });
+
+        areaDesc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Comparator<posting_list> area_array = new Comparator<posting_list>() {
+                    @Override
+                    public int compare(posting_list o1, posting_list o2) {
+                        int ret;
+
+                        if(Integer.parseInt(o1.getArea())< Integer.parseInt(o2.getArea())){ ret = -1;}
+                        else if(Integer.parseInt(o1.getArea())==Integer.parseInt(o2.getArea())){
+                            ret = 0;
+                        }
+                        else ret = 1;
+                        return ret;
+                    }
+                };
+                Collections.sort(list_itemArrayList, area_array);
+                pictureListAdapter.notifyDataSetChanged();
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
