@@ -132,10 +132,6 @@ public class UploadActivity extends AppCompatActivity{
                     homeIDManager homeIDManager = new homeIDManager();
                     homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
 
-                    Insert_houselist insert_houselist = new Insert_houselist();
-                    insert_houselist.execute("http://tjdghwns.cafe24.com/insert_houselist.php", user.info_ID, Integer.toString(COUNT_ID));
-
-
                     titleRoom.setText("");
                     roomaddress.setText("");
                     roomdetail.setText("");
@@ -402,6 +398,8 @@ public class UploadActivity extends AppCompatActivity{
                 uploadFile2();
                 uploadFile3();
                 image_manage.execute("http://dozonexx.dothome.co.kr/imageUpload.php", image_one, image_two, image_three);
+                Insert_houselist insert_houselist = new Insert_houselist();
+                insert_houselist.execute("http://tjdghwns.cafe24.com/insert_houselist.php", user.info_ID, Integer.toString(COUNT_ID));
             }
             catch(Exception e){
                 e.printStackTrace();

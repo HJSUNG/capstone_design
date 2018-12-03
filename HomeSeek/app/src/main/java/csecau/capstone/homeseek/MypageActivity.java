@@ -91,8 +91,8 @@ public class MypageActivity extends AppCompatActivity{
 
                                 Houselist house = new Houselist();
                                 house.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
-                                //Delete delete = new Delete();
-                                //delete.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
+                                Delete delete = new Delete();
+                                delete.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
                                 deleteBoard deleteBoard = new deleteBoard();
                                 deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
                                 deleteComment deleteComment = new deleteComment();
