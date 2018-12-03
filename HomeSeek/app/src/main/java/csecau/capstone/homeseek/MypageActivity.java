@@ -108,11 +108,12 @@ public class MypageActivity extends AppCompatActivity{
                                 deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
                                 deleteComment deleteComment = new deleteComment();
                                 deleteComment.execute("http://dozonexx.dothome.co.kr/deleteCommentID.php", user.info_ID);
+
                                 Delete_houselist delete_houselist = new Delete_houselist();
                                 delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
                                 Delete_ID delete_id = new Delete_ID();
                                 delete_id.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
-
+                                Toast.makeText(getApplicationContext(), "탈퇴하였습니다", Toast.LENGTH_LONG).show();
                                 user.log_out();
 
                                 finish();
@@ -143,7 +144,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -209,7 +209,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -275,7 +274,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -341,7 +339,6 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -406,8 +403,6 @@ public class MypageActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
         }
 
         @Override
