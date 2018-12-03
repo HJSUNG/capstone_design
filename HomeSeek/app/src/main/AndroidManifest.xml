@@ -60,6 +60,7 @@
         <activity android:name=".ModifyPostingActivity"/>
         <activity android:name=".BoardContentView"/>
         <activity android:name=".BoardShow"/>
+        <activity android:name=".BoardEdit"/>
 .    </application>
 
 </manifest>

@@ -1,9 +1,11 @@
 package csecau.capstone.homeseek;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,19 +82,47 @@ public class BoardContentView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.action_edit:
-                Intent intent = new Intent(BoardContentView.this, BoardEdit.class);
-                intent.putExtra("title", titleView.getText());
-                intent.putExtra("content", contentView.getText());
-                intent.putExtra("board", board);
-                startActivity(intent);
-                return true;
+                if(!id.equals(user.info_ID)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("권한이 없습니다.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+                else {
+                    Intent intent = new Intent(BoardContentView.this, BoardEdit.class);
+                    intent.putExtra("title", titleView.getText());
+                    intent.putExtra("content", contentView.getText());
+                    intent.putExtra("board", board);
+                    startActivity(intent);
+                    return true;
+                }
             case R.id.action_delete:
+                if(!id.equals(user.info_ID)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setMessage("권한이 없습니다.");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                    return true;
+                }
+                else{
                 deleteManage deleteManage = new deleteManage();
                 deleteManage.execute("http://dozonexx.dothome.co.kr/deleteBoard.php", board);
                 deleteComment deleteComment = new deleteComment();
-                deleteComment.execute("http://dozonexx.dothome.co.kr/deleteComment.php",board);
+                deleteComment.execute("http://dozonexx.dothome.co.kr/deleteComment.php", board);
                 startActivity(new Intent(BoardContentView.this, navigation_main.class));
                 return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
