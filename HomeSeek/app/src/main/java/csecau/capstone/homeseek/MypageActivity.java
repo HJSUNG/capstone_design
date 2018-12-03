@@ -27,6 +27,8 @@ import static csecau.capstone.homeseek.MainActivity.user;
 
 public class MypageActivity extends AppCompatActivity{
 
+    private static String houselist[] = new String[100];
+
     TextView nickname, ID, phone, type;
     TextView my_supervise, favorite_supervise,ID_supervise;
 
@@ -88,6 +90,12 @@ public class MypageActivity extends AppCompatActivity{
                                 delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
                                 DeleteEstate deleteEstate = new DeleteEstate();
                                 deleteEstate.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
+
+                                Houselist houselist = new Houselist();
+                                houselist.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
+
+                                Delete_houselist delete_houselist = new Delete_houselist();
+                                delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
@@ -170,6 +178,7 @@ public class MypageActivity extends AppCompatActivity{
     }
 
     class DeleteEstate extends AsyncTask<String, Void, String> {
+    class Houselist extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -181,6 +190,12 @@ public class MypageActivity extends AppCompatActivity{
             super.onPostExecute(result);
 
             Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
+            String result_string_temp[] = (String[]) result.split(",");
+            houselist[0]="";
+
+            for(int i=0;i<result_string_temp.length-1;i++) {
+                houselist[i] = result_string_temp[i+1];
+            }
         }
 
         @Override
@@ -189,6 +204,71 @@ public class MypageActivity extends AppCompatActivity{
 
             String serverURL = (String)params[0];
             String postParameters = "estateid=" + ID;
+            String postParameters = "ID=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class Delete_houselist extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "ID=" + ID;
 
             try {
                 URL url = new URL(serverURL);
