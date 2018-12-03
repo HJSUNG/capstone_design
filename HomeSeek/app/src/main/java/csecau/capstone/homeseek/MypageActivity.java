@@ -86,14 +86,11 @@ public class MypageActivity extends AppCompatActivity{
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Delete delete_task = new Delete();
-                                delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
+//                                Delete delete_task = new Delete();
+//                                delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
 
                                 Houselist houselist = new Houselist();
                                 houselist.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
-
-                                Delete_houselist delete_houselist = new Delete_houselist();
-                                delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
@@ -203,6 +200,9 @@ public class MypageActivity extends AppCompatActivity{
                     }
                 }
             }
+
+//            Delete_houselist delete_houselist = new Delete_houselist();
+//            delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
         }
 
         @Override
