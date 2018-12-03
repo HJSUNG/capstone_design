@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
 //        ID_textview = (TextView) findViewById(R.id.user_information_ID);
 //        nickname_textview = (TextView)findViewById(R.id.user_information_nickname);
 //        phone_textview = (TextView)findViewById(R.id.user_information_phone);

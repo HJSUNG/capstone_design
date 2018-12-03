@@ -32,11 +32,14 @@ public class MypageActivity extends AppCompatActivity{
     TextView nickname, ID, phone, type;
     TextView my_supervise, favorite_supervise,ID_supervise;
 
+    public static MypageActivity activity = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_mypage);
+        final Intent intent = new Intent(getApplicationContext(), navigation_main.class);
 
         nickname = (TextView) findViewById(R.id.mypage_nickname);
         ID = (TextView) findViewById(R.id.mypage_ID);
@@ -50,6 +53,16 @@ public class MypageActivity extends AppCompatActivity{
         ID.setText(user.info_ID);
         phone.setText(user.info_phone);
         type.setText(user.info_type);
+
+        boolean test = user.info_ID == "";
+        if (user.info_ID.equals("")) {
+            Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent3);
+
+            navigation_main.activity.finish();
+
+            finish();
+        }
 
         my_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,20 +87,18 @@ public class MypageActivity extends AppCompatActivity{
         favorite_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(), FavoriteActivity.class);
+                startActivity(intent2);
             }
         });
         ID_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(MypageActivity.this);
+                final AlertDialog.Builder alert_confirm = new AlertDialog.Builder(MypageActivity.this);
                 alert_confirm.setMessage("회원탈퇴를 진행하시겠습니까 ?").setCancelable(false).setPositiveButton("확인",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                Delete delete_task = new Delete();
-//                                delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
 
                                 Houselist house = new Houselist();
                                 house.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
@@ -97,7 +108,15 @@ public class MypageActivity extends AppCompatActivity{
                                 deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
                                 deleteComment deleteComment = new deleteComment();
                                 deleteComment.execute("http://dozonexx.dothome.co.kr/deleteCommentID.php", user.info_ID);
+                                Delete_houselist delete_houselist = new Delete_houselist();
+                                delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
+                                Delete_ID delete_id = new Delete_ID();
+                                delete_id.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
 
+                                user.log_out();
+
+                                finish();
+                                startActivity(new Intent(MypageActivity.this, MypageActivity.class));
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
@@ -541,6 +560,70 @@ public class MypageActivity extends AppCompatActivity{
     }
 
     class Delete_houselist extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            String ID = (String)params[1];
+
+            String serverURL = (String)params[0];
+            String postParameters = "ID=" + ID;
+
+            try {
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d("@@@", "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString();
+            } catch (Exception e) {
+                Log.d("@@@", "Login Error ", e);
+                return new String("ERROR: " + e.getMessage());
+            }
+        }
+    }
+
+    class Delete_ID extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
