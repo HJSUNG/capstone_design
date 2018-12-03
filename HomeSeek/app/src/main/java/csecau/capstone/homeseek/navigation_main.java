@@ -161,7 +161,7 @@ public class navigation_main extends AppCompatActivity
             Intent intent1 = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent1);
         } else if (id == R.id.nav_board) {
-            Intent intent2 = new Intent(getApplicationContext(), BoardActivity.class);
+            Intent intent2 = new Intent(getApplicationContext(), BoardShow.class);
             startActivity(intent2);
 //        } else if (id == R.id.nav_picturelist) {
 //            Intent intent3 = new Intent(getApplicationContext(), Picture_List_Activity.class);

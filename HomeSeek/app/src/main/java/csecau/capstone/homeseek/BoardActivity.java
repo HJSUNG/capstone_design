@@ -1,35 +1,12 @@
 package csecau.capstone.homeseek;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONObject;
 
@@ -39,11 +16,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import csecau.capstone.homeseek.db.SimpleDB;
-import csecau.capstone.homeseek.vo.ArticleVO;
+import static csecau.capstone.homeseek.MainActivity.user;
 
 public class BoardActivity extends AppCompatActivity {
     EditText titleRoom, detailExplain;
@@ -161,7 +135,7 @@ public class BoardActivity extends AppCompatActivity {
             String title = (String)params[1];
             String detail_inform = (String)params[2];
 
-            String data = "board="+COUNT_ID+"&id="+"lll"+"&title="+title+"&detail="+detail_inform;
+            String data = "board="+COUNT_ID+"&id="+user.info_ID+"&title="+title+"&detail="+detail_inform;
 
             try{
                 URL url = new URL(link);

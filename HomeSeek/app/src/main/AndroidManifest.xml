@@ -58,6 +58,8 @@
         <activity android:name=".CommentActivity"/>
         <activity android:name=".ModifyActivity"/>
         <activity android:name=".ModifyPostingActivity"/>
-    </application>
+        <activity android:name=".BoardContentView"/>
+        <activity android:name=".BoardShow"/>
+.    </application>
 
 </manifest>
