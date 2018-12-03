@@ -211,7 +211,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                 switch (menuItem.getItemId()) {
                     case R.id.call:
                         Toast.makeText(getApplicationContext(), "Call", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0"+phoneNum)));
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phoneNum)));
                         return true;
                     case R.id.favorite:
 //                        Toast.makeText(getApplicationContext(), "Favorites", Toast.LENGTH_LONG).show();

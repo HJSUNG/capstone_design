@@ -13,12 +13,13 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,10 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -54,6 +51,12 @@ public class EditActivity extends AppCompatActivity{
     private static String image_one = null;
     private static String image_two = null;
     private static String image_three = null;
+
+    //비공개 기능을 넣기위한 라디오버튼그룹
+    private RadioGroup hide_typeRg;
+    private RadioButton hide_type_open;
+    private RadioButton hide_type_close;
+    String sVisible = "1";
 
     EditText titleRoom, roomaddress, roomdetail, detailExplain, deposit, monthly, term;
     CheckBox chkWasing, chkRefri, chkDesk, chkBed, chkMicro, chkCloset;
@@ -90,6 +93,10 @@ public class EditActivity extends AppCompatActivity{
         imageView3 = (ImageView)findViewById(R.id.image3);
         roomaddress.setEnabled(false);
 
+        hide_typeRg = (RadioGroup)findViewById(R.id.hide_typeRg);
+        hide_type_open = (RadioButton)findViewById(R.id.hide_type_open);
+        hide_type_close = (RadioButton)findViewById(R.id.hide_type_close);
+
         Intent intent = getIntent();
 
         titleRoom.setText(intent.getStringExtra("title"));
@@ -125,6 +132,17 @@ public class EditActivity extends AppCompatActivity{
         imageView1.setImageBitmap(bitmap1);
         imageView2.setImageBitmap(bitmap2);
         imageView3.setImageBitmap(bitmap3);
+
+        hide_typeRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.hide_type_open) {
+                    sVisible = "1";
+                } else {
+                    sVisible = "0";
+                }
+            }
+        });
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,8 +184,9 @@ public class EditActivity extends AppCompatActivity{
                 uploadFile3();
                 image_manage.execute("http://dozonexx.dothome.co.kr/updateImage.php", image_one, image_two, image_three);
 
-                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(search);
+//                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
+//                startActivity(search);
+                finish();
             }
 
         });
