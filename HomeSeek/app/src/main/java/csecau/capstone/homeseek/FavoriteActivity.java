@@ -33,9 +33,13 @@ public class FavoriteActivity extends Activity {
     private String TAG = "bookmark";
     private static String test;
 
+    public static FavoriteActivity activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        activity = this;
 
         setContentView(R.layout.activity_posting_test);
 

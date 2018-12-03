@@ -919,4 +919,16 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if(FavoriteActivity.activity !=null) {
+            FavoriteActivity.activity.finish();
+
+            Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
+            startActivity(intent);
+        }
+
+        finish();
+    }
 }
