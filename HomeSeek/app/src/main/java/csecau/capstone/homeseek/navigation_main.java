@@ -31,11 +31,13 @@ public class navigation_main extends AppCompatActivity
 
     TextView user_id, user_nickname, user_phone, user_type;
 
+    public static  navigation_main activity = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        activity = this;
 
 //        setContentView(R.layout.nav_header_main);
 

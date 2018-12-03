@@ -32,10 +32,12 @@ public class MypageActivity extends AppCompatActivity{
     TextView nickname, ID, phone, type;
     TextView my_supervise, favorite_supervise,ID_supervise;
 
+    public static MypageActivity activity = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        activity = this;
         setContentView(R.layout.activity_mypage);
 
         nickname = (TextView) findViewById(R.id.mypage_nickname);
@@ -74,8 +76,8 @@ public class MypageActivity extends AppCompatActivity{
         favorite_supervise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(), FavoriteActivity.class);
+                startActivity(intent2);
             }
         });
         ID_supervise.setOnClickListener(new View.OnClickListener() {
@@ -91,12 +93,14 @@ public class MypageActivity extends AppCompatActivity{
 
                                 Houselist house = new Houselist();
                                 house.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
-                                //Delete delete = new Delete();
-                                //delete.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
+                                Delete delete = new Delete();
+                                delete.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
                                 deleteBoard deleteBoard = new deleteBoard();
                                 deleteBoard.execute("http://dozonexx.dothome.co.kr/deleteBoardID.php", user.info_ID);
                                 deleteComment deleteComment = new deleteComment();
                                 deleteComment.execute("http://dozonexx.dothome.co.kr/deleteCommentID.php", user.info_ID);
+                                Delete_houselist delete_houselist = new Delete_houselist();
+                                delete_houselist.execute("http://tjdghwns.cafe24.com/delete_houselist.php", user.info_ID);
 
                             }
                         }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -550,6 +554,11 @@ public class MypageActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
+            Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent3);
+
+            user.log_out();
         }
 
         @Override
