@@ -25,10 +25,14 @@ public class BoardEdit extends AppCompatActivity {
     static int COUNT_ID;
     private static String JSONString;
 
+    public static BoardEdit activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
+
+        activity = this;
 
         titleRoom = (EditText)findViewById(R.id.title);
         detailExplain = (EditText)findViewById(R.id.detail_exp_textView);
@@ -47,11 +51,28 @@ public class BoardEdit extends AppCompatActivity {
                 String sTitle = titleRoom.getText().toString();
                 String sDetail_info = detailExplain.getText().toString();
 
+
                 boardManager db_manage = new boardManager();
                 db_manage.execute("http://dozonexx.dothome.co.kr/boardEdit.php", sTitle, sDetail_info);
 
                 titleRoom.setText("");
                 detailExplain.setText("");
+
+                if(BoardEdit.activity!=null) {
+                    BoardEdit.activity.finish();
+                }
+
+                if(BoardShow.activity!=null) {
+                    BoardShow.activity.finish();
+                }
+
+                if(BoardContentView.activity!=null) {
+                    BoardContentView.activity.finish();
+                }
+
+                Intent intent = new Intent(BoardEdit.this, BoardShow.class);
+                startActivity(intent);
+
                 finish();
             }
 
