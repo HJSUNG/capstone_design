@@ -21,6 +21,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static csecau.capstone.homeseek.MainActivity.user;
+
 public class BoardContentView extends AppCompatActivity {
     private BoardComment boardComment;
     private ListView listView;
@@ -68,7 +70,9 @@ public class BoardContentView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_board, menu);
+        if (user.info_ID.equals(idView.getText())) {
+            inflater.inflate(R.menu.menu_board, menu);
+        }
         return true;
     }
 

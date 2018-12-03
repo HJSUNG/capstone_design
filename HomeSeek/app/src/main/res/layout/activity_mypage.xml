@@ -71,19 +71,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="비공개 매물 관리"
-            android:textSize="20dp"
-            android:layout_marginTop="@dimen/my_margin"
-            android:layout_marginBottom="@dimen/my_margin"
-            android:paddingLeft="@dimen/my_padding"
-            android:id="@+id/my_hide_supervise"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/mypagecolor"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
             android:text="즐겨찾기 관리"
             android:textSize="20dp"
             android:layout_marginTop="@dimen/my_margin"
