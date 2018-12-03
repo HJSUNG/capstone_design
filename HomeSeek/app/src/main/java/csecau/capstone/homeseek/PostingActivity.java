@@ -131,7 +131,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         Check_bookmark check_bookmark_task = new Check_bookmark();
-        check_bookmark_task.execute("http://tjdghwns.cafe24.com/check_bookmark.php", user.info_ID);
+        check_bookmark_task.execute("http://tjdghwns.cafe24.com/check_bookmark.php", user.info_ID, homeID);
 
         storage.getReferenceFromUrl(imageoneURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -738,9 +738,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         protected String doInBackground(String... params) {
 
             String ID = (String)params[1];
+            String item_num = (String)params[2];
 
             String serverURL = (String)params[0];
-            String postParameters = "ID=" + ID;
+            String postParameters = "ID=" + ID + "&item_num=" + item_num;
 
             try {
                 URL url = new URL(serverURL);
