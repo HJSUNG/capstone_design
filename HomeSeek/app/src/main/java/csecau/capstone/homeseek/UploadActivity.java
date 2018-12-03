@@ -45,7 +45,6 @@ import static csecau.capstone.homeseek.MainActivity.user;
 
 public class UploadActivity extends AppCompatActivity{
     private static int COUNT_ID;
-    private static int COUNT_ESTATE = 1000;
     private static String JSONString;
 
     private Uri filePath, filePath2, filePath3;
@@ -221,8 +220,8 @@ public class UploadActivity extends AppCompatActivity{
                         Bitmap image = BitmapFactory.decodeStream(in);
                         image = resize(image);
                         in.close();
-                        imageView1.setImageBitmap(image);
                         imageCounter++;
+                        imageView1.setImageBitmap(image);
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -237,8 +236,8 @@ public class UploadActivity extends AppCompatActivity{
                         Bitmap image = BitmapFactory.decodeStream(in);
                         image = resize(image);
                         in.close();
-                        imageView2.setImageBitmap(image);
                         imageCounter++;
+                        imageView2.setImageBitmap(image);
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -253,8 +252,8 @@ public class UploadActivity extends AppCompatActivity{
                         Bitmap image = BitmapFactory.decodeStream(in);
                         image = resize(image);
                         in.close();
-                        imageView3.setImageBitmap(image);
                         imageCounter++;
+                        imageView3.setImageBitmap(image);
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -288,17 +287,19 @@ public class UploadActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"1.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_one = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_one = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -318,17 +319,19 @@ public class UploadActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"2.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_two = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_two = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath2)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -348,8 +351,8 @@ public class UploadActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"3.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_three = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_three = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath3)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override

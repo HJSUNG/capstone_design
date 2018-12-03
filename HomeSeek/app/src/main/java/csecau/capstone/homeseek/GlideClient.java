@@ -11,8 +11,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
-    public class GlideClient {
-        final static FirebaseStorage storage = FirebaseStorage.getInstance();
+public class GlideClient {
+    final static FirebaseStorage storage = FirebaseStorage.getInstance();
     static String imageURL;
 
     public  static  void downloadimg(final Context c, String url, final ImageView img)
@@ -36,7 +36,8 @@ import com.squareup.picasso.Picasso;
             Picasso.with(c).load(imageURL).resize(3,3).into(img);
             Picasso.with(c).load(url).resize(3,3).into(img);
             Log.d("aqua", "성공");
-        }else
+        }
+        else
         {
             Picasso.with(c).load(R.drawable.plusicon).into(img);
         }

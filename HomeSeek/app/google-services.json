@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "901702786887",
-    "firebase_url": "https://estate-777.firebaseio.com",
-    "project_id": "estate-777",
-    "storage_bucket": "estate-777.appspot.com"
+    "project_number": "699308631119",
+    "firebase_url": "https://homeseek-a8f70.firebaseio.com",
+    "project_id": "homeseek-a8f70",
+    "storage_bucket": "homeseek-a8f70.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:901702786887:android:689848c99541bc38",
+        "mobilesdk_app_id": "1:699308631119:android:5517f027e609cfc4",
         "android_client_info": {
-          "package_name": "com.example.minjoung.posting"
+          "package_name": "csecau.capstone.homeseek"
         }
       },
       "oauth_client": [
         {
-          "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
+          "client_id": "699308631119-k3gdaare5t5odd8obloc138sqs8p1e0m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB0MJFhyfsdZyf5Ggj66CDAGDM76_CEKtw"
+          "current_key": "AIzaSyBGD8fuIdmS9ca0j40Y6VsIhekELieNKUM"
         }
       ],
       "services": {
@@ -31,102 +31,6 @@
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:901702786887:android:4838702e670377fa",
-        "android_client_info": {
-          "package_name": "com.example.minjoung.postingtest"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "901702786887-ll21bfv45ecqa8ifmenlhon898fid39l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.minjoung.postingtest",
-            "certificate_hash": "d6ae75466b39be067e4dd420b3fa119e0f6f0555"
-          }
-        },
-        {
-          "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB0MJFhyfsdZyf5Ggj66CDAGDM76_CEKtw"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:901702786887:android:5517f027e609cfc4",
-        "android_client_info": {
-          "package_name": "csecau.capstone.homeseek"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "901702786887-0hcdfdtjc2m9ibq0mu5v5938sqrqspje.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "csecau.capstone.homeseek",
-            "certificate_hash": "d6ae75466b39be067e4dd420b3fa119e0f6f0555"
-          }
-        },
-        {
-          "client_id": "901702786887-ph8gd51o03elbu6kvrjap0i9230lvfee.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "csecau.capstone.homeseek",
-            "certificate_hash": "16f25664c0eb4983bf1ed57dd2abae185608a3de"
-          }
-        },
-        {
-          "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB0MJFhyfsdZyf5Ggj66CDAGDM76_CEKtw"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "901702786887-ojost29m7j78nvel2lp4s72tprvaf0c3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
         },
         "ads_service": {
           "status": 2
