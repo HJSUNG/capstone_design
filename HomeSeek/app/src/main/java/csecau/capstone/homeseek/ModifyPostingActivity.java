@@ -87,6 +87,7 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
     static String imageONE, imageTWO, imageTHREE;
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     static String imageoneURL, imagetwoURL, imagethreeURL;
+    private TextView manageView, areaView;
     StorageReference storageReference = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images");
 
     @Override
@@ -111,6 +112,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
         monthlyView = (TextView)findViewById(R.id.monthlyview);
         termView = (TextView)findViewById(R.id.termview);
         checkView = (TextView)findViewById(R.id.checkview);
+        manageView = (TextView)findViewById(R.id.manageview);
+        areaView = (TextView)findViewById(R.id.areaview);
         beforeButton = (Button)findViewById(R.id.before);
         nextButton = (Button)findViewById(R.id.next);
         directionButton = (Button)findViewById(R.id.direction);
@@ -246,6 +249,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
         depositView.setText(intent.getStringExtra("deposit"));
         monthlyView.setText(intent.getStringExtra("monthly"));
         termView.setText(intent.getStringExtra("term"));
+        manageView.setText(intent.getStringExtra("manage"));
+        areaView.setText(intent.getStringExtra("area")+"평");
 
         washingChk = intent.getStringExtra("washing");
         refrigeChk = intent.getStringExtra("refrigerator");
@@ -305,6 +310,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
                 intent.putExtra("deposit", String.valueOf(depositView.getText()));
                 intent.putExtra("monthly", String.valueOf(monthlyView.getText()));
                 intent.putExtra("term", String.valueOf(termView.getText()));
+                intent.putExtra("manage", String.valueOf(manageView.getText()));
+                intent.putExtra("area", String.valueOf(areaView.getText()));
 
                 intent.putExtra("washing", washingChk);
                 intent.putExtra("refrigerator", refrigeChk);
@@ -328,11 +335,18 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
                 deleteImage.execute("http://dozonexx.dothome.co.kr/deleteImage.php", homeID);
                 deleteCheck deleteCheck = new deleteCheck();
                 deleteCheck.execute("http://dozonexx.dothome.co.kr/deleteCheck.php", homeID);
-                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
+//                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
+                finish();
                 return true;
             case R.id.action_hide:
                 dbManager dbManager = new dbManager();
                 dbManager.execute("http://dozonexx.dothome.co.kr/updateHide.php", "0", homeID);
+                finish();
+                return true;
+            case R.id.action_open:
+                dbManager dbManager1 = new dbManager();
+                dbManager1.execute("http://dozonexx.dothome.co.kr/updateHide.php", "1", homeID);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

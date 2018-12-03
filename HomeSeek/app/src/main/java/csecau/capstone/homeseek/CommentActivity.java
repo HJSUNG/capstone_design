@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,6 +33,7 @@ import static csecau.capstone.homeseek.MainActivity.user;
 public class CommentActivity extends AppCompatActivity {
     private comment comment;
     private ListView list;
+    private SwipeRefreshLayout refreshLayout = null;
     private ArrayList<comment_list> list_itemArrayList;
     private String JSONstring;
     private EditText commentText;
@@ -56,11 +58,13 @@ public class CommentActivity extends AppCompatActivity {
         phpDown task = new phpDown();
         task.execute("http://dozonexx.dothome.co.kr/getComment.php");
 
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        refreshLayout = (SwipeRefreshLayout)findViewById(R.id.refresh);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            public void onRefresh() {
+                list_itemArrayList.clear();
+                phpDown task = new phpDown();
+                task.execute("http://dozonexx.dothome.co.kr/getComment.php");
             }
         });
 
@@ -177,6 +181,7 @@ public class CommentActivity extends AppCompatActivity {
             super.onPostExecute(str);
             JSONstring = str;
             showResult();
+            refreshLayout.setRefreshing(false);
         }
 
         @Override

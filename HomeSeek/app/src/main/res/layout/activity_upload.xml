@@ -196,7 +196,8 @@
             <EditText
                 android:id="@+id/depositwrite"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
             <TextView
                 android:id="@+id/depositend"
                 android:layout_width="wrap_content"
@@ -222,9 +223,37 @@
             <EditText
                 android:id="@+id/monthlywrite"
                 android:layout_width="200dp"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/monthlyend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="만원"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/manage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="관리비"/>
+            <EditText
+                android:id="@+id/managewrite"
+                android:layout_width="200dp"
+                android:inputType="number"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/manageend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -248,6 +277,7 @@
             <EditText
                 android:id="@+id/termwrite"
                 android:layout_width="200dp"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/termend"
@@ -257,6 +287,33 @@
                 android:textColor="@android:color/black"
                 android:textSize="17dp"
                 android:text="개월"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="평수"/>
+            <EditText
+                android:id="@+id/areawrite"
+                android:layout_width="200dp"
+                android:inputType="number"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/areaend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="17dp"
+                android:text="평"/>
         </LinearLayout>
 
         <LinearLayout
@@ -298,8 +355,6 @@
                 android:onClick="insert"
                 android:text="등록"/>
         </LinearLayout>
-
-
 
     </LinearLayout>
 </ScrollView>

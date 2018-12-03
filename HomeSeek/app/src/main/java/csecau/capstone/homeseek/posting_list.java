@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class posting_list implements Parcelable {
 
     private String profile_image;
-    private String title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term;
+    private String title, homeid, estateid, address, detailaddress, explain, deposit, monthly, term, manage, area;
     private String washing, refrigerator, desk, bed, microwave, closet;
     private String imageone, imagetwo, imagethree;
     private String phoneNum;
@@ -41,6 +41,10 @@ public class posting_list implements Parcelable {
     public void setMonthly(String monthly){this.monthly = monthly;}
     public String getTerm(){return term;}
     public void setTerm(String term){this.term = term;}
+    public String getManage(){return manage;}
+    public void setManage(String manage){this.manage= manage;}
+    public String getArea(){return area;}
+    public void setArea(String area){this.area = area;}
 
     public String getWashing(){return washing;}
     public void setWashing(String washing){this.washing = washing;}
@@ -68,7 +72,7 @@ public class posting_list implements Parcelable {
 
     public posting_list(String profile_image, String title, String homeid, String estateid,String address, String detailaddress, String explain, String deposit, String monthly, String term,
                         String washing, String refrigerator, String desk, String bed, String microwave, String closet,
-                        String imageone, String imagetwo, String imagethree, String phoneNum) {
+                        String imageone, String imagetwo, String imagethree, String phoneNum, String manage, String area) {
         this.profile_image = profile_image;
         this.title = title;
         this.homeid = homeid;
@@ -92,11 +96,14 @@ public class posting_list implements Parcelable {
         this.imagethree = imagethree;
 
         this.phoneNum = phoneNum;
+        this.manage = manage;
+        this.area = area;
     }
 
     public posting_list(Parcel in){
         this.profile_image = in.readString();
         this.title = in.readString();
+        this.estateid = in.readString();
         this.address = in.readString();
         this.detailaddress = in.readString();
         this.explain = in.readString();
@@ -116,6 +123,8 @@ public class posting_list implements Parcelable {
         this.imagetwo = in.readString();
 
         this.phoneNum = in.readString();
+        this.manage = in.readString();
+        this.area = in.readString();
     }
 
     @Override
@@ -147,6 +156,8 @@ public class posting_list implements Parcelable {
         dest.writeString(this.imagethree);
 
         dest.writeString(this.phoneNum);
+        dest.writeString(this.manage);
+        dest.writeString(this.area);
     }
 
 

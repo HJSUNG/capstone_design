@@ -285,34 +285,6 @@
                 android:textSize="16sp"
                 android:scrollbars="vertical"/>
 
-            <RadioGroup
-                android:layout_width="210dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:id="@+id/hide_typeRg"
-                android:layout_below="@+id/RegisterLinear">
-
-                <RadioButton
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/hide_type_open"
-                    android:gravity="center"
-                    android:text="공개"
-                    android:checked="true"/>
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
-
-                <RadioButton
-                    android:layout_width="80dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/hide_type_close"
-                    android:gravity="center"
-                    android:text="비공개"/>
-
-            </RadioGroup>
 
             <Button
                 android:id="@+id/btnRegister"

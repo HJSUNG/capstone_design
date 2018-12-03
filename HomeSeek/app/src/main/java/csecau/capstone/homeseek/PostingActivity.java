@@ -87,6 +87,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     static String imageONE, imageTWO, imageTHREE;
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     static String imageoneURL, imagetwoURL, imagethreeURL;
+    private TextView manageView, areaView;
     StorageReference storageReference = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images");
 
     @Override
@@ -111,6 +112,8 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         monthlyView = (TextView)findViewById(R.id.monthlyview);
         termView = (TextView)findViewById(R.id.termview);
         checkView = (TextView)findViewById(R.id.checkview);
+        manageView = (TextView)findViewById(R.id.manageview);
+        areaView = (TextView)findViewById(R.id.areaview);
         beforeButton = (Button)findViewById(R.id.before);
         nextButton = (Button)findViewById(R.id.next);
         directionButton = (Button)findViewById(R.id.direction);
@@ -246,6 +249,8 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         depositView.setText(intent.getStringExtra("deposit"));
         monthlyView.setText(intent.getStringExtra("monthly"));
         termView.setText(intent.getStringExtra("term"));
+        manageView.setText(intent.getStringExtra("manage"));
+        areaView.setText(intent.getStringExtra("area")+"평");
 
         washingChk = intent.getStringExtra("washing");
         refrigeChk = intent.getStringExtra("refrigerator");
@@ -284,10 +289,11 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     //포스팅 쪽의 수정,삭제 기능창
+    //mypage 매물관리에서만 가능하게함
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu){
 //        MenuInflater inflater = getMenuInflater();
-//        if(user.info_ID.equals(estateid)){//유저 아이디랑 매물 주인이랑 확인
+//        if(user.info_ID.equals(userView.getText())){//유저 아이디랑 매물 주인이랑 확인
 //            inflater.inflate(R.menu.menu_posting, menu);
 //        }
 //        return true;
