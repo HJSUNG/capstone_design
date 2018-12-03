@@ -49,7 +49,12 @@ public class BoardActivity extends AppCompatActivity {
 
                 titleRoom.setText("");
                 detailExplain.setText("");
-                startActivity(new Intent(BoardActivity.this, navigation_main.class));
+
+                if(BoardShow.activity!=null) {
+                    BoardShow.activity.finish();
+                }
+
+                startActivity(new Intent(BoardActivity.this, BoardShow.class));
                 finish();
             }
 
