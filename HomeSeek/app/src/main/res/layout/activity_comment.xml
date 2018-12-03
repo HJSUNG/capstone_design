@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,22 +17,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/comment_enter"
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@android:color/background_dark"
-            tools:ignore="Suspicious0dp" />
+            android:background="@android:color/white" />
         <ImageButton
             android:id="@+id/commentBtn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src ="@drawable/outline_keyboard_arrow_right_black_36dp"
-            tools:ignore="Suspicious0dp" />
+            android:src ="@drawable/outline_keyboard_arrow_right_black_36dp" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -88,6 +88,8 @@ public class MypageActivity extends AppCompatActivity{
                             public void onClick(DialogInterface dialog, int which) {
                                 Delete delete_task = new Delete();
                                 delete_task.execute("http://tjdghwns.cafe24.com/delete.php", user.info_ID);
+                                DeleteEstate deleteEstate = new DeleteEstate();
+                                deleteEstate.execute("http://dozonexx.dothome.co.kr/deleteEstate.php", user.info_ID);
 
                                 Houselist houselist = new Houselist();
                                 houselist.execute("http://tjdghwns.cafe24.com/houselist.php", user.info_ID);
@@ -175,6 +177,7 @@ public class MypageActivity extends AppCompatActivity{
         }
     }
 
+    class DeleteEstate extends AsyncTask<String, Void, String> {
     class Houselist extends AsyncTask<String, Void, String> {
 
         @Override
@@ -186,6 +189,7 @@ public class MypageActivity extends AppCompatActivity{
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+            Toast.makeText(MypageActivity.this, result, Toast.LENGTH_LONG).show();
             String result_string_temp[] = (String[]) result.split(",");
             houselist[0]="";
 
@@ -199,6 +203,7 @@ public class MypageActivity extends AppCompatActivity{
             String ID = (String)params[1];
 
             String serverURL = (String)params[0];
+            String postParameters = "estateid=" + ID;
             String postParameters = "ID=" + ID;
 
             try {

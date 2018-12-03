@@ -32,12 +32,11 @@ public class FavoriteActivity extends Activity {
     private String JSONstring;
     private String TAG = "bookmark";
     private static String test;
-    //private String[] array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //array =test.split(",");
+
         setContentView(R.layout.activity_posting_test);
 
         listView = (ListView) findViewById(R.id.my_list);
@@ -47,9 +46,6 @@ public class FavoriteActivity extends Activity {
         listView.setAdapter(pictureListAdapter);
         Bookmark bookmark = new Bookmark();
         bookmark.execute("http://tjdghwns.cafe24.com/bookmark.php", user.info_ID);
-//        phpDown task = new phpDown();
-//        task.execute("http://dozonexx.dothome.co.kr/getInform.php");
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

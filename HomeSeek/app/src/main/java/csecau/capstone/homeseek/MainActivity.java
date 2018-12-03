@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent1);
                         break;
                     case 2: // menu3
-                        Intent intent2 = new Intent(getApplicationContext(), BoardActivity.class);
+                        Intent intent2 = new Intent(getApplicationContext(), BoardShow.class);
                         startActivity(intent2);
                         break;
 //                    case 3: // menu4
