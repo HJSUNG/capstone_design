@@ -27,7 +27,7 @@ import static csecau.capstone.homeseek.MainActivity.user;
 
 public class MypageActivity extends AppCompatActivity{
 
-    private static String houselist[] = new String[100];
+    private static String houselist;
 
     TextView nickname, ID, phone, type;
     TextView my_supervise, favorite_supervise,ID_supervise;
@@ -187,10 +187,21 @@ public class MypageActivity extends AppCompatActivity{
             super.onPostExecute(result);
 
             String result_string_temp[] = (String[]) result.split(",");
-            houselist[0]="";
+            String result_string[] = new String[50];
+            if(result_string_temp.length == 1) {
+                //nothing happen
+            } else {
+                for(int i=0;i<result_string_temp.length-1;i++) {
+                    result_string[i] = result_string_temp[i+1];
+                }
 
-            for(int i=0;i<result_string_temp.length-1;i++) {
-                houselist[i] = result_string_temp[i+1];
+                houselist = result_string[0];
+
+                for(int j=1;j<result_string.length;j++) {
+                    if(result_string[j]!=null) {
+                        houselist = houselist + "," + result_string[j];
+                    }
+                }
             }
         }
 
