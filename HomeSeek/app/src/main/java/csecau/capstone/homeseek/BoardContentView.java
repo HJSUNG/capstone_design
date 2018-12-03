@@ -34,10 +34,13 @@ public class BoardContentView extends AppCompatActivity {
     String board, title, id, content;
     ImageButton send;
 
+    public static BoardContentView activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_show);
+        activity = this;
         //listView = (ListView)findViewById(R.id.list_view1);
         titleView = (TextView)findViewById(R.id.titleview);
         idView = (TextView)findViewById(R.id.idview);
@@ -72,7 +75,9 @@ public class BoardContentView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_board, menu);
+        if (user.info_ID.equals(idView.getText())) {
+            inflater.inflate(R.menu.menu_board, menu);
+        }
         return true;
     }
 
@@ -93,6 +98,7 @@ public class BoardContentView extends AppCompatActivity {
                     return true;
                 }
                 else {
+
                     Intent intent = new Intent(BoardContentView.this, BoardEdit.class);
                     intent.putExtra("title", titleView.getText());
                     intent.putExtra("content", contentView.getText());
@@ -118,7 +124,12 @@ public class BoardContentView extends AppCompatActivity {
                 deleteManage.execute("http://dozonexx.dothome.co.kr/deleteBoard.php", board);
                 deleteComment deleteComment = new deleteComment();
                 deleteComment.execute("http://dozonexx.dothome.co.kr/deleteComment.php", board);
-                startActivity(new Intent(BoardContentView.this, navigation_main.class));
+                startActivity(new Intent(BoardContentView.this, BoardShow.class));
+
+                if(BoardShow.activity!=null) {
+                    BoardShow.activity.finish();
+                }
+                finish();
                 return true;
             }
         }

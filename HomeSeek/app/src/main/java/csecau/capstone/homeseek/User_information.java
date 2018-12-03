@@ -8,6 +8,7 @@ import static csecau.capstone.homeseek.navigation_main.phone_textview;
 import static csecau.capstone.homeseek.navigation_main.type_textview;
 
 
+
 public class User_information {
     public static String info_ID = "";
     public String info_nickname = "";
@@ -45,4 +46,5 @@ public class User_information {
 //        type_textview.setText(this.info_type);
 
     }
+
 }

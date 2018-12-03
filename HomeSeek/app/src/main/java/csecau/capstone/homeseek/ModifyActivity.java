@@ -30,9 +30,9 @@ public class ModifyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_posting_test);
+        setContentView(R.layout.activity_posting_mypage);
 
-        listView = (ListView) findViewById(R.id.my_list);
+        listView = (ListView) findViewById(R.id.mypage_list);
 
         list_itemArrayList = new ArrayList<>();
         pictureListAdapter = new PostingTitle(this, list_itemArrayList);

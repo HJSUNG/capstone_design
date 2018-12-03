@@ -32,10 +32,13 @@ public class BoardShow extends Activity {
     private String JSONstring;
     FloatingActionButton floatingActionButton;
 
+    public static BoardShow activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_list);
+        activity = this;
 
         listView = (ListView) findViewById(R.id.my_list);
 

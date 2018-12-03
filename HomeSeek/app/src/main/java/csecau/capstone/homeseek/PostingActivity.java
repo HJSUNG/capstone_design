@@ -131,7 +131,7 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         Check_bookmark check_bookmark_task = new Check_bookmark();
-        check_bookmark_task.execute("http://tjdghwns.cafe24.com/check_bookmark.php", user.info_ID);
+        check_bookmark_task.execute("http://tjdghwns.cafe24.com/check_bookmark.php", user.info_ID, homeID);
 
         storage.getReferenceFromUrl(imageoneURL).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -289,10 +289,11 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     //포스팅 쪽의 수정,삭제 기능창
+    //mypage 매물관리에서만 가능하게함
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu){
 //        MenuInflater inflater = getMenuInflater();
-//        if(user.info_ID.equals(estateid)){//유저 아이디랑 매물 주인이랑 확인
+//        if(user.info_ID.equals(userView.getText())){//유저 아이디랑 매물 주인이랑 확인
 //            inflater.inflate(R.menu.menu_posting, menu);
 //        }
 //        return true;
@@ -737,9 +738,10 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         protected String doInBackground(String... params) {
 
             String ID = (String)params[1];
+            String item_num = (String)params[2];
 
             String serverURL = (String)params[0];
-            String postParameters = "ID=" + ID;
+            String postParameters = "ID=" + ID + "&item_num=" + item_num;
 
             try {
                 URL url = new URL(serverURL);
@@ -916,5 +918,17 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
                 return new String("ERROR: " + e.getMessage());
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(FavoriteActivity.activity !=null) {
+            FavoriteActivity.activity.finish();
+
+            Intent intent = new Intent(getApplicationContext(), FavoriteActivity.class);
+            startActivity(intent);
+        }
+
+        finish();
     }
 }
