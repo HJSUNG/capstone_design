@@ -15,5 +15,9 @@
         android:id="@+id/action_hide"
         android:title="감추기"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_open"
+        android:title="공개"
+        app:showAsAction="never"/>1
 
 </menu>

@@ -328,11 +328,18 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
                 deleteImage.execute("http://dozonexx.dothome.co.kr/deleteImage.php", homeID);
                 deleteCheck deleteCheck = new deleteCheck();
                 deleteCheck.execute("http://dozonexx.dothome.co.kr/deleteCheck.php", homeID);
-                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
+//                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
+                finish();
                 return true;
             case R.id.action_hide:
                 dbManager dbManager = new dbManager();
                 dbManager.execute("http://dozonexx.dothome.co.kr/updateHide.php", "0", homeID);
+                finish();
+                return true;
+            case R.id.action_open:
+                dbManager dbManager1 = new dbManager();
+                dbManager1.execute("http://dozonexx.dothome.co.kr/updateHide.php", "1", homeID);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
