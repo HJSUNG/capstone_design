@@ -284,14 +284,14 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
     }
 
     //포스팅 쪽의 수정,삭제 기능창
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        MenuInflater inflater = getMenuInflater();
-//        if(user.info_ID.equals(estateid)){//유저 아이디랑 매물 주인이랑 확인
-//            inflater.inflate(R.menu.menu_posting, menu);
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        if(user.info_ID.equals(userView.getText())){//유저 아이디랑 매물 주인이랑 확인
+            inflater.inflate(R.menu.menu_posting, menu);
+        }
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
