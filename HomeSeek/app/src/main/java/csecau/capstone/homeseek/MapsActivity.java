@@ -72,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        list_itemArrayList = new ArrayList<posting_list>();
+        list_itemArrayList = new ArrayList<>();
         Bundle bundle = getIntent().getExtras();
         list_itemArrayList = bundle.getParcelableArrayList("marker_list");
 
