@@ -18,156 +18,170 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/drawer">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="학교 주변 매물"
-                    android:textSize="30sp"
-                    android:textColor="@android:color/holo_blue_dark"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/FrontDoor"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_weight="1"
-                    android:text="정문"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="normal" />
-                <Button
-                    android:id="@+id/MiddleDoor"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_weight="1"
-                    android:text="중문"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="normal" />
-
-                <Button
-                    android:id="@+id/BackDoor"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_weight="1"
-                    android:text="후문"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:typeface="normal" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="지하철 주변 매물"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="30dp"
-                    android:textColor="@android:color/holo_blue_dark"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:src="@drawable/subway1"
-                    android:scaleType="centerCrop"
-                    android:layout_height="130dp"
-                    android:layout_width="match_parent"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/black"
-                    android:text="흑석역"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    android:id="@+id/Subway1"/>
-
-                <Button
-                    android:src="@drawable/subway2"
-                    android:scaleType="centerCrop"
-                    android:layout_height="130dp"
-                    android:layout_width="match_parent"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/black"
-                    android:text="상도역"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:typeface="normal"
-                    android:id="@+id/Subway2"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/icon"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/whole_layout"
-            android:layout_below="@+id/drawer_content">
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textSize="27sp"
+            android:gravity="center_horizontal"
+            android:text="HomeSeek"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/first_layout">
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/user_information_ID"
-                    android:layout_centerHorizontal="true"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="학교 주변 매물"-->
+                    <!--android:textSize="30sp"-->
+                    <!--android:textColor="@android:color/holo_blue_dark"/>-->
+            <!--</LinearLayout>-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/user_information_nickname"
-                    android:layout_toRightOf="@+id/user_information_ID"/>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/second_layout"
-                android:layout_below="@+id/first_layout">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/user_information_phone"
-                    android:layout_centerHorizontal="true"/>
+                <!--<Button-->
+                    <!--android:id="@+id/FrontDoor"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="정문"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="normal" />-->
+                <!--<Button-->
+                    <!--android:id="@+id/MiddleDoor"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="중문"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="normal" />-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/user_information_type"
-                    android:layout_toRightOf="@+id/user_information_phone"/>
-            </LinearLayout>
-        </LinearLayout>
+                <!--<Button-->
+                    <!--android:id="@+id/BackDoor"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="후문"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="normal" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:text="지하철 주변 매물"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="30dp"-->
+                    <!--android:textColor="@android:color/holo_blue_dark"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<Button-->
+                    <!--android:src="@drawable/subway1"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:text="흑석역"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="normal"-->
+                    <!--android:id="@+id/Subway1"/>-->
+
+                <!--<Button-->
+                    <!--android:src="@drawable/subway2"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:layout_height="130dp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:textSize="15sp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:text="상도역"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:typeface="normal"-->
+                    <!--android:id="@+id/Subway2"/>-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:id="@+id/whole_layout"-->
+            <!--android:layout_below="@+id/drawer_content">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:id="@+id/first_layout">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/user_information_ID"-->
+                    <!--android:layout_centerHorizontal="true"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/user_information_nickname"-->
+                    <!--android:layout_toRightOf="@+id/user_information_ID"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:id="@+id/second_layout"-->
+                <!--android:layout_below="@+id/first_layout">-->
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/user_information_phone"-->
+                    <!--android:layout_centerHorizontal="true"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/user_information_type"-->
+                    <!--android:layout_toRightOf="@+id/user_information_phone"/>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
 
 
         <ListView

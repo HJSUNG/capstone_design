@@ -219,19 +219,15 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     class InsertData extends AsyncTask<String, Void, String>{
-        ProgressDialog progressDialog;
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = ProgressDialog.show(RegistrationActivity.this,"Please Wait", null, true, true);
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            progressDialog.dismiss();
             Toast.makeText(RegistrationActivity.this,result,Toast.LENGTH_SHORT).show();
         }
 

@@ -53,7 +53,12 @@
                 android:layout_width="350dp"
                 android:layout_height="325dp"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:background="@drawable/edittext_frame"
+                android:background="@drawable/corner"
+                android:gravity="top"
+                android:maxLength="500"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 android:scrollbars="vertical"/>
 
             <Button
