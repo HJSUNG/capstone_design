@@ -27,10 +27,14 @@ public class ModifyActivity extends Activity {
     private ArrayList<posting_list> list_itemArrayList;
     private String JSONstring;
 
+    public static ModifyActivity activity = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting_mypage);
+
+        activity = this;
 
         listView = (ListView) findViewById(R.id.mypage_list);
 

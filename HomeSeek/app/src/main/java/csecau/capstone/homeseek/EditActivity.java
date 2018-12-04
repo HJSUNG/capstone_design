@@ -166,9 +166,16 @@ public class EditActivity extends AppCompatActivity{
                 uploadFile3();
                 image_manage.execute("http://dozonexx.dothome.co.kr/updateImage.php", image_one, image_two, image_three);
 
-//                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
-//                startActivity(search);
-                finish();
+                if(ModifyPostingActivity.activity !=null) {
+                    ModifyPostingActivity.activity.finish();
+                }
+
+                if(ModifyActivity.activity!=null) {
+                    ModifyActivity.activity.finish();
+                }
+
+                Intent intent1 = new Intent(getApplicationContext(), ModifyActivity.class);
+                startActivity(intent1);
             }
 
         });

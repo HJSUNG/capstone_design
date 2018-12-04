@@ -94,6 +94,8 @@ public class PostingActivity extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
 
+        isInBookmark = false;
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_posting);
         mapFragment.getMapAsync(this);
