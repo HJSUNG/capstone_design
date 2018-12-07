@@ -321,8 +321,8 @@ public class EditActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"1.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_one = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_one = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -356,8 +356,8 @@ public class EditActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"2.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_two = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_two = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath2)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -390,8 +390,8 @@ public class EditActivity extends AppCompatActivity{
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             String filename = format.format(now)+COUNT_ID+"3.jpg";
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://estate-777.appspot.com").child("images/"+filename);
-            image_three = "gs://estate-777.appspot.com/images/"+filename;
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://homeseek-a8f70.appspot.com").child("images/"+filename);
+            image_three = "gs://homeseek-a8f70.appspot.com/images/"+filename;
             storageRef.putFile(filePath3)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
