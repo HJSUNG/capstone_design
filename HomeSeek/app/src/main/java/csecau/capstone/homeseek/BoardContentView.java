@@ -26,10 +26,9 @@ import java.util.ArrayList;
 import static csecau.capstone.homeseek.MainActivity.user;
 
 public class BoardContentView extends AppCompatActivity {
-    private BoardComment boardComment;
     private ListView listView;
     private ArrayList<comment_list> list_itemArrayList;
-    TextView titleView, idView, contentView, commentView;
+    TextView titleView, idView, contentView;
     FloatingActionButton fab;
     String board, title, id, content;
     ImageButton send;
