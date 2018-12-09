@@ -35,7 +35,6 @@
         <activity android:name=".SearchActivity"
             android:noHistory="true"/>
         <activity android:name=".BoardActivity" />
-        <activity android:name=".Picture_List_Activity" />
         <activity android:name=".SearchwithmapActivity" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".TmapActivity" />
