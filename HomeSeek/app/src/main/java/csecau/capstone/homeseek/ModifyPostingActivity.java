@@ -63,6 +63,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
 
     private GoogleMap mMap;
 
+    public static ModifyPostingActivity activity = null;
+
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
@@ -94,6 +96,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
+
+        activity = this;
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_posting);
@@ -326,6 +330,8 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
                 intent.putExtra("imagetwoURL", imagetwoURL);
                 intent.putExtra("imagethree",bm_three);
                 intent.putExtra("imagethreeURL", imagethreeURL);
+
+
                 startActivity(intent);
                 return true;
             case R.id.action_delete:
@@ -336,6 +342,13 @@ public class ModifyPostingActivity extends AppCompatActivity implements OnMapRea
                 deleteCheck deleteCheck = new deleteCheck();
                 deleteCheck.execute("http://dozonexx.dothome.co.kr/deleteCheck.php", homeID);
 //                startActivity(new Intent(ModifyPostingActivity.this, SearchActivity.class));
+
+                if(ModifyActivity.activity!=null) {
+                    ModifyActivity.activity.finish();
+
+                    Intent intent1 = new Intent(getApplicationContext(), ModifyActivity.class);
+                    startActivity(intent1);
+                }
                 finish();
                 return true;
             case R.id.action_hide:

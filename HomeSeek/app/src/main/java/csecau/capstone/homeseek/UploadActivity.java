@@ -130,7 +130,7 @@ public class UploadActivity extends AppCompatActivity{
                     checkPoint[5] = "1";
                 }else{ checkPoint[5] = "0";}
 
-                if(imageCounter==3) {
+                if(imageCounter>=3) {
                     homeIDManager homeIDManager = new homeIDManager();
                     homeIDManager.execute("http://dozonexx.dothome.co.kr/homeid.php");
 
